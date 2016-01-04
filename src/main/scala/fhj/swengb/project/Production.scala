@@ -1,5 +1,7 @@
 package fhj.swengb.project
 
+import scala.collection.mutable.Map
+
 /**
   * Created by Daniel on 03.01.2016.
   */
@@ -15,46 +17,99 @@ case object Beverage extends Machines
 
 case object Fries extends Machines
 
+
+sealed trait Product
+
+case object Pizza extends Product
+
+case object Cola extends Product
+
+case object CurlyFries extends Product
+
+
 object Production {
   def main(args: Array[String]) {
-    Production(Oven)
+    println(Production.products)
+    Production().start(Oven)
+    println(Production.products)
+    Production().start(Beverage)
+    println(Production.products)
+    /*Production().pickedUp(Oven)
+    println(Production.products)*/
   }
   /*
-  creates an empty Production
+  get the correct machine which should produce from the player
    */
-  def apply():Production = {//Production()
-  val machine : Machines = Oven
+  def apply():Production = Production(Oven)
+
+  /*def test():Production = {//Production()
+  val machine : Machines = Fries
     Production(machine)
-  }
+  }*/
 
   /*
-  receive the machine which should produce a product from the player
+  A Map to save all the produced Products
    */
-  //def getMachine = ??? //val machine : Machines = Oven
-  //Production(machine)
+  val products: Map[Machines,Product] = Map(Oven -> null, Beverage -> null, Fries -> null)
 }
 
-case class Production(machine: Machines){
+case class Production(machine:Machines){
+
 
   /*
   If the player moves to the machine, the product will be produced which is ordered by the guest
   Every different order (pizza,cola or fries) has a different producing time
+  The produced product is stored in the Map "products"
    */
-  def start(machine: Machines) : Unit = machine match {
-    case Oven => println("Pizza wird gemacht") // if (ready == false) start producing else producing not possible; ready = true
-    case Beverage => println("Cola wird zubereitet")
-    case Fries => println("Pommes werden frittiert")
+  def start(machine: Machines): Map[Machines, Product] = machine match {
+    case Oven => Production.products += (machine->Pizza)
+    case Beverage => Production.products += (machine->Cola)
+    case Fries => Production.products += (machine->CurlyFries)
   }
 
+  /*
+   Products picked up by the player to bring the products to the quests are removed
+  */
+  def pickedUp(machine:Machines) : Map[Machines,Product] = machine match {
+    case Oven => Production.products += (machine->null)
+    case Beverage => Production.products += (machine->null)
+    case Fries => Production.products += (machine->null)
+  }
 
   /*
-  If the product is produced, the player can pick up the product and bring it to the guest
+  Status of the machine => if ready == true, the product is produced and ready to pick up
+  Otherwise and new product must be produced
    */
-  //val ready : Boolean = ??? // if (produced) true else false
-
+  def ready(machine:Machines):Boolean = machine match {
+    case Oven if Production.products.filter(_._2==Pizza) => true
+    case Beverage if Production.products.filter(_._2==Cola) => true
+    case Fries if Production.products.filter(_._2==CurlyFries) => true
+    case _ => false
+  }
   /*
-  The machine is waiting for the next order, after the player takes the finished product
-   */
-  //val waiting : Machines = ???
 
+/*
+thread.sleep
+oder
+http://doc.akka.io/docs/akka/2.3.6/scala/scheduler.html
+scheduler -> akka
+ */
+*/
 }
+/*
+case class Oven(machine:Machines = Oven) {
+
+  val start = {
+    Thread.sleep(5000)
+    Production.products += (Oven->Pizza)
+  }
+}
+
+case class Beverage(machine:Machines = Beverage) {
+
+  val start = {
+    Thread.sleep(2000)
+    Production.products += (Beverage->Pizza)
+  }
+}
+*/
