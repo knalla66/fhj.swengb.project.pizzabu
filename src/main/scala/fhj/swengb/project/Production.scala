@@ -47,6 +47,7 @@ case class Production(machine: Machines){
   }
 
 
+
   /*
   If the product is produced, the player can pick up the product and bring it to the guest
    */
