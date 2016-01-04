@@ -30,12 +30,15 @@ case object CurlyFries extends Product
 object Production {
   def main(args: Array[String]) {
     println(Production.products)
-    Production().start(Oven)
+    println(Production().ready(Oven))
+    Production().startMaschine(Oven)
     println(Production.products)
-    Production().start(Beverage)
+    Production().startMaschine(Beverage)
     println(Production.products)
-    /*Production().pickedUp(Oven)
-    println(Production.products)*/
+    println(Production().ready(Oven))
+    Production().pickedUp(Oven)
+    println(Production.products)
+    println(Production().ready(Oven))
   }
   /*
   get the correct machine which should produce from the player
@@ -55,6 +58,10 @@ object Production {
 
 case class Production(machine:Machines){
 
+  def startMaschine(machine:Machines) = machine match {
+    case Oven => Oven()
+    case Beverage => Beverage()
+  }
 
   /*
   If the player moves to the machine, the product will be produced which is ordered by the guest
@@ -81,9 +88,9 @@ case class Production(machine:Machines){
   Otherwise and new product must be produced
    */
   def ready(machine:Machines):Boolean = machine match {
-    case Oven if Production.products.filter(_._2==Pizza) => true
-    case Beverage if Production.products.filter(_._2==Cola) => true
-    case Fries if Production.products.filter(_._2==CurlyFries) => true
+    case Oven if Production.products.getOrElse(Oven,Pizza)==Pizza => println("true");true
+    case Beverage if Production.products.getOrElse(Beverage,Cola)==Cola => println("true");true
+    case Fries if Production.products.getOrElse(Fries,CurlyFries)==CurlyFries => println("true");true
     case _ => false
   }
   /*
@@ -96,7 +103,7 @@ scheduler -> akka
  */
 */
 }
-/*
+
 case class Oven(machine:Machines = Oven) {
 
   val start = {
@@ -112,4 +119,4 @@ case class Beverage(machine:Machines = Beverage) {
     Production.products += (Beverage->Pizza)
   }
 }
-*/
+
