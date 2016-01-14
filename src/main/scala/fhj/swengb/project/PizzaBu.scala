@@ -54,7 +54,6 @@ object PizzaBu {
 
   def main(args: Array[String]) {
     println(PizzaBu(Player()).asString)
-    println(playField(2)(2))
     getInput
 
     def getInput:Unit = {
@@ -71,14 +70,11 @@ object PizzaBu {
     def move(move: String) = move match {
       case "w" if row!=0 => row-=1;println("GEHT")
       case "a" if col!=0 => col-=1;println("GEHT")
-      case "s" if row!=5 => row+=1;println("GEHT")
+      case "s" if row!=4 => row+=1;println("GEHT")
       case "d" if col!=2 => col+=1;println("GEHT")
       case _ => "FUNZT NET"
-
     }
-
   }
-
   /**
     * Starts a new game of PizzaBu
     */
@@ -106,5 +102,4 @@ case class PizzaBu(player: Player) {
     "|"+chkPF(f40)+"|"+chkPF(f41)+"|"+chkPF(f42)+"|\n"+
     "|-----|-----|-----|\n"
   }
-
 }
