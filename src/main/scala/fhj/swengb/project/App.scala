@@ -1,12 +1,20 @@
 package fhj.swengb.project
 
+import com.sun.scenario.effect.impl.prism.PrDrawable
+
+import scala.util.Random
+
 import scala.concurrent.Future
+import concurrent.ExecutionContext.Implicits.global
+import concurrent.Future
+
 
 /**
  * @author ${user.name}
  */
 object App {
   def main(args: Array[String]) {
+    val f = concurrent.Future { println("hi") }
 
   }
 }
@@ -35,5 +43,21 @@ object ScalaFuture {
     Await.ready(f2, 60 seconds)
     println("exit")
   }
+}
+
+object RandomGuest{
+def main (args: Array[String] ) {
+  val bestellung: List[Product] = List(Pizza,Cola,CurlyFries)
+  val items = List(1, 2, 3)
+  val howMany = Random.shuffle(items).head
+
+  def order(howMany: Int, bestellung: List[Product],orderList: List[Product]=Nil): List[Product] = howMany match {
+      case howMany if howMany > 0 => order(howMany-1,bestellung,orderList.::(Random.shuffle(bestellung).head))
+      case _ => orderList
+    }
+
+  order(howMany,bestellung)
+
+}
 }
 

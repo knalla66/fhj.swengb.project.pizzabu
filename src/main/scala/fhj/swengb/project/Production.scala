@@ -1,6 +1,8 @@
 package fhj.swengb.project
 
 import scala.collection.mutable.Map
+import concurrent.ExecutionContext.Implicits.global
+
 
 /**
   * Created by Daniel on 03.01.2016.
@@ -28,24 +30,17 @@ case object CurlyFries extends Product
 
 
 object Production {
+
   def main(args: Array[String]) {
-    println(Production.products)
-    println(Production().ready(Oven))
-    Production().startMaschine(Oven)
-    println(Production.products)
-    Production().startMaschine(Beverage)
-    println(Production.products)
-    println(Production().ready(Oven))
-    Production().pickedUp(Oven)
-    println(Production.products)
-    println(Production().ready(Oven))
+    Production(Oven).start(Oven)
+    Production(Beverage).start(Beverage)
   }
   /*
   get the correct machine which should produce from the player
    */
-  def apply():Production = Production(Oven)
+  def apply():Production = Production()
 
-  /*def test():Production = {//Production()
+   /*def test():Production = {//Production()
   val machine : Machines = Fries
     Production(machine)
   }*/
@@ -57,11 +52,12 @@ object Production {
 }
 
 case class Production(machine:Machines){
-
+/*
   def startMaschine(machine:Machines) = machine match {
     case Oven => Oven()
     case Beverage => Beverage()
   }
+  */
 
   /*
   If the player moves to the machine, the product will be produced which is ordered by the guest
@@ -69,9 +65,13 @@ case class Production(machine:Machines){
   The produced product is stored in the Map "products"
    */
   def start(machine: Machines): Map[Machines, Product] = machine match {
-    case Oven => Production.products += (machine->Pizza)
-    case Beverage => Production.products += (machine->Cola)
+    case Oven => println("produktion angestoßen");produce();Production.products += (machine->Pizza)
+    case Beverage => println("Produziere Getränke");Production.products += (machine->Cola)
     case Fries => Production.products += (machine->CurlyFries)
+  }
+
+  def produce() = concurrent.Future {
+    Thread.sleep(5000); println("produziert")
   }
 
   /*
@@ -88,22 +88,13 @@ case class Production(machine:Machines){
   Otherwise and new product must be produced
    */
   def ready(machine:Machines):Boolean = machine match {
-    case Oven if Production.products.getOrElse(Oven,Pizza)==Pizza => println("true");true
-    case Beverage if Production.products.getOrElse(Beverage,Cola)==Cola => println("true");true
-    case Fries if Production.products.getOrElse(Fries,CurlyFries)==CurlyFries => println("true");true
+    case Oven if Production.products.getOrElse(Oven,Pizza)==Pizza => true
+    case Beverage if Production.products.getOrElse(Beverage,Cola)==Cola => true
+    case Fries if Production.products.getOrElse(Fries,CurlyFries)==CurlyFries => true
     case _ => false
   }
-  /*
-
-/*
-thread.sleep
-oder
-http://doc.akka.io/docs/akka/2.3.6/scala/scheduler.html
-scheduler -> akka
- */
-*/
 }
-
+/*
 case class Oven(machine:Machines = Oven) {
 
   val start = {
@@ -118,5 +109,5 @@ case class Beverage(machine:Machines = Beverage) {
     Thread.sleep(2000)
     Production.products += (Beverage->Cola)
   }
-}
+}*/
 
