@@ -45,10 +45,10 @@ object ScalaFuture {
   }
 }
 
-object RandomGuest{
+object RandomOrder{
 def main (args: Array[String] ) {
   val bestellung: List[Product] = List(Pizza,Cola,CurlyFries)
-  val items = List(1, 2, 3)
+  val items = List(1,2,3)
   val howMany = Random.shuffle(items).head
 
   def order(howMany: Int, bestellung: List[Product],orderList: List[Product]=Nil): List[Product] = howMany match {
