@@ -116,7 +116,7 @@ case class Beverage(machine:Machines = Beverage) {
 
   val start = {
     Thread.sleep(2000)
-    Production.products += (Beverage->Pizza)
+    Production.products += (Beverage->Cola)
   }
 }
 
