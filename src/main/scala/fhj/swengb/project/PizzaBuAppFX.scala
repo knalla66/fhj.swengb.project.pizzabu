@@ -61,6 +61,7 @@ class PizzaBuAppFXController extends Initializable {
 
   @FXML var canvasAnchorPane: AnchorPane = _
 
+
   var animationTimer: CircleAnimation = _
 
   def randColor(): Color = Color.color(Random.nextDouble, Random.nextDouble(), Random.nextDouble)
@@ -72,7 +73,7 @@ class PizzaBuAppFXController extends Initializable {
     val height = canvasAnchorPane.getMinHeight
 
     val circles: IndexedSeq[Circle] =
-      for (i <- 1 to 5) yield {
+      for (i <- 1 to 1) yield {
         mkCircle(width.toInt, height.toInt, Random.nextInt(20) + 1)
       }
     // wieso getChildren.addAll?
