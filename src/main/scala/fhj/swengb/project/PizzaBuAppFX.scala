@@ -6,6 +6,7 @@ import java.util.ResourceBundle
 import javafx.animation.AnimationTimer
 import javafx.application.Application
 import javafx.fxml.{FXML, Initializable, FXMLLoader}
+import javafx.scene.control.Button
 import javafx.scene.layout.AnchorPane
 import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
@@ -60,6 +61,16 @@ case class CircleAnimation(circles: Seq[Circle]) extends AnimationTimer {
 class PizzaBuAppFXController extends Initializable {
 
   @FXML var canvasAnchorPane: AnchorPane = _
+  @FXML var pommes: Button = _
+  @FXML var ofen: Button = _
+  @FXML var cola: Button = _
+
+  @FXML var reihe1: Button = _
+  @FXML var reihe2: Button = _
+  @FXML var reihe3: Button = _
+  @FXML var reihe4: Button = _
+
+  @FXML var stop: Button = _
 
 
   var animationTimer: CircleAnimation = _
@@ -79,7 +90,6 @@ class PizzaBuAppFXController extends Initializable {
     // wieso getChildren.addAll?
     canvasAnchorPane.getChildren.addAll(circles: _*)
     animationTimer = CircleAnimation(circles)
-
   }
 
 
