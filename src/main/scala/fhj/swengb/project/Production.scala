@@ -47,7 +47,7 @@ object Production {
 
 case class Production(products:Map[Machines,Product]) {
 
-  val mas = getMachine(readLine("Please choose a product -> "))
+   val mas = getMachine(readLine("Please choose a product -> "))
 
 
   def getMachine(machine: String) = machine match {
@@ -61,7 +61,7 @@ case class Production(products:Map[Machines,Product]) {
   Every different order (pizza,cola or fries) has a different producing time
   The produced product is stored in the Map "products"
    */
-  def start(machine: Machines) = machine match {
+  def start(machine: Machines):Production = machine match {
     case Oven => println("Pizza wird gemacht"); println(products + (machine -> Pizza));Production(products + (machine -> Pizza))
     case Beverage => println("Produziere Getränke"); println(products + (machine -> Cola));Production(products + (machine -> Cola))
     case Fries => println("CurlyFries werden gemacht"); println(products + (machine -> CurlyFries));Production(products + (machine -> CurlyFries))
@@ -70,7 +70,7 @@ case class Production(products:Map[Machines,Product]) {
   /*
    Products picked up by the player to bring the products to the quests are removed
   */
-  def pickedUp(machine: Machines) = machine match {
+  def pickedUp(machine: Machines):Production = machine match {
     case Oven => println("Pizza wurde ausgeliefert");println(products + (machine -> null));Production(products + (machine -> null))
     case Beverage => println("Cola wurde ausgeliefert");println(products + (machine -> null));Production(products + (machine -> null))
     case Fries => println("Fries wurden ausgeliefert");println(products + (machine -> null));Production(products + (machine -> null))

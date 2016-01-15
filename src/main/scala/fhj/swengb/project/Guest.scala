@@ -58,8 +58,8 @@ case class Guests(order:Seq[Product], recList:Seq[Product] = Nil) {
     case fries if del == "fries" => println("Fries");savereceived(CurlyFries,recList,order)
   }
 
-    def savereceived(product:Product,recList:Seq[Product]=Nil,order:Seq[Product]) =  {
-      println(recList.+:(product)); Guests(order, recList.+:(product))//wait for received product (getProduct)
+    def savereceived(product:Product,recList:Seq[Product]=Nil,order:Seq[Product]):Guests =  {
+      Guests(order, recList.+:(product))//wait for received product (getProduct)
     }
 
 }

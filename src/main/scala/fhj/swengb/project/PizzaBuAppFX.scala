@@ -19,6 +19,7 @@ object PizzaBuApp {
 
 }
 
+
 class PizzaBuAppFX extends javafx.application.Application {
 
   val loader = new FXMLLoader(getClass.getResource("GUI-Startscreen.fxml"))
