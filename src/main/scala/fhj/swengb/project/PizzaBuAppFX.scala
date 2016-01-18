@@ -14,6 +14,7 @@ import javafx.scene.{Scene, Parent}
 import javafx.stage.Stage
 
 import scala.collection.immutable.IndexedSeq
+import scala.compat.Platform
 import scala.util.Random
 import scala.util.control.NonFatal
 
@@ -30,7 +31,7 @@ object PizzaBuApp {
 
 class PizzaBuAppFX extends Application {
 
-  val loader = new FXMLLoader(getClass.getResource("GUI-Game.fxml"))
+  val loader = new FXMLLoader(getClass.getResource("GUI-Startscreen.fxml"))
 
   override def start(stage: Stage): Unit =
     try {
@@ -57,6 +58,85 @@ case class CircleAnimation(circles: Seq[Circle]) extends AnimationTimer {
 
   }
 }
+
+
+class PizzaBuAppStartController {
+
+  @FXML var start: Button = _
+  @FXML var highscore: Button = _
+  @FXML var help: Button = _
+  @FXML var exit: Button = _
+
+  def onStart(): Unit = {
+    val loaderGame = new FXMLLoader(getClass.getResource("GUI-Game.fxml"))
+    val gameStage = new Stage()
+
+    gameStage.setTitle("PizzaBu - HighScore!")
+    loaderGame.load[Parent]()
+    gameStage.setScene(new Scene(loaderGame.getRoot[Parent]))
+
+    gameStage.show()
+  }
+
+  def goToHighScore(): Unit = {
+    val loaderScore = new FXMLLoader(getClass.getResource("GUI-Highscore.fxml"))
+    val highScoreStage = new Stage()
+
+    highScoreStage.setTitle("PizzaBu - HighScore!")
+    loaderScore.load[Parent]()
+    highScoreStage.setScene(new Scene(loaderScore.getRoot[Parent]))
+
+    highScoreStage.show()
+
+    // Zurück zu Startbilschirm Button einbauen! (muss im Highscore Controller eingebaut sein)
+
+    // Beenden des anderen Fensters wenn auf Button geklickt wird
+
+    //highScoreStage.close()
+
+  }
+  def onHelp(): Unit = {
+    val loaderHelp = new FXMLLoader(getClass.getResource("GUI-Help.fxml"))
+    val helpStage = new Stage()
+
+    helpStage.setTitle("PizzaBu - Help!")
+    loaderHelp.load[Parent]()
+    helpStage.setScene(new Scene(loaderHelp.getRoot[Parent]))
+
+    helpStage.show()
+  }
+
+  def onExit(): Unit = {
+    println("hello Exit")
+  }
+
+}
+
+
+class PizzaBuAppHighscoreController {
+
+  @FXML var zurueck: Button = _
+
+  // Wenn der Button Zurück gedrückt wird, soll das aktuelle Fenster geschlossen werden und
+  // der Startbildschirm wieder angezeigt werden.
+  def onZurueck(): Unit = {
+    println("Ich will zurüc zum Startbildschirm")
+
+  }
+}
+
+class PizzaBuAppHelpController {
+
+  @FXML var zurueck: Button = _
+
+  // Wenn der Button Zurück gedrückt wird, soll das aktuelle Fenster geschlossen werden und
+  // der Startbildschirm wieder angezeigt werden.
+  def onZurueck(): Unit = {
+    println("Ich will zurück zum Startbildschirm")
+
+  }
+}
+
 
 class PizzaBuAppFXController extends Initializable {
 
