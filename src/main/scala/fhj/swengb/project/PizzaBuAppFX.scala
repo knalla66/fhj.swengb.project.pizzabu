@@ -113,7 +113,7 @@ class PizzaBuAppStartController {
 }
 
 
-class PizzaBuAppHighscoreController {
+class PizzaBuAppHighscoreController extends PizzaBuAppFX{
 
   @FXML var zurueck: Button = _
 
