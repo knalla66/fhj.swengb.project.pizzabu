@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhj.swengb.project.PizzaBuAppFXController">
    <center>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -30,18 +30,21 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="88.0" stroke="DODGERBLUE" strokeType="INSIDE" width="50.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" stroke="DODGERBLUE" strokeType="INSIDE" width="50.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="88.0" stroke="DODGERBLUE" strokeType="INSIDE" width="50.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Arc fill="#ffbf00" length="270.0" radiusX="19.0" radiusY="15.0" startAngle="45.0" stroke="#ffbf00" strokeType="INSIDE" type="ROUND" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-            <Arc fill="#ffbf00" length="270.0" radiusX="15.0" radiusY="15.0" startAngle="45.0" stroke="#ffbf00" strokeType="INSIDE" type="ROUND" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-            <Arc fill="#ffbf00" length="270.0" radiusX="15.0" radiusY="15.0" startAngle="45.0" stroke="#ffbf00" strokeType="INSIDE" type="ROUND" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-            <Ellipse fill="#89a3bc" radiusX="20.0" radiusY="21.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d60000" height="65.0" stroke="#be00f9" strokeType="INSIDE" width="67.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2200f7" height="65.0" stroke="#be00f9" strokeType="INSIDE" width="67.0" GridPane.halignment="CENTER" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#71d019" height="65.0" stroke="#be00f9" strokeType="INSIDE" width="67.0" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+            <Ellipse fx:id="koch" fill="#89a3bc" radiusX="20.0" radiusY="21.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Button fx:id="ofen" mnemonicParsing="false" prefHeight="155.0" prefWidth="212.0" text="Ofen" GridPane.rowIndex="2" />
+            <Button fx:id="pommes" layoutX="10.0" layoutY="171.0" mnemonicParsing="false" prefHeight="155.0" prefWidth="212.0" text="Pommes" />
+            <Button fx:id="cola" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="155.0" prefWidth="212.0" text="Cola" GridPane.rowIndex="4" />
+            <Button fx:id="reihe1" mnemonicParsing="false" prefHeight="139.0" prefWidth="210.0" text="Reihe1" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Button fx:id="reihe2" layoutX="453.0" layoutY="91.0" mnemonicParsing="false" prefHeight="139.0" prefWidth="210.0" text="Reihe2" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Button fx:id="reihe3" layoutX="453.0" layoutY="171.0" mnemonicParsing="false" prefHeight="139.0" prefWidth="210.0" text="Reihe3" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <Button fx:id="reihe4" layoutX="453.0" layoutY="251.0" mnemonicParsing="false" prefHeight="139.0" prefWidth="210.0" text="Reihe4" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+            <Button fx:id="start" mnemonicParsing="false" onAction="#start" text="Start handle" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <Button fx:id="stop" mnemonicParsing="false" onAction="#exit" text="Stop handle" GridPane.columnIndex="4" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </center>
    <top>
-      <AnchorPane prefHeight="64.0" prefWidth="737.0" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="canvasAnchorPane" minHeight="30.0" minWidth="100.0" prefHeight="64.0" prefWidth="737.0" BorderPane.alignment="CENTER">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b10000" height="39.0" stroke="#b10000" strokeType="INSIDE" width="737.0" />
             <Label alignment="CENTER" prefHeight="39.0" prefWidth="737.0" text="PizzaBu - Game" textFill="WHITE">

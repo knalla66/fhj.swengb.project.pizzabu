@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhj.swengb.project.PizzaBudeController">
+   <left>
+      <ButtonBar prefHeight="400.0" prefWidth="79.0" BorderPane.alignment="CENTER">
+        <buttons>
+          <Button fx:id="btnPizza" mnemonicParsing="false" onAction="#pizza" text="Pizza" />
+        </buttons>
+      </ButtonBar>
+   </left>
+   <bottom>
+      <Button fx:id="btnStart" mnemonicParsing="false" onAction="#start" text="Start" BorderPane.alignment="CENTER" />
+   </bottom>
+   <right>
+      <Button fx:id="btnStop" mnemonicParsing="false" onAction="#stop" text="Stop" BorderPane.alignment="CENTER" />
+   </right>
+   <top>
+      <Button fx:id="btnDrink" mnemonicParsing="false" onAction="#drink" text="Drink" BorderPane.alignment="CENTER" />
+   </top>
+</BorderPane>
