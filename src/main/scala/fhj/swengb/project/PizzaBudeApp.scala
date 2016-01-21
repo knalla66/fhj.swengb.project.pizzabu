@@ -4,14 +4,13 @@ import java.net.URL
 import java.util.ResourceBundle
 import javafx.animation.AnimationTimer
 import javafx.application.Application
-import javafx.beans.property.{SimpleBooleanProperty, SimpleObjectProperty, SimpleIntegerProperty}
 import javafx.fxml._
+import javafx.scene.layout.AnchorPane
 import javafx.scene.{Scene, Parent}
 import javafx.scene.control.{Button}
 import javafx.stage.Stage
 
 import scala.collection.mutable
-import scala.collection.mutable.HashMap
 import scala.util.control.NonFatal
 
 /**
@@ -35,57 +34,38 @@ class PizzaBudeApp extends Application {
     } catch {
     case NonFatal(e) => e.printStackTrace()
   }
-
 }
 
 case class GameLoop(game: PizzaBude) extends AnimationTimer{
 
   override def handle(now:Long):Unit = {
 
-    /**
-      * Checks if Button for PizzaOven is clicked.
-      */
-    if(PizzaOven.getProperty()){
-      println("SET TIME!!!")
-      PizzaOven.setTime(now+10000000000L)
-      PizzaOven.setState(true)
-      PizzaOven.setProperty(false)
+    PizzaBude.saveStartTime(now)
+
+
+    PizzaOven.checkMachine(now, PizzaOven.t, PizzaOven.product)
+    Drink.checkMachine(now, Drink.t, Drink.product)
+    Pommes.checkMachine(now, Pommes.t, Pommes.product)
+
+    Table2.checkTables(now)
+    Table2.deliver()
+    Table2.checkAngryLevel(now)
+
+    if(PizzaBude.getStartTime()+60000000000L < now) {
+      Table3.checkTables(now)
+      Table3.deliver()
+
+    }
+    if(PizzaBude.getStartTime()+120000000000L < now) {
+      Table1.checkTables(now)
+      Table1.deliver()
+    }
+    if(PizzaBude.getStartTime()+180000000000L < now) {
+      Table4.checkTables(now)
+      Table4.deliver()
     }
 
-    /**
-      *
-      */
-    if(PizzaOven.getTime() < now && PizzaOven.getState()) {
-      println("PIZZA FERTIG")
-      PizzaOven.setState(false)
-    }
-
-    /**
-      * Checks if Button for Drink is clicked
-      */
-    if(Drink.getProperty()){
-      println("SET TIME!!!")
-      Drink.setTime(now+5000000000L)
-      Drink.setState(true)
-      Drink.setProperty(false)
-    }
-    /**
-      *
-      */
-    if(Drink.getTime() < now && Drink.getState()) {
-      println("DRINK FERTIG")
-      Drink.setState(false)
-    }
-
-
-    //println(game.guests.update(Guest(game.getGuestProperty()),Order(game.getGuestProperty()).createOrder()))
-    //val g = game.guests
-    //val x = g.update(Guest(game.getGuestProperty()),Order(game.getGuestProperty()).createOrder())
-    //game.setGuestProperty(game.getGuestProperty()+1)
-    //println(game.getGuestProperty())
-    //game.setGameState(PizzaBude(game.guests + (Guest(game.getGuestProperty()) -> Order(game.getGuestProperty()).createOrder()),game.machines,game.player))
-    //println(game.getGameState())
-
+    PizzaBude.checkGameOver()
   }
 }
 
@@ -95,6 +75,12 @@ class PizzaBudeController extends Initializable {
   @FXML var btnDrink: Button = _
   @FXML var btnStart: Button = _
   @FXML var btnStop: Button = _
+  @FXML var btnTable1: Button = _
+  @FXML var btnTable2: Button = _
+  @FXML var btnTable3: Button = _
+  @FXML var btnTable4: Button = _
+
+  @FXML var canvasAnchorPane: AnchorPane = _
 
   var game:GameLoop = _
 
@@ -102,16 +88,21 @@ class PizzaBudeController extends Initializable {
 
     val machines = Seq(PizzaOven,Drink)
     val guests: mutable.Map[Guest, Seq[Product]] = mutable.Map()
-    val player = Player(0)
-    val g = PizzaBude.apply(guests,machines,player)
+    val g = PizzaBude.apply(guests,machines)
     g.setGameState(g)
     game = GameLoop(g)
 
   }
 
-  @FXML def pizza():Unit = if(!PizzaOven.getState()) {PizzaOven.setProperty(true);println("Start PIZZAOFEN")}
-  @FXML def drink():Unit = if(!Drink.getState()) {Drink.setProperty(true);println("Start DRINK")}
+  @FXML def pizza():Unit = if(!PizzaOven.getState()) PizzaOven.setProperty(true)
+  @FXML def drink():Unit = if(!Drink.getState()) Drink.setProperty(true)
+  @FXML def pommes():Unit = if(!Pommes.getState()) Pommes.setProperty(true)
   @FXML def start():Unit = game.start()
   @FXML def stop():Unit = game.stop()
+
+  @FXML def table1():Unit = Table1.setProperty(true)
+  @FXML def table2():Unit = Table2.setProperty(true)
+  @FXML def table3():Unit = Table3.setProperty(true)
+  @FXML def table4():Unit = Table4.setProperty(true)
 
 }
