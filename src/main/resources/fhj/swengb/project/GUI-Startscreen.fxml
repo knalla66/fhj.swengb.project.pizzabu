@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhj.swengb.project.PizzaBuAppFXController">
    <center>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -20,10 +20,10 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" prefHeight="64.0" prefWidth="272.0" text="Start" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Button mnemonicParsing="false" prefHeight="64.0" prefWidth="272.0" text="High Score" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button mnemonicParsing="false" prefHeight="64.0" prefWidth="272.0" text="Help" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Button mnemonicParsing="false" prefHeight="64.0" prefWidth="272.0" text="Exit" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Button id="start" mnemonicParsing="false" onAction="#start" prefHeight="64.0" prefWidth="272.0" text="Start" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button id="highscore" mnemonicParsing="false" prefHeight="64.0" prefWidth="272.0" text="High Score" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button id="help" mnemonicParsing="false" prefHeight="64.0" prefWidth="272.0" text="Help" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Button id="exit" mnemonicParsing="false" onAction="#exit" prefHeight="64.0" prefWidth="272.0" text="Exit" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
    </center>
@@ -34,7 +34,7 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b10000" height="611.0" stroke="#b10000" strokeType="INSIDE" width="39.0" BorderPane.alignment="CENTER" />
    </right>
    <top>
-      <AnchorPane prefHeight="64.0" prefWidth="737.0" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="canvasAnchorPaneTop" minHeight="70.0" minWidth="50.0" prefHeight="64.0" prefWidth="737.0" BorderPane.alignment="CENTER">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b10000" height="39.0" stroke="#b10000" strokeType="INSIDE" width="737.0" />
             <Label alignment="CENTER" prefHeight="39.0" prefWidth="737.0" text="PizzaBu - Start" textFill="WHITE">
@@ -45,4 +45,7 @@
          </children>
       </AnchorPane>
    </top>
+   <bottom>
+      <AnchorPane fx:id="canvasAnchorPane" minHeight="10.0" minWidth="361.0" prefHeight="60.0" prefWidth="760.0" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>

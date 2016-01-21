@@ -11,7 +11,7 @@ import concurrent.Future
 
 /**
  * @author ${user.name}
- */
+
 object App {
   def main(args: Array[String]) {
     val f = concurrent.Future { println("hi") }
@@ -61,3 +61,4 @@ def main (args: Array[String] ) {
 }
 }
 
+  */
