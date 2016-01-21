@@ -8,17 +8,47 @@
    <left>
       <ButtonBar prefHeight="400.0" prefWidth="79.0" BorderPane.alignment="CENTER">
         <buttons>
-          <Button fx:id="btnPizza" mnemonicParsing="false" onAction="#pizza" text="Pizza" />
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                <Button fx:id="btnPizza" mnemonicParsing="false" onAction="#pizza" text="Pizza" GridPane.rowIndex="1" />
+                  <Button fx:id="btnPommes" mnemonicParsing="false" onAction="#pommes" text="Pommes" />
+                  <Button fx:id="btnDrink" mnemonicParsing="false" onAction="#drink" text="Drink" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
         </buttons>
       </ButtonBar>
    </left>
    <bottom>
       <Button fx:id="btnStart" mnemonicParsing="false" onAction="#start" text="Start" BorderPane.alignment="CENTER" />
    </bottom>
-   <right>
-      <Button fx:id="btnStop" mnemonicParsing="false" onAction="#stop" text="Stop" BorderPane.alignment="CENTER" />
-   </right>
    <top>
-      <Button fx:id="btnDrink" mnemonicParsing="false" onAction="#drink" text="Drink" BorderPane.alignment="CENTER" />
+      <Button fx:id="btnStop" mnemonicParsing="false" onAction="#stop" text="Stop" BorderPane.alignment="CENTER" />
    </top>
+   <right>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="btnTable2" mnemonicParsing="false" onAction="#table2" text="Table2" GridPane.rowIndex="1" />
+            <Button fx:id="btnTable11" mnemonicParsing="false" onAction="#table1" text="Table1" />
+            <Button fx:id="btnTable3" mnemonicParsing="false" onAction="#table3" text="Table3" GridPane.rowIndex="2" />
+            <Button fx:id="btnTable4" mnemonicParsing="false" onAction="#table4" text="Table4" GridPane.rowIndex="3" />
+         </children>
+      </GridPane>
+   </right>
 </BorderPane>
