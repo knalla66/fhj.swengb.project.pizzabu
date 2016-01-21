@@ -5,7 +5,7 @@ import scala.util.Random
 /**
   * Created by IMA14/PizzaBu on 14.01.2016.
   */
-trait Guest {
+sealed trait Guest {
 
   val products:List[Product] = List(Pizza,Cola,CurlyFries)
 
@@ -32,13 +32,12 @@ object Guest4 extends Guest
 object Guests {
   def main(args: Array[String]) {
     val g1 = Guests
-  }
 
  val order = Guest1.order
   println(order)
   Guests(order)
 
-}
+}}
 
 case class Guests(order:Seq[Product], recList:Seq[Product] = Nil) {
 

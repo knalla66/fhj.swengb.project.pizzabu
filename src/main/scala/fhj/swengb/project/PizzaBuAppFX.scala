@@ -5,13 +5,14 @@ import java.net.URL
 import java.util.ResourceBundle
 import javafx.animation.AnimationTimer
 import javafx.application.Application
+import javafx.beans.property.{SimpleBooleanProperty, SimpleObjectProperty}
 import javafx.fxml.{FXML, Initializable, FXMLLoader}
+import javafx.stage.Stage
 import javafx.scene.layout.AnchorPane
+import javafx.scene.control.{Label, Button, TextArea}
 import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
 import javafx.scene.{Scene, Parent}
-import javafx.stage.Stage
-
 import scala.collection.immutable.IndexedSeq
 import scala.util.Random
 import scala.util.control.NonFatal
@@ -60,6 +61,7 @@ case class CircleAnimation(circles: Seq[Circle]) extends AnimationTimer {
 class PizzaBuAppFXController extends Initializable {
 
   @FXML var canvasAnchorPane: AnchorPane = _
+  @FXML var pommes: Button = _
 
 
   var animationTimer: CircleAnimation = _
@@ -76,11 +78,38 @@ class PizzaBuAppFXController extends Initializable {
       for (i <- 1 to 1) yield {
         mkCircle(width.toInt, height.toInt, Random.nextInt(20) + 1)
       }
+
+    val fries = setPommes(true)
+
     // wieso getChildren.addAll?
     canvasAnchorPane.getChildren.addAll(circles: _*)
     animationTimer = CircleAnimation(circles)
 
   }
+
+  /*
+  *** current Products
+   */
+  val currentProduct:SimpleBooleanProperty = new SimpleBooleanProperty()
+  //currentGameProperty.addListener(JfxUtils.onChange(updateGame))
+
+  def getPommes() = currentProduct.get()
+  def setPommes(s: Boolean) = currentProduct.set(s)
+
+  def getCola() = currentProduct.get()
+  def setCola(s: Boolean) = currentProduct.set(s)
+
+  def getPizza() = currentProduct.get()
+  def setPizza(s: Boolean) = currentProduct.set(s)
+
+  /*
+  *** current Guest
+   */
+  val currentGuest:SimpleBooleanProperty = new SimpleBooleanProperty()
+
+  def getGuest() = currentGuest.get()
+  def setGuet(s: Boolean) = currentGuest.set(s)
+
 
 
   def mkCircle(width: Int, height: Int, maxRadius: Int): Circle = {
@@ -98,6 +127,9 @@ class PizzaBuAppFXController extends Initializable {
     animationTimer.stop()
   }
 
+  def getPommes(flag: Boolean): Boolean = flag
+
+  @FXML def onPommes():Boolean = getPommes(true)
 
 }
 
