@@ -4,25 +4,7 @@ import scala.util.Random
 
 /**
   * Created by IMA14/PizzaBu on 14.01.2016.
-  */
-trait Guest {
 
-  val products:List[Product] = List(Pizza,Cola,CurlyFries)
-
-  def createOrder(howMany:Int = Random.shuffle(List(1,2,3)).head, products: List[Product] = products,orderList: List[Product]=Nil): Seq[Product] = howMany match {
-    case howMany if howMany > 0 => createOrder(howMany-1,products,orderList.::(Random.shuffle(products).head))
-    case _ => orderList
-  }
-
-  val order:Seq[Product] = createOrder()
-
-  def setAngryLevel(lvl: Int = 0) = {
-    0 + lvl
-  }
-
-  var angry = setAngryLevel()
-
-}
 
 object Guest1 extends Guest
 object Guest2 extends Guest
@@ -38,6 +20,26 @@ object Guests {
   println(order)
   Guests(order)
 
+}
+
+
+case class Gast(id : Int)
+case class Order(id : Int)
+
+/*case class PizzaHut(guests : Seq[Guest]) {
+
+  def createNextState() : PizzaHut
+}*/
+
+object TestProgramm {
+
+
+
+  def main(args: Array[String]) {
+    val gäste = for (i <- 1 to 10) yield Gast(i)
+    gäste.foreach(println)
+
+  }
 }
 
 case class Guests(order:Seq[Product], recList:Seq[Product] = Nil) {
@@ -62,4 +64,4 @@ case class Guests(order:Seq[Product], recList:Seq[Product] = Nil) {
       println(recList.+:(product)); Guests(order, recList.+:(product))//wait for received product (getProduct)
     }
 
-}
+}**/

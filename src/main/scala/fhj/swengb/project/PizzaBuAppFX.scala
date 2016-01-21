@@ -1,6 +1,6 @@
 package fhj.swengb.project
 
-import java.awt.Image
+import java.awt.{Button, Image}
 import java.net.URL
 import java.util.ResourceBundle
 import javafx.animation.AnimationTimer
@@ -60,6 +60,7 @@ case class CircleAnimation(circles: Seq[Circle]) extends AnimationTimer {
 class PizzaBuAppFXController extends Initializable {
 
   @FXML var canvasAnchorPane: AnchorPane = _
+  @FXML var btnPizza: Button =_
 
   var animationTimer: CircleAnimation = _
 
