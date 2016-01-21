@@ -5,14 +5,13 @@ import java.util.ResourceBundle
 import javafx.animation.AnimationTimer
 import javafx.application.Application
 import javafx.fxml.{FXML, FXMLLoader, Initializable}
-import javafx.scene.control.{TableView, TableColumn, Button}
+import javafx.scene.control.{Button, TableColumn, TableView}
 import javafx.scene.layout.AnchorPane
 import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
 import javafx.scene.{Parent, Scene}
 import javafx.stage.Stage
 
-import fhj.swengb.project.Highscore.Score._
 import fhj.swengb.project.Highscore._
 
 import scala.collection.immutable.IndexedSeq
@@ -25,8 +24,8 @@ import scala.util.control.NonFatal
 
 // companion object
 object PizzaBuApp {
-  def main(args: Array[String]) {
-    Application.launch(classOf[PizzaBuAppFX], args: _*)
+  def main(args: Array[ String ]) {
+    Application.launch(classOf[ PizzaBuAppFX ], args: _*)
   }
 }
 
@@ -38,7 +37,7 @@ class PizzaBuAppFX extends Application {
     try {
       stage.setTitle("PizzaBu - Die Pizza kommt in nu!")
       loader.load[Parent]()
-      stage.setScene(new Scene(loader.getRoot[Parent]))
+      stage.setScene(new Scene(loader.getRoot[ Parent ]))
 
       stage.show()
     } catch {
@@ -46,7 +45,7 @@ class PizzaBuAppFX extends Application {
     }
 }
 
-case class CircleAnimation(circles: Seq[Circle]) extends AnimationTimer {
+case class CircleAnimation(circles: Seq[ Circle ]) extends AnimationTimer {
 
   // every tick this method is called - you are free to do whatever you want
   // in this method. maybe animate something, maybe something else ...
@@ -74,7 +73,7 @@ class PizzaBuAppStartController {
 
     gameStage.setTitle("PizzaBu - HighScore!")
     loaderGame.load[Parent]()
-    gameStage.setScene(new Scene(loaderGame.getRoot[Parent]))
+    gameStage.setScene(new Scene(loaderGame.getRoot[ Parent ]))
 
     gameStage.show()
   }
@@ -85,7 +84,7 @@ class PizzaBuAppStartController {
 
     highScoreStage.setTitle("PizzaBu - HighScore!")
     loaderScore.load[Parent]()
-    highScoreStage.setScene(new Scene(loaderScore.getRoot[Parent]))
+    highScoreStage.setScene(new Scene(loaderScore.getRoot[ Parent ]))
 
     highScoreStage.show()
 
@@ -96,13 +95,14 @@ class PizzaBuAppStartController {
     //highScoreStage.close()
 
   }
+
   def onHelp(): Unit = {
     val loaderHelp = new FXMLLoader(getClass.getResource("GUI-Help.fxml"))
     val helpStage = new Stage()
 
     helpStage.setTitle("PizzaBu - Help!")
     loaderHelp.load[Parent]()
-    helpStage.setScene(new Scene(loaderHelp.getRoot[Parent]))
+    helpStage.setScene(new Scene(loaderHelp.getRoot[ Parent ]))
 
     helpStage.show()
   }
@@ -114,7 +114,7 @@ class PizzaBuAppStartController {
 }
 
 
-class PizzaBuAppHighscoreController extends Initializable{
+class PizzaBuAppHighscoreController extends Initializable {
 
   import JfxUtils._
 
@@ -126,7 +126,7 @@ class PizzaBuAppHighscoreController extends Initializable{
   @FXML var columnName: ScoreTC[ String ] = _
   @FXML var columnScore: ScoreTC[ Int ] = _
 
-  val mutableArticles = mkObservableList(List(MutableScore(Score(1, "Verena", 15666858))))
+  val mutableArticles = mkObservableList(List(MutableScore(Score("Verena", 15666858))))
 
   @FXML var zurueck: Button = _
 
@@ -150,27 +150,42 @@ class PizzaBuAppHighscoreController extends Initializable{
 
   //läd die Daten von der Datenbank
   def loadData(): Unit = {
-    for {
-      con <- Db.maybeConnection
-      _ = reTable(con.createStatement())
-      _ = highscorelist.map(toDb(con)(_))
-      s <- fromDb(queryAll(con))
-    } {
-      // fügt die Daten in die TableView ein
-      tableView.getItems().add(MutableScore(s))
-      printscore(s)
+
+
+
+    if (new java.io.File("C:\\workspace\\score.db").exists == true) {
+
+      for {
+        con <- Db.maybeConnection
+        s <- Score.fromDb(Score.queryAll(con))
+      } {
+        tableView.getItems().add(MutableScore(s))
+      }
+
+      println("Es musste keine Datenbank erstellt werden!")
+
+
+
     }
+    else {
 
-    //println("Juhu!")
+      for {
+        con <- Db.maybeConnection
+        _ = Score.reTable(con.createStatement())
+        _ = Score.highscorelist.map(Score.toDb(con)(_))
+        s <- Score.fromDb(Score.queryAll(con))
+      } {
+        tableView.getItems().add(MutableScore(s))
+      }
 
-   // println(highscorelist)
+      println("Es wurde eine neue Datenbank erstellt!")
+
+    }
 
   }
 
-  override def initialize(location: URL, resources: ResourceBundle): Unit =
-  {
+  override def initialize(location: URL, resources: ResourceBundle): Unit = {
     //teilt den einzelnen Spalten einen Wert zu
-    initTableViewColumn[Int](columnRang, _.rangProperty)
     initTableViewColumn[String](columnName, _.nameProperty)
     initTableViewColumn[Int](columnScore, _.scoreProperty)
 
@@ -215,7 +230,7 @@ class PizzaBuAppFXController extends Initializable {
     val width = canvasAnchorPane.getMinWidth
     val height = canvasAnchorPane.getMinHeight
 
-    val circles: IndexedSeq[Circle] =
+    val circles: IndexedSeq[ Circle ] =
       for (i <- 1 to 1) yield {
         mkCircle(width.toInt, height.toInt, Random.nextInt(20) + 1)
       }

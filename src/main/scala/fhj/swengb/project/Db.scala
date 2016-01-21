@@ -36,6 +36,14 @@ object Db {
        */
       def reTable(stmt: Statement): Int
 
+
+      /*
+      *
+      * erstellt eine neue Datenbank, wenn noch keine Existiert
+      */
+
+      def createTable (stmt: Statement): Int
+
       /**
        * Saves given type to the database.
        *
@@ -64,6 +72,10 @@ object Db {
         con.createStatement().executeQuery(query)
       }
 
+      def queryMaster(con: Connection)(query: String): ResultSet = {
+        con.createStatement().executeQuery(query)
+      }
+
       /**
        * Sql code necessary to execute a drop table on the backing sql table
        *
@@ -80,7 +92,6 @@ object Db {
        * sql code for inserting an entity.
        */
       def insertSql: String
-
 
 
     }
