@@ -6,7 +6,7 @@ package fhj.swengb.project
 
 /**
   * for a pizza game, there are three different machines --> oven, beverage, fries
-  */
+
 sealed trait Machines
 
 case object Oven extends Machines
@@ -87,3 +87,5 @@ case class Production(products:Map[Machines,Product]) {
     case _ => false
   }
 }
+
+  */
