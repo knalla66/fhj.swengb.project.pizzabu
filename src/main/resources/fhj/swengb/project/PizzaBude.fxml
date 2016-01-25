@@ -1,54 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhj.swengb.project.PizzaBudeController">
-   <left>
-      <ButtonBar prefHeight="400.0" prefWidth="79.0" BorderPane.alignment="CENTER">
-        <buttons>
-            <GridPane>
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                <Button fx:id="btnPizza" mnemonicParsing="false" onAction="#pizza" text="Pizza" GridPane.rowIndex="1" />
-                  <Button fx:id="btnPommes" mnemonicParsing="false" onAction="#pommes" text="Pommes" />
-                  <Button fx:id="btnDrink" mnemonicParsing="false" onAction="#drink" text="Drink" GridPane.rowIndex="2" />
-               </children>
-            </GridPane>
-        </buttons>
-      </ButtonBar>
-   </left>
    <bottom>
       <Button fx:id="btnStart" mnemonicParsing="false" onAction="#start" text="Start" BorderPane.alignment="CENTER" />
    </bottom>
    <top>
       <Button fx:id="btnStop" mnemonicParsing="false" onAction="#stop" text="Stop" BorderPane.alignment="CENTER" />
    </top>
-   <right>
-      <GridPane BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+   <center>
+      <AnchorPane fx:id="canvasAnchorPane" minHeight="317.0" minWidth="223.0" prefHeight="350.0" prefWidth="223.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnTable2" mnemonicParsing="false" onAction="#table2" text="Table2" GridPane.rowIndex="1" />
-            <Button fx:id="btnTable11" mnemonicParsing="false" onAction="#table1" text="Table1" />
-            <Button fx:id="btnTable3" mnemonicParsing="false" onAction="#table3" text="Table3" GridPane.rowIndex="2" />
-            <Button fx:id="btnTable4" mnemonicParsing="false" onAction="#table4" text="Table4" GridPane.rowIndex="3" />
+            <Button fx:id="btnPizza" layoutX="8.0" layoutY="104.0" mnemonicParsing="false" onAction="#pizza" prefHeight="100.0" prefWidth="100.0" text="Pizza" />
+            <Button fx:id="btnPommes" layoutX="-4.0" layoutY="-2.0" mnemonicParsing="false" onAction="#pommes" prefHeight="100.0" prefWidth="100.0" text="Pommes" />
+            <Button fx:id="btnDrink" layoutX="-2.0" layoutY="213.0" mnemonicParsing="false" onAction="#drink" prefHeight="100.0" prefWidth="100.0" text="Drink" />
+            <Button fx:id="btnTable11" layoutX="294.0" layoutY="39.0" mnemonicParsing="false" onAction="#table1" text="Table1" />
+            <Button fx:id="btnTable2" layoutX="281.0" layoutY="119.0" mnemonicParsing="false" onAction="#table2" text="Table2" />
+            <Button fx:id="btnTable3" layoutX="292.0" layoutY="186.0" mnemonicParsing="false" onAction="#table3" text="Table3" />
+            <Button fx:id="btnTable4" layoutX="294.0" layoutY="261.0" mnemonicParsing="false" onAction="#table4" text="Table4" />
          </children>
-      </GridPane>
-   </right>
+      </AnchorPane>
+   </center>
 </BorderPane>
