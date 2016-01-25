@@ -112,13 +112,10 @@ object Score extends Db.DbEntity[ Score ] {
   val nine = Score("Benni", 7000)
   val ten = Score("Alex", 78688)
 
-
-
-
   val highscore: Set[ Score ] = Set(one,two,three,four,five,six,seven,eight,nine,ten)
 
   lazy val highscorelist = highscore.toList
-
+  
   val dropTableSql = "drop table if exists score"
   val createTableSql = "create table if not exists score (name string, highscore integer)"
   val insertSql = "insert into score (name, highscore) VALUES (?, ?)"
