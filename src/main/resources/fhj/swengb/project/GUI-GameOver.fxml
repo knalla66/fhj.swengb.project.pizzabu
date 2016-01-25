@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Game Over!" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="61.0" />
+         </font>
+      </Text>
+   </top>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="70.0" layoutY="63.0" prefHeight="51.0" prefWidth="146.0" text="Name des Spielers" textFill="#0051ff">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="70.0" layoutY="163.0" prefHeight="51.0" prefWidth="146.0" text="Score" textFill="#0051ff">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="nameField" layoutX="257.0" layoutY="63.0" prefHeight="52.0" prefWidth="265.0" promptText="Bitte gib deinen Namen ein" />
+            <Button fx:id="btn_save" layoutX="58.0" layoutY="294.0" mnemonicParsing="false" onAction="#save" prefHeight="49.0" prefWidth="199.0" text="Speichern" />
+            <Button fx:id="btn_toHighscore" layoutX="423.0" layoutY="294.0" mnemonicParsing="false" onAction="#toHighscore" prefHeight="49.0" prefWidth="199.0" text="Zum Highscore" />
+            <TextField fx:id="scoreField" layoutX="257.0" layoutY="189.0" prefHeight="48.0" prefWidth="264.0" />
+         </children>
+      </AnchorPane>
+   </center>
+   <left>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b10000" height="550.0" stroke="#b10000" strokeType="INSIDE" width="39.0" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b10000" height="617.0" stroke="#b10000" strokeType="INSIDE" width="39.0" BorderPane.alignment="CENTER" />
+   </right>
+</BorderPane>
