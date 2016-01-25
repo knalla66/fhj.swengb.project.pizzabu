@@ -1,8 +1,9 @@
 package fhj.swengb.project
 
 import javafx.beans.property._
-import scala.util.Random
+
 import scala.collection.mutable.Map
+import scala.util.Random
 
 /**
   * Created by PizzaBudeTeam on 15.01.2016.
@@ -271,6 +272,7 @@ object PizzaBude {
     if(Table1.getAngryLevel() == 4 || Table2.getAngryLevel() == 4 || Table3.getAngryLevel() == 4 || Table4.getAngryLevel() == 4){
       setGameOver(true)
       println("GAME OVER!!!")
+
     }
   }
 

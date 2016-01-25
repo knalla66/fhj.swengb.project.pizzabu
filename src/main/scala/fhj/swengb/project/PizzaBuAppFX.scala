@@ -126,8 +126,6 @@ class PizzaBuAppHighscoreController extends Initializable {
   @FXML var columnName: ScoreTC[ String ] = _
   @FXML var columnScore: ScoreTC[ Int ] = _
 
-  val mutableArticles = mkObservableList(List(MutableScore(Score("Verena", 15666858))))
-
   @FXML var zurueck: Button = _
 
   // Wenn der Button Zurück gedrückt wird, soll das aktuelle Fenster geschlossen werden und
@@ -149,7 +147,11 @@ class PizzaBuAppHighscoreController extends Initializable {
     initTableViewColumnCellValueFactory[ MutableScore, T ]
 
   //läd die Daten von der Datenbank
-  def loadData(): Unit = {
+
+  override def initialize(location: URL, resources: ResourceBundle): Unit = {
+    //teilt den einzelnen Spalten einen Wert zu
+    initTableViewColumn[String](columnName, _.nameProperty)
+    initTableViewColumn[Int](columnScore, _.scoreProperty)
 
 
 
@@ -163,7 +165,6 @@ class PizzaBuAppHighscoreController extends Initializable {
       }
 
       println("Es musste keine Datenbank erstellt werden!")
-
 
 
     }
@@ -183,13 +184,6 @@ class PizzaBuAppHighscoreController extends Initializable {
     }
 
   }
-
-  override def initialize(location: URL, resources: ResourceBundle): Unit = {
-    //teilt den einzelnen Spalten einen Wert zu
-    initTableViewColumn[String](columnName, _.nameProperty)
-    initTableViewColumn[Int](columnScore, _.scoreProperty)
-
-  }
 }
 
 class PizzaBuAppHelpController {
@@ -203,6 +197,7 @@ class PizzaBuAppHelpController {
 
   }
 }
+
 
 
 class PizzaBuAppFXController extends Initializable {
