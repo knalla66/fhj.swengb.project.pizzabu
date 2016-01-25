@@ -113,8 +113,6 @@ object Score extends Db.DbEntity[ Score ] {
   val ten = Score("Alex", 78688)
 
 
-
-
   val highscore: Set[ Score ] = Set(one,two,three,four,five,six,seven,eight,nine,ten)
 
   lazy val highscorelist = highscore.toList
@@ -145,11 +143,7 @@ object Score extends Db.DbEntity[ Score ] {
     lb.toList
   }
 
-
-
   def queryAll(c: Connection): ResultSet = query(c)("select * from score order by highscore DESC")
-
-  def queryMaster (c:Connection): ResultSet = query(c)("SELECT count(*) FROM sqlite_master WHERE type = 'table' AND tbl_name = 'score'")
 
   def printlist(l: List[ Score ]): Unit = println(l)
 

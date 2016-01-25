@@ -148,11 +148,10 @@ class PizzaBuAppHighscoreController extends Initializable {
   def initTableViewColumn[ T ]: (ScoreTC[ T ], (MutableScore) => Any) => Unit =
     initTableViewColumnCellValueFactory[ MutableScore, T ]
 
-  //läd die Daten von der Datenbank
-  def loadData(): Unit = {
 
+  override def initialize(location: URL, resources: ResourceBundle): Unit = {
 
-
+    // läd die Daten sofort wenn sich das Fenster öffnet, aus der Datenbank
     if (new java.io.File("C:\\workspace\\score.db").exists == true) {
 
       for {
@@ -182,9 +181,6 @@ class PizzaBuAppHighscoreController extends Initializable {
 
     }
 
-  }
-
-  override def initialize(location: URL, resources: ResourceBundle): Unit = {
     //teilt den einzelnen Spalten einen Wert zu
     initTableViewColumn[String](columnName, _.nameProperty)
     initTableViewColumn[Int](columnScore, _.scoreProperty)
