@@ -5,7 +5,7 @@ import java.util.ResourceBundle
 import javafx.animation.AnimationTimer
 import javafx.application.Application
 import javafx.fxml.{FXML, FXMLLoader, Initializable}
-import javafx.scene.control.{Button, TableColumn, TableView}
+import javafx.scene.control.{TextField, Button, TableColumn, TableView}
 import javafx.scene.layout.AnchorPane
 import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
@@ -126,8 +126,6 @@ class PizzaBuAppHighscoreController extends Initializable {
   @FXML var columnName: ScoreTC[ String ] = _
   @FXML var columnScore: ScoreTC[ Int ] = _
 
-  val mutableArticles = mkObservableList(List(MutableScore(Score("Verena", 15666858))))
-
   @FXML var zurueck: Button = _
 
   // Wenn der Button Zurück gedrückt wird, soll das aktuelle Fenster geschlossen werden und
@@ -149,7 +147,11 @@ class PizzaBuAppHighscoreController extends Initializable {
     initTableViewColumnCellValueFactory[ MutableScore, T ]
 
   //läd die Daten von der Datenbank
-  def loadData(): Unit = {
+
+  override def initialize(location: URL, resources: ResourceBundle): Unit = {
+    //teilt den einzelnen Spalten einen Wert zu
+    initTableViewColumn[String](columnName, _.nameProperty)
+    initTableViewColumn[Int](columnScore, _.scoreProperty)
 
 
 
@@ -183,13 +185,6 @@ class PizzaBuAppHighscoreController extends Initializable {
     }
 
   }
-
-  override def initialize(location: URL, resources: ResourceBundle): Unit = {
-    //teilt den einzelnen Spalten einen Wert zu
-    initTableViewColumn[String](columnName, _.nameProperty)
-    initTableViewColumn[Int](columnScore, _.scoreProperty)
-
-  }
 }
 
 class PizzaBuAppHelpController {
@@ -204,6 +199,51 @@ class PizzaBuAppHelpController {
   }
 }
 
+class GameOverController extends Initializable {
+
+  @FXML var nameField: TextField = _
+  @FXML var scoreField: TextField = _
+  @FXML var btn_save: Button = _
+  @FXML var btn_toHighscore: Button = _
+
+  val highscore = Table1.getScore()+ Table2.getScore() + Table3.getScore() + Table4.getScore()
+
+  override def initialize(location: URL, resources: ResourceBundle): Unit = {
+    scoreField.setText(highscore.toString())
+
+  }
+
+  def save() = {
+    val name = nameField.getCharacters.toString
+    Score.toDb(Db.maybeConnection.get)(Score(name, highscore))
+
+    println("Name: " + name + " Highscore:" + highscore)
+
+    val loaderScore = new FXMLLoader(getClass.getResource("GUI.fxml"))
+    val highScoreStage = new Stage()
+
+    highScoreStage.setTitle("PizzaBu - HighScore!")
+    loaderScore.load[Parent]()
+    highScoreStage.setScene(new Scene(loaderScore.getRoot[ Parent ]))
+
+    highScoreStage.show()
+
+  }
+
+  def toHighscore() = {
+
+    val loaderScore = new FXMLLoader(getClass.getResource("GUI.fxml"))
+    val highScoreStage = new Stage()
+
+    highScoreStage.setTitle("PizzaBu - HighScore!")
+    loaderScore.load[Parent]()
+    highScoreStage.setScene(new Scene(loaderScore.getRoot[ Parent ]))
+
+    highScoreStage.show()
+
+  }
+
+}
 
 class PizzaBuAppFXController extends Initializable {
 

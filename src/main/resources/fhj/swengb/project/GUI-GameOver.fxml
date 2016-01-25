@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.scene.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
@@ -9,7 +8,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhj.swengb.project.GameOverController">
    <top>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Game Over!" BorderPane.alignment="CENTER">
          <font>
@@ -31,11 +30,11 @@
                </font>
             </Label>
             <TextField fx:id="nameField" layoutX="257.0" layoutY="63.0" prefHeight="52.0" prefWidth="265.0" promptText="Bitte gib deinen Namen ein" />
-            <!--
+
             <Button fx:id="btn_save" layoutX="58.0" layoutY="294.0" mnemonicParsing="false" onAction="#save" prefHeight="49.0" prefWidth="199.0" text="Speichern" />
             <Button fx:id="btn_toHighscore" layoutX="423.0" layoutY="294.0" mnemonicParsing="false" onAction="#toHighscore" prefHeight="49.0" prefWidth="199.0" text="Zum Highscore" />
-            -->
-             <TextField fx:id="scoreField" layoutX="257.0" layoutY="189.0" prefHeight="48.0" prefWidth="264.0" />
+
+             <TextField fx:id="scoreField" editable="false" layoutX="257.0" layoutY="189.0" prefHeight="48.0" prefWidth="264.0" />
          </children>
       </AnchorPane>
    </center>
