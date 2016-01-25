@@ -30,7 +30,6 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="88.0" stroke="DODGERBLUE" strokeType="INSIDE" width="50.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="80.0" stroke="DODGERBLUE" strokeType="INSIDE" width="50.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="88.0" stroke="DODGERBLUE" strokeType="INSIDE" width="50.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Ellipse fx:id="koch" fill="#89a3bc" radiusX="20.0" radiusY="21.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
             <Button fx:id="ofen" mnemonicParsing="false" prefHeight="155.0" prefWidth="212.0" text="Ofen" GridPane.rowIndex="2" />
             <Button fx:id="pommes" layoutX="10.0" layoutY="171.0" mnemonicParsing="false" prefHeight="155.0" prefWidth="212.0" text="Pommes" />
             <Button fx:id="cola" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="155.0" prefWidth="212.0" text="Cola" GridPane.rowIndex="4" />
@@ -40,11 +39,12 @@
             <Button fx:id="reihe4" layoutX="453.0" layoutY="251.0" mnemonicParsing="false" prefHeight="139.0" prefWidth="210.0" text="Reihe4" GridPane.columnIndex="3" GridPane.rowIndex="4" />
             <Button fx:id="start" mnemonicParsing="false" onAction="#start" text="Start handle" GridPane.columnIndex="4" GridPane.rowIndex="1" />
             <Button fx:id="stop" mnemonicParsing="false" onAction="#exit" text="Stop handle" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <AnchorPane fx:id="canvasAnchorPane" minHeight="80.0" minWidth="100.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </center>
    <top>
-      <AnchorPane fx:id="canvasAnchorPane" minHeight="30.0" minWidth="100.0" prefHeight="64.0" prefWidth="737.0" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="canvasAnchorPane2" minHeight="30.0" minWidth="100.0" prefHeight="64.0" prefWidth="737.0" BorderPane.alignment="CENTER">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b10000" height="39.0" stroke="#b10000" strokeType="INSIDE" width="737.0" />
             <Label alignment="CENTER" prefHeight="39.0" prefWidth="737.0" text="PizzaBu - Game" textFill="WHITE">

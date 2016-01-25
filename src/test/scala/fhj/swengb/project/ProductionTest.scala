@@ -1,13 +1,13 @@
-package fhj.swengb.project
+/*package fhj.swengb.project
 
 import fhj.swengb.project._
 import org.junit.Assert._
 import org.junit.Test
-
+*/
 /**
   * Created by Daniel on 04.01.2016.
   */
-
+/*
 class ProductionTest {
   /*
   all products are produced
@@ -62,5 +62,5 @@ class ProductionTest {
   }
 }
 
-
+*/
 
