@@ -5,33 +5,27 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0"
-            prefWidth="737.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="fhj.swengb.project.PizzaBuAppHighscoreController">
+<BorderPane fx:id="rootHighScore" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhj.swengb.project.PizzaBuAppHighscoreController">
     <center>
-        <TableView fx:id="tableView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                   minWidth="-Infinity" prefHeight="415.0" prefWidth="661.0" BorderPane.alignment="CENTER">
+        <TableView fx:id="tableView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="415.0" prefWidth="661.0" BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn fx:id="columnRang" prefWidth="59.0" text="Rang"/>
-                <TableColumn fx:id="columnName" prefWidth="239.0" text="Name"/>
-                <TableColumn fx:id="columnScore" prefWidth="362.0" text="Highscore"/>
+                <TableColumn fx:id="columnRang" prefWidth="59.0" text="Rang" />
+                <TableColumn fx:id="columnName" prefWidth="239.0" text="Name" />
+                <TableColumn fx:id="columnScore" prefWidth="362.0" text="Highscore" />
             </columns>
         </TableView>
     </center>
     <left>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b10000" height="528.0" stroke="#b10000" strokeType="INSIDE"
-                   width="39.0" BorderPane.alignment="CENTER"/>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b10000" height="528.0" stroke="#b10000" strokeType="INSIDE" width="39.0" BorderPane.alignment="CENTER" />
     </left>
     <right>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b10000" height="617.0" stroke="#b10000" strokeType="INSIDE"
-                   width="39.0" BorderPane.alignment="CENTER"/>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b10000" height="617.0" stroke="#b10000" strokeType="INSIDE" width="39.0" BorderPane.alignment="CENTER" />
     </right>
     <top>
         <AnchorPane prefHeight="53.0" prefWidth="737.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="zurueck" layoutX="41.0" layoutY="13.0" mnemonicParsing="false" onAction="#onZurueck"
-                        text="Zurück"/>
-                <Label layoutX="277.0" layoutY="18.0" text="PizzaBu - Highscore"/>
+                <Button fx:id="zurueck" layoutX="41.0" layoutY="13.0" mnemonicParsing="false" onAction="#onZurueck" text="Zurück" />
+                <Label layoutX="277.0" layoutY="18.0" text="PizzaBu - Highscore" />
             </children>
         </AnchorPane>
     </top>

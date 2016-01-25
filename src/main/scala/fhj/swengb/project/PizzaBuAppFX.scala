@@ -6,7 +6,7 @@ import javafx.animation.AnimationTimer
 import javafx.application.Application
 import javafx.fxml.{FXML, FXMLLoader, Initializable}
 import javafx.scene.control.{TextField, Button, TableColumn, TableView}
-import javafx.scene.layout.AnchorPane
+import javafx.scene.layout.{BorderPane, AnchorPane}
 import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
 import javafx.scene.{Parent, Scene}
@@ -62,6 +62,7 @@ case class CircleAnimation(circles: Seq[ Circle ]) extends AnimationTimer {
 
 class PizzaBuAppStartController {
 
+  @FXML var borderTop: BorderPane = _
   @FXML var start: Button = _
   @FXML var highscore: Button = _
   @FXML var help: Button = _
@@ -108,7 +109,7 @@ class PizzaBuAppStartController {
   }
 
   def onExit(): Unit = {
-    println("hello Exit")
+    borderTop.getScene.getWindow.hide()
   }
 
 }
@@ -120,6 +121,7 @@ class PizzaBuAppHighscoreController extends Initializable {
 
   type ScoreTC[ T ] = TableColumn[ MutableScore, T ]
 
+  @FXML var rootHighScore: BorderPane =_
   @FXML var tableView: TableView[ MutableScore ] = _
 
   @FXML var columnRang: ScoreTC[ Int ] = _
@@ -131,8 +133,7 @@ class PizzaBuAppHighscoreController extends Initializable {
   // Wenn der Button Zurück gedrückt wird, soll das aktuelle Fenster geschlossen werden und
   // der Startbildschirm wieder angezeigt werden.
   def onZurueck(): Unit = {
-    println("Ich will zurück zum Startbildschirm")
-
+    rootHighScore.getScene.getWindow.hide()
   }
 
   /**
@@ -189,13 +190,13 @@ class PizzaBuAppHighscoreController extends Initializable {
 
 class PizzaBuAppHelpController {
 
+  @FXML var borderTop: BorderPane = _
   @FXML var zurueck: Button = _
 
   // Wenn der Button Zurück gedrückt wird, soll das aktuelle Fenster geschlossen werden und
   // der Startbildschirm wieder angezeigt werden.
   def onZurueck(): Unit = {
-    println("Ich will zurück zum Startbildschirm")
-
+    borderTop.getScene.getWindow.hide()
   }
 }
 

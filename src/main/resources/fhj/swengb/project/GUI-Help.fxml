@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhj.swengb.project.PizzaBuAppHelpController">
+<BorderPane fx:id="borderTop" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhj.swengb.project.PizzaBuAppHelpController">
    <left>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b10000" height="528.0" stroke="#b10000" strokeType="INSIDE" width="39.0" BorderPane.alignment="CENTER" />
    </left>
@@ -20,7 +20,7 @@
       <AnchorPane prefHeight="63.0" prefWidth="737.0" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="321.0" layoutY="23.0" text="PizzaBu - HELP" />
-            <Button fx:id="zurueck" onAction="#onZurueck" layoutX="46.0" layoutY="18.0" mnemonicParsing="false" text="Zurück" />
+            <Button fx:id="zurueck" layoutX="46.0" layoutY="18.0" mnemonicParsing="false" onAction="#onZurueck" text="Zurück" />
          </children>
       </AnchorPane>
    </top>
