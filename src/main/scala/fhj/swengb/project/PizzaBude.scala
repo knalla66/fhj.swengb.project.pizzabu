@@ -1,7 +1,9 @@
 package fhj.swengb.project
 
 import javafx.beans.property._
-
+import javafx.fxml.FXMLLoader
+import javafx.scene.{Scene, Parent}
+import javafx.stage.Stage
 import scala.collection.mutable.Map
 import scala.util.Random
 
@@ -274,6 +276,7 @@ object PizzaBude {
       println("GAME OVER!!!")
 
     }
+
   }
 
 }

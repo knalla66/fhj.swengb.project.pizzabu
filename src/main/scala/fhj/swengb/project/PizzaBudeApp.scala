@@ -5,12 +5,13 @@ import java.util.ResourceBundle
 import javafx.animation.AnimationTimer
 import javafx.application.Application
 import javafx.fxml._
-import javafx.scene.layout.AnchorPane
+import javafx.scene.layout.{BorderPane, AnchorPane}
 import javafx.scene.{Scene, Parent}
 import javafx.scene.control.{TextField, Button}
 import javafx.stage.Stage
 
 import fhj.swengb.project.Highscore.Score
+import fhj.swengb.project.PizzaBude._
 
 import scala.collection.mutable
 import scala.util.control.NonFatal
@@ -44,7 +45,6 @@ case class GameLoop(game: PizzaBude) extends AnimationTimer{
 
     PizzaBude.saveStartTime(now)
 
-
     PizzaOven.checkMachine(now, PizzaOven.t, PizzaOven.product)
     Drink.checkMachine(now, Drink.t, Drink.product)
     Pommes.checkMachine(now, Pommes.t, Pommes.product)
@@ -68,11 +68,25 @@ case class GameLoop(game: PizzaBude) extends AnimationTimer{
     }
 
     PizzaBude.checkGameOver()
+
+    if(PizzaBude.getGameOver()) {
+      stop()
+
+      val gameOver = new FXMLLoader(getClass.getResource("GUI-GameOver.fxml"))
+      val gameOverStage = new Stage()
+
+      gameOverStage.setTitle("PizzaBu - HighScore!")
+      gameOver.load[Parent]()
+      gameOverStage.setScene(new Scene(gameOver.getRoot[ Parent ]))
+
+      gameOverStage.show()
+     }
   }
 }
-
 class PizzaBudeController extends Initializable {
 
+
+  @FXML var bordertop: BorderPane = _
   @FXML var btnPizza: Button = _
   @FXML var btnDrink: Button = _
   @FXML var btnStart: Button = _
@@ -93,7 +107,6 @@ class PizzaBudeController extends Initializable {
     val g = PizzaBude.apply(guests,machines)
     g.setGameState(g)
     game = GameLoop(g)
-
   }
 
   @FXML def pizza():Unit = if(!PizzaOven.getState()) PizzaOven.setProperty(true)
@@ -106,6 +119,7 @@ class PizzaBudeController extends Initializable {
   @FXML def table2():Unit = Table2.setProperty(true)
   @FXML def table3():Unit = Table3.setProperty(true)
   @FXML def table4():Unit = Table4.setProperty(true)
+  @FXML def close():Unit = bordertop.getScene.getWindow.hide()
 
 }
 
@@ -122,7 +136,6 @@ class GameOverController extends Initializable {
 
   override def initialize(location: URL, resources: ResourceBundle): Unit = {
     scoreField.setText(highscore.toString())
-
   }
 
   def save() = {
