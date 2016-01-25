@@ -19,7 +19,7 @@ object Highscore {
 /**
  * domain object
  */
-case class Score(rang: Int, name: String, highscore: Int) extends Db.DbEntity[ Score ] {
+case class Score(name: String, highscore: Int) extends Db.DbEntity[ Score ] {
 
   def reTable(stmt: Statement): Int = 0
 
@@ -27,15 +27,22 @@ case class Score(rang: Int, name: String, highscore: Int) extends Db.DbEntity[ S
 
   def fromDb(rs: ResultSet): List[ Score ] = List()
 
+
   def dropTableSql: String = "drop table if exists score"
 
-  def createTableSql: String = "create table score (rang integer, name string, highscore integer)"
+  def createTableSql: String = "create table if not exists score (name string, highscore integer)"
 
-  def insertSql: String = "insert into score (rang, name, highscore) VALUES (?, ?, ?)"
+  def insertSql: String = "insert into score (name, highscore) VALUES (?, ?)"
+
+  def tableexistsSql: String = "SELECT count(*) FROM sqlite_master WHERE type='table' AND name='score'"
 
   def printlist(l: List[ Score ]): Unit = {}
 
   def printscore(s: Score): Unit = {}
+
+  def createTable (stmt: Statement): Int = 0
+
+  def existTable (stmt: Statement): Int = 0
 
 }
 
@@ -44,11 +51,9 @@ case class Score(rang: Int, name: String, highscore: Int) extends Db.DbEntity[ S
  */
 class MutableScore {
 
-  val rangProperty: SimpleIntegerProperty = new SimpleIntegerProperty()
   val nameProperty: SimpleStringProperty = new SimpleStringProperty()
   val scoreProperty: SimpleIntegerProperty = new SimpleIntegerProperty()
 
-  def setRang(id: Int) = rangProperty.set(id)
 
   def setName(name: String) = nameProperty.set(name)
 
@@ -62,7 +67,6 @@ object MutableScore {
 
   def apply(a: Score): MutableScore = {
     val ma = new MutableScore
-    ma.setRang(a.rang)
     ma.setName(a.name)
     ma.setScore(a.highscore)
     ma
@@ -97,18 +101,29 @@ object JfxUtils {
 //Datenbank
 
 object Score extends Db.DbEntity[ Score ] {
-  val first = Score(1, "Verena", 15666858)
-  val second = Score(2, "Dani", 58968)
-  val third = Score(3, "Tati", 15852)
+  val one = Score("Verena", 15666858)
+  val two = Score( "Dani", 58968)
+  val three = Score("Tati", 321548)
+  val four = Score("Edith",25865)
+  val five = Score("Marie", 2568768)
+  val six = Score("Sophie", 2727272)
+  val seven = Score("Michi", 52577)
+  val eight = Score("Benji", 25245)
+  val nine = Score("Benni", 7000)
+  val ten = Score("Alex", 78688)
 
-  val highscore: Set[ Score ] = Set(first, second, third)
+
+  val highscore: Set[ Score ] = Set(one,two,three,four,five,six,seven,eight,nine,ten)
 
   lazy val highscorelist = highscore.toList
 
   val dropTableSql = "drop table if exists score"
-  val createTableSql = "create table score (rang integer, name string, highscore integer)"
-  val insertSql = "insert into score (rang, name, highscore) VALUES (?, ?, ?)"
+  val createTableSql = "create table if not exists score (name string, highscore integer)"
+  val insertSql = "insert into score (name, highscore) VALUES (?, ?)"
 
+  def createTable (stmt: Statement) : Int ={
+    stmt.executeUpdate(Score.createTableSql)
+  }
 
   def reTable(stmt: Statement): Int = {
     stmt.executeUpdate(Score.dropTableSql)
@@ -117,25 +132,26 @@ object Score extends Db.DbEntity[ Score ] {
 
   def toDb(c: Connection)(i: Score): Int = {
     val pstmt: PreparedStatement = c.prepareStatement(insertSql)
-    pstmt.setInt(1, i.rang)
-    pstmt.setString(2, i.name)
-    pstmt.setInt(3, i.highscore)
+    pstmt.setString(1, i.name)
+    pstmt.setInt(2, i.highscore)
     pstmt.executeUpdate()
   }
 
   def fromDb(rs: ResultSet): List[ Score ] = {
     val lb: ListBuffer[ Score ] = new ListBuffer[ Score ]()
-    while (rs.next()) lb.append(Score(rs.getInt("rang"), rs.getString("name"), rs.getInt("highscore")))
+    while (rs.next()) lb.append(Score(rs.getString("name"), rs.getInt("highscore")))
     lb.toList
   }
 
-  def queryAll(c: Connection): ResultSet = query(c)("select * from score")
+  def queryAll(c: Connection): ResultSet = query(c)("select * from score order by highscore DESC")
 
   def printlist(l: List[ Score ]): Unit = println(l)
 
   def printscore(s: Score): Unit = println {
-    "Rang= " + s.rang + " Name= " + s.name + " Highscore = " + s.highscore
+    " Name= " + s.name + ", Highscore = " + s.highscore
   }
 
 }
+
+
 }
