@@ -72,6 +72,10 @@ object Db {
         con.createStatement().executeQuery(query)
       }
 
+      def queryMaster(con: Connection)(query: String): ResultSet = {
+        con.createStatement().executeQuery(query)
+      }
+
       /**
        * Sql code necessary to execute a drop table on the backing sql table
        *

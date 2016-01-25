@@ -29,5 +29,7 @@
          </children>
       </AnchorPane>
    </top>
-
+   <bottom>
+      <Button fx:id="loadData" mnemonicParsing="false" onAction="#loadData" text="Load Data" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>
