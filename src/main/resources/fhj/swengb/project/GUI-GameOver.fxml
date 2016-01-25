@@ -31,9 +31,11 @@
                </font>
             </Label>
             <TextField fx:id="nameField" layoutX="257.0" layoutY="63.0" prefHeight="52.0" prefWidth="265.0" promptText="Bitte gib deinen Namen ein" />
-            <!--<Button fx:id="btn_save" layoutX="58.0" layoutY="294.0" mnemonicParsing="false" onAction="#save" prefHeight="49.0" prefWidth="199.0" text="Speichern" />
+            <!--
+            <Button fx:id="btn_save" layoutX="58.0" layoutY="294.0" mnemonicParsing="false" onAction="#save" prefHeight="49.0" prefWidth="199.0" text="Speichern" />
             <Button fx:id="btn_toHighscore" layoutX="423.0" layoutY="294.0" mnemonicParsing="false" onAction="#toHighscore" prefHeight="49.0" prefWidth="199.0" text="Zum Highscore" />
-            --><TextField fx:id="scoreField" layoutX="257.0" layoutY="189.0" prefHeight="48.0" prefWidth="264.0" />
+            -->
+             <TextField fx:id="scoreField" layoutX="257.0" layoutY="189.0" prefHeight="48.0" prefWidth="264.0" />
          </children>
       </AnchorPane>
    </center>
