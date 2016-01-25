@@ -29,7 +29,7 @@ object PizzaBuApp {
   }
 }
 
-class PizzaBuAppFX extends Application {
+case class PizzaBuAppFX() extends Application {
 
   val loader = new FXMLLoader(getClass.getResource("GUI-Startscreen.fxml"))
 
@@ -60,7 +60,7 @@ case class CircleAnimation(circles: Seq[ Circle ]) extends AnimationTimer {
 }
 
 
-class PizzaBuAppStartController {
+case class PizzaBuAppStartController() {
 
   @FXML var borderTop: BorderPane = _
   @FXML var start: Button = _
@@ -77,6 +77,8 @@ class PizzaBuAppStartController {
     gameStage.setScene(new Scene(loaderGame.getRoot[ Parent ]))
 
     gameStage.show()
+    borderTop.getScene.getWindow.hide()
+
   }
 
   def goToHighScore(): Unit = {
@@ -115,7 +117,7 @@ class PizzaBuAppStartController {
 }
 
 
-class PizzaBuAppHighscoreController extends Initializable {
+case class PizzaBuAppHighscoreController() extends Initializable {
 
   import JfxUtils._
 
@@ -134,6 +136,14 @@ class PizzaBuAppHighscoreController extends Initializable {
   // der Startbildschirm wieder angezeigt werden.
   def onZurueck(): Unit = {
     rootHighScore.getScene.getWindow.hide()
+
+    val loader = new FXMLLoader(getClass.getResource("GUI-Startscreen.fxml"))
+    val startStage = new Stage()
+    startStage.setTitle("PizzaBu - Die Pizza kommt in nu!")
+    loader.load[Parent]()
+    startStage.setScene(new Scene(loader.getRoot[ Parent ]))
+
+    startStage.show()
   }
 
   /**
@@ -187,7 +197,7 @@ class PizzaBuAppHighscoreController extends Initializable {
   }
 }
 
-class PizzaBuAppHelpController {
+case class PizzaBuAppHelpController() {
 
   @FXML var borderTop: BorderPane = _
   @FXML var zurueck: Button = _
@@ -201,7 +211,7 @@ class PizzaBuAppHelpController {
 
 
 
-class PizzaBuAppFXController extends Initializable {
+case class PizzaBuAppFXController() extends Initializable {
 
   @FXML var canvasAnchorPane: AnchorPane = _
   @FXML var pommes: Button = _

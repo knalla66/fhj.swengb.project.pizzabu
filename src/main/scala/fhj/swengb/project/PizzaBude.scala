@@ -1,6 +1,9 @@
 package fhj.swengb.project
 
 import javafx.beans.property._
+import javafx.fxml.FXMLLoader
+import javafx.scene.{Scene, Parent}
+import javafx.stage.Stage
 
 import scala.collection.mutable.Map
 import scala.util.Random
@@ -256,6 +259,11 @@ object PizzaBude {
   def getGameOver():Boolean = gameOver.get()
   def setGameOver(b:Boolean) = gameOver.set(b)
 
+  /*
+  val gameOverStop: SimpleBooleanProperty = new SimpleBooleanProperty()
+  def getGameOverStop():Boolean = gameOverStop.get()
+  def setGameOverSTop(b:Boolean) = gameOverStop.set(b)
+  */
   val deliverProperty: SimpleObjectProperty[Product] = new SimpleObjectProperty[Product]()
   def getDeliverProperty(): Product = deliverProperty.get()
   def setDeliverProperty(p:Product) = deliverProperty.set(p)
@@ -272,6 +280,10 @@ object PizzaBude {
     if(Table1.getAngryLevel() == 4 || Table2.getAngryLevel() == 4 || Table3.getAngryLevel() == 4 || Table4.getAngryLevel() == 4){
       setGameOver(true)
       println("GAME OVER!!!")
+
+        // NullPointer Exception! WIESO?????
+        //PizzaBudeController().close()
+
 
     }
   }
