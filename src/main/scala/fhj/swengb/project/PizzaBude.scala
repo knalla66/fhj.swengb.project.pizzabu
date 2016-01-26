@@ -21,7 +21,7 @@ case object Order1 extends Order
 case object Order2 extends Order
 case object Order3 extends Order
 case object Order4 extends Order
-case object Score extends Order
+case object ScoreAll extends Order
 
 sealed trait Product
 case object Pizza extends Product
@@ -218,27 +218,8 @@ case object Pommes extends Machine {
   override val product:Product = Fries
 }
 
-case class Guest(id: Int)
-/**
-case class Order(id: Int) {
 
-  val products:Seq[Product] = Seq(Pizza,Cola,Fries)
-
-  val maxLength = products.length + 1
-  val orderLength = Random.shuffle(1 to maxLength).head
-
-
-  def createOrder(orderSeq:Seq[Product] = Nil,orderLength:Int = orderLength,products: Seq[Product] = products):Seq[Product] = orderLength match {
-    case orderLength if orderLength > 0 => createOrder(orderSeq:+Random.shuffle(products).head,orderLength-1,products)
-    case _ => orderSeq
-  }
-
-  val order = createOrder()
-}
-*/
-
-
-case class PizzaBude(guests: mutable.Map[Guest, Seq[Product]], machines: Seq[Machine]) {
+case class PizzaBude() {
 
   val gameState: SimpleObjectProperty[PizzaBude] = new SimpleObjectProperty[PizzaBude]()
   def getGameState:PizzaBude = gameState.get()
@@ -256,9 +237,6 @@ case class PizzaBude(guests: mutable.Map[Guest, Seq[Product]], machines: Seq[Mac
   def getDeliverProperty: Product = deliverProperty.get()
   def setDeliverProperty(p:Product) = deliverProperty.set(p)
 
-  def createNextGameState(guests:mutable.Map[Guest,Seq[Product]]): PizzaBude = {
-    PizzaBude(guests,machines)
-  }
 }
 
 object PizzaBude {
