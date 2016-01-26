@@ -7,11 +7,14 @@ import javafx.application.Application
 import javafx.beans.property.{SimpleIntegerProperty, SimpleObjectProperty}
 import javafx.fxml._
 import javafx.scene.image.{ImageView, Image}
-import javafx.scene.layout.AnchorPane
+import javafx.scene.layout.{BorderPane, AnchorPane}
 import javafx.scene.{Scene, Parent}
-import javafx.scene.control.{Button,Label}
+import javafx.scene.control.{TextField, Button, Label}
 import javafx.stage.Stage
 
+import fhj.swengb.project.Highscore.Score
+
+import scala.collection.mutable
 import scala.util.control.NonFatal
 
 /**
@@ -40,7 +43,6 @@ class PizzaBudeApp extends Application {
 case class GameLoop(game: PizzaBude,buttons: Map[Move, Button],labels: Map[Order,Label],images: Map[Images, ImageView]) extends AnimationTimer{
 
   override def handle(now:Long):Unit = {
-
 
     PizzaBude.saveStartTime(now)
 
@@ -130,13 +132,62 @@ case class GameLoop(game: PizzaBude,buttons: Map[Move, Button],labels: Map[Order
       Table4.checkAngryLevel(now)
     }
     PizzaBude.checkGameOver()
-    if(PizzaBude.getGameOver) stop()
+    if(PizzaBude.getGameOver) {
+      stop()
+      val loaderGameOver = new FXMLLoader(getClass.getResource("GUI-GameOver.fxml"))
+      val gameOverStage = new Stage()
+
+      gameOverStage.setTitle("GAMEOVER!")
+      loaderGameOver.load[Parent]()
+      gameOverStage.setScene(new Scene(loaderGameOver.getRoot[ Parent ]))
+
+      gameOverStage.show()
+      //borderTop.getScene.getWindow.hide()
+
+
+    }
+
 
   }
 }
 
+
+/**
+ * GAMEOVER
+ */
+
+case class GameOverController() extends Initializable {
+
+  @FXML var borderPaneTop: BorderPane = _
+  @FXML var nameField: TextField = _
+  @FXML var scoreField: TextField = _
+  @FXML var btn_save: Button = _
+  @FXML var btn_toHighscore: Button = _
+
+  val highscore = Table1.getScore + Table2.getScore + Table3.getScore + Table4.getScore
+
+  override def initialize(location: URL, resources: ResourceBundle): Unit = {
+    scoreField.setText(highscore.toString())
+  }
+
+  def save() = {
+    val name = nameField.getCharacters.toString
+    Score.toDb(Db.maybeConnection.get)(Score(name, highscore))
+    println("Name: " + name + " Highscore:" + highscore)
+    val loaderScore = new FXMLLoader(getClass.getResource("GUI-Highscore.fxml"))
+    val highScoreStage = new Stage()
+    highScoreStage.setTitle("PizzaBu - HighScore!")
+    loaderScore.load[Parent]()
+    highScoreStage.setScene(new Scene(loaderScore.getRoot[Parent]))
+    highScoreStage.show()
+    borderPaneTop.getScene.getWindow.hide()
+  }
+}
+
+
 case class PizzaBudeController() extends Initializable {
 
+  @FXML var borderPaneTop: BorderPane = _
   @FXML var btnPizza: Button = _
   @FXML var btnDrink: Button = _
   @FXML var btnPommes: Button = _
@@ -229,6 +280,7 @@ case class PizzaBudeController() extends Initializable {
   @FXML def table2():Unit = Table2.setProperty(true)
   @FXML def table3():Unit = Table3.setProperty(true)
   @FXML def table4():Unit = Table4.setProperty(true)
+  @FXML def close():Unit = borderPaneTop.getScene.getWindow.hide()
 
   lazy val images: Map[Images, ImageView] = Map(
     BtnDrink_1 -> btnDrink_1,

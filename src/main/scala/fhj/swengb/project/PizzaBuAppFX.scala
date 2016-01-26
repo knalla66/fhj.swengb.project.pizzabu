@@ -1,12 +1,14 @@
 package fhj.swengb.project
 
+import java.io.File
 import java.net.URL
+import java.nio.file.{Files, Paths, Path}
 import java.util.ResourceBundle
 import javafx.animation.AnimationTimer
 import javafx.application.Application
 import javafx.fxml.{FXML, FXMLLoader, Initializable}
-import javafx.scene.control.{Button, TableColumn, TableView}
-import javafx.scene.layout.AnchorPane
+import javafx.scene.control.{TextField, Button, TableColumn, TableView}
+import javafx.scene.layout.{BorderPane, AnchorPane}
 import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
 import javafx.scene.{Parent, Scene}
@@ -29,7 +31,7 @@ object PizzaBuApp {
   }
 }
 
-class PizzaBuAppFX extends Application {
+case class PizzaBuAppFX() extends Application {
 
   val loader = new FXMLLoader(getClass.getResource("GUI-Startscreen.fxml"))
 
@@ -60,22 +62,25 @@ case class CircleAnimation(circles: Seq[ Circle ]) extends AnimationTimer {
 }
 
 
-class PizzaBuAppStartController {
+case class PizzaBuAppStartController() extends Initializable{
 
+  @FXML var borderTop: BorderPane = _
   @FXML var start: Button = _
   @FXML var highscore: Button = _
   @FXML var help: Button = _
   @FXML var exit: Button = _
 
   def onStart(): Unit = {
-    val loaderGame = new FXMLLoader(getClass.getResource("GUI-Game.fxml"))
+    val loaderGame = new FXMLLoader(getClass.getResource("PizzaBude.fxml"))
     val gameStage = new Stage()
 
-    gameStage.setTitle("PizzaBu - HighScore!")
+    gameStage.setTitle("PizzaBu - Die Pizza kommt in nu!")
     loaderGame.load[Parent]()
     gameStage.setScene(new Scene(loaderGame.getRoot[ Parent ]))
 
     gameStage.show()
+    borderTop.getScene.getWindow.hide()
+
   }
 
   def goToHighScore(): Unit = {
@@ -87,12 +92,7 @@ class PizzaBuAppStartController {
     highScoreStage.setScene(new Scene(loaderScore.getRoot[ Parent ]))
 
     highScoreStage.show()
-
-    // Zurück zu Startbilschirm Button einbauen! (muss im Highscore Controller eingebaut sein)
-
-    // Beenden des anderen Fensters wenn auf Button geklickt wird
-
-    //highScoreStage.close()
+    borderTop.getScene.getWindow.hide()
 
   }
 
@@ -108,33 +108,50 @@ class PizzaBuAppStartController {
   }
 
   def onExit(): Unit = {
-    println("hello Exit")
+    borderTop.getScene.getWindow.hide()
   }
 
+  override def initialize(location: URL, resources: ResourceBundle): Unit = {
+    var path: Path = Paths.get("C:\\PizzaBu")
+
+    if (Files.exists(path) == false){
+
+      val dir: File = new File("C:\\PizzaBu")
+      // attempt to create the directory
+      dir.mkdir()
+
+    }
+  }
 }
 
 
-class PizzaBuAppHighscoreController extends Initializable {
+case class PizzaBuAppHighscoreController() extends Initializable {
 
   import JfxUtils._
 
   type ScoreTC[ T ] = TableColumn[ MutableScore, T ]
 
+  @FXML var rootHighScore: BorderPane =_
   @FXML var tableView: TableView[ MutableScore ] = _
 
   @FXML var columnRang: ScoreTC[ Int ] = _
   @FXML var columnName: ScoreTC[ String ] = _
   @FXML var columnScore: ScoreTC[ Int ] = _
 
-  val mutableArticles = mkObservableList(List(MutableScore(Score("Verena", 15666858))))
-
   @FXML var zurueck: Button = _
 
   // Wenn der Button Zurück gedrückt wird, soll das aktuelle Fenster geschlossen werden und
   // der Startbildschirm wieder angezeigt werden.
   def onZurueck(): Unit = {
-    println("Ich will zurück zum Startbildschirm")
+    rootHighScore.getScene.getWindow.hide()
 
+    val loader = new FXMLLoader(getClass.getResource("GUI-Startscreen.fxml"))
+    val startStage = new Stage()
+    startStage.setTitle("PizzaBu - Die Pizza kommt in nu!")
+    loader.load[Parent]()
+    startStage.setScene(new Scene(loader.getRoot[ Parent ]))
+
+    startStage.show()
   }
 
   /**
@@ -149,12 +166,17 @@ class PizzaBuAppHighscoreController extends Initializable {
     initTableViewColumnCellValueFactory[ MutableScore, T ]
 
   //läd die Daten von der Datenbank
-  def loadData(): Unit = {
+
+  override def initialize(location: URL, resources: ResourceBundle): Unit = {
+    //teilt den einzelnen Spalten einen Wert zu
+    initTableViewColumn[String](columnName, _.nameProperty)
+    initTableViewColumn[Int](columnScore, _.scoreProperty)
 
 
 
-    if (new java.io.File("C:\\workspace\\score.db").exists == true) {
+    if (new java.io.File("C:\\PizzaBu\\score.db").exists == true) {
 
+      println("ich komme in die if schleife")
       for {
         con <- Db.maybeConnection
         s <- Score.fromDb(Score.queryAll(con))
@@ -163,7 +185,6 @@ class PizzaBuAppHighscoreController extends Initializable {
       }
 
       println("Es musste keine Datenbank erstellt werden!")
-
 
 
     }
@@ -183,29 +204,27 @@ class PizzaBuAppHighscoreController extends Initializable {
     }
 
   }
-
-  override def initialize(location: URL, resources: ResourceBundle): Unit = {
-    //teilt den einzelnen Spalten einen Wert zu
-    initTableViewColumn[String](columnName, _.nameProperty)
-    initTableViewColumn[Int](columnScore, _.scoreProperty)
-
-  }
 }
 
-class PizzaBuAppHelpController {
+case class PizzaBuAppHelpController() {
 
+  @FXML var borderTop: BorderPane = _
   @FXML var zurueck: Button = _
 
   // Wenn der Button Zurück gedrückt wird, soll das aktuelle Fenster geschlossen werden und
   // der Startbildschirm wieder angezeigt werden.
   def onZurueck(): Unit = {
-    println("Ich will zurück zum Startbildschirm")
-
+    borderTop.getScene.getWindow.hide()
   }
 }
 
 
-class PizzaBuAppFXController extends Initializable {
+/**
+ * GAME OVER CONTROLLER
+ */
+
+
+case class PizzaBuAppFXController() extends Initializable {
 
   @FXML var canvasAnchorPane: AnchorPane = _
   @FXML var pommes: Button = _
