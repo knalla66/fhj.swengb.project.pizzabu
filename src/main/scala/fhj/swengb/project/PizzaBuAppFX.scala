@@ -1,6 +1,8 @@
 package fhj.swengb.project
 
+import java.io.File
 import java.net.URL
+import java.nio.file.{Files, Paths, Path}
 import java.util.ResourceBundle
 import javafx.animation.AnimationTimer
 import javafx.application.Application
@@ -60,7 +62,7 @@ case class CircleAnimation(circles: Seq[ Circle ]) extends AnimationTimer {
 }
 
 
-case class PizzaBuAppStartController() {
+case class PizzaBuAppStartController() extends Initializable{
 
   @FXML var borderTop: BorderPane = _
   @FXML var start: Button = _
@@ -69,10 +71,10 @@ case class PizzaBuAppStartController() {
   @FXML var exit: Button = _
 
   def onStart(): Unit = {
-    val loaderGame = new FXMLLoader(getClass.getResource("GUI-Game.fxml"))
+    val loaderGame = new FXMLLoader(getClass.getResource("PizzaBude.fxml"))
     val gameStage = new Stage()
 
-    gameStage.setTitle("PizzaBu - HighScore!")
+    gameStage.setTitle("PizzaBu - Die Pizza kommt in nu!")
     loaderGame.load[Parent]()
     gameStage.setScene(new Scene(loaderGame.getRoot[ Parent ]))
 
@@ -90,12 +92,7 @@ case class PizzaBuAppStartController() {
     highScoreStage.setScene(new Scene(loaderScore.getRoot[ Parent ]))
 
     highScoreStage.show()
-
-    // Zurück zu Startbilschirm Button einbauen! (muss im Highscore Controller eingebaut sein)
-
-    // Beenden des anderen Fensters wenn auf Button geklickt wird
-
-    //highScoreStage.close()
+    borderTop.getScene.getWindow.hide()
 
   }
 
@@ -114,6 +111,17 @@ case class PizzaBuAppStartController() {
     borderTop.getScene.getWindow.hide()
   }
 
+  override def initialize(location: URL, resources: ResourceBundle): Unit = {
+    var path: Path = Paths.get("C:\\PizzaBu")
+
+    if (Files.exists(path) == false){
+
+      val dir: File = new File("C:\\PizzaBu")
+      // attempt to create the directory
+      dir.mkdir()
+
+    }
+  }
 }
 
 
@@ -166,7 +174,7 @@ case class PizzaBuAppHighscoreController() extends Initializable {
 
 
 
-    if (new java.io.File("score.db").exists == true) {
+    if (new java.io.File("C:\\PizzaBu\\score.db").exists == true) {
 
       println("ich komme in die if schleife")
       for {
@@ -210,6 +218,10 @@ case class PizzaBuAppHelpController() {
   }
 }
 
+
+/**
+ * GAME OVER CONTROLLER
+ */
 
 
 case class PizzaBuAppFXController() extends Initializable {

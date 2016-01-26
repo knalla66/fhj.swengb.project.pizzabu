@@ -7,13 +7,12 @@ import javafx.application.Application
 import javafx.beans.property.{SimpleIntegerProperty, SimpleObjectProperty}
 import javafx.fxml._
 import javafx.scene.image.{ImageView, Image}
-import javafx.scene.layout.AnchorPane
+import javafx.scene.layout.{BorderPane, AnchorPane}
 import javafx.scene.{Scene, Parent}
-import javafx.scene.control.{Button,Label}
+import javafx.scene.control.{TextField, Button, Label}
 import javafx.stage.Stage
 
 import fhj.swengb.project.Highscore.Score
-import fhj.swengb.project.PizzaBude._
 
 import scala.collection.mutable
 import scala.util.control.NonFatal
@@ -63,7 +62,7 @@ case class GameLoop(game: PizzaBude,buttons: Map[Move, Button],labels: Map[Order
     if(Pommes.getState) buttons(Product3).setGraphic(images(BtnFries_2))
     if(!Pommes.getState && !Pommes.getWaiting) buttons(Product3).setGraphic(images(BtnFries_1))
 
-    labels(Score).setText("Score: "+(Table1.getScore+Table2.getScore+Table3.getScore+Table4.getScore).toString)
+    labels(ScoreAll).setText("Score: "+(Table1.getScore+Table2.getScore+Table3.getScore+Table4.getScore).toString)
 
     if(Table1.getOrder==Nil) buttons(Customer1).setGraphic(images(BtnTable_0()))
     if(Table2.getOrder==Nil) buttons(Customer2).setGraphic(images(BtnTable2_0()))
@@ -136,10 +135,58 @@ case class GameLoop(game: PizzaBude,buttons: Map[Move, Button],labels: Map[Order
       Table4.checkAngryLevel(now)
     }
     PizzaBude.checkGameOver()
-    if(PizzaBude.getGameOver) stop()
+    if(PizzaBude.getGameOver) {
+      stop()
+      val loaderGameOver = new FXMLLoader(getClass.getResource("GUI-GameOver.fxml"))
+      val gameOverStage = new Stage()
+
+      gameOverStage.setTitle("GAMEOVER!")
+      loaderGameOver.load[Parent]()
+      gameOverStage.setScene(new Scene(loaderGameOver.getRoot[ Parent ]))
+
+      gameOverStage.show()
+      //borderTop.getScene.getWindow.hide()
+
+
+    }
+
 
   }
 }
+
+
+/**
+ * GAMEOVER
+ */
+
+case class GameOverController() extends Initializable {
+
+  @FXML var borderPaneTop: BorderPane = _
+  @FXML var nameField: TextField = _
+  @FXML var scoreField: TextField = _
+  @FXML var btn_save: Button = _
+  @FXML var btn_toHighscore: Button = _
+
+  val highscore = Table1.getScore + Table2.getScore + Table3.getScore + Table4.getScore
+
+  override def initialize(location: URL, resources: ResourceBundle): Unit = {
+    scoreField.setText(highscore.toString())
+  }
+
+  def save() = {
+    val name = nameField.getCharacters.toString
+    Score.toDb(Db.maybeConnection.get)(Score(name, highscore))
+    println("Name: " + name + " Highscore:" + highscore)
+    val loaderScore = new FXMLLoader(getClass.getResource("GUI-Highscore.fxml"))
+    val highScoreStage = new Stage()
+    highScoreStage.setTitle("PizzaBu - HighScore!")
+    loaderScore.load[Parent]()
+    highScoreStage.setScene(new Scene(loaderScore.getRoot[Parent]))
+    highScoreStage.show()
+    borderPaneTop.getScene.getWindow.hide()
+  }
+}
+
 
 case class PizzaBudeController() extends Initializable {
 
@@ -178,7 +225,7 @@ case class PizzaBudeController() extends Initializable {
     Order2 -> lblTable2,
     Order3 -> lblTable3,
     Order4 -> lblTable4,
-    Score -> lblScore
+    ScoreAll -> lblScore
   )
 
   lazy val btnDrink_1: ImageView = new ImageView(new Image(getClass.getResourceAsStream("btnDrink_DrinkWait.png")))
@@ -225,6 +272,7 @@ case class PizzaBudeController() extends Initializable {
     btnPommes.setGraphic(btnFries_1)
     btnPizza.setGraphic(btnPizza_1)
     btnDrink.setGraphic(btnDrink_1)
+    game.start()
 
   }
 

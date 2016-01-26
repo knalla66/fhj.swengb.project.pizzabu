@@ -21,7 +21,7 @@ case object Order1 extends Order
 case object Order2 extends Order
 case object Order3 extends Order
 case object Order4 extends Order
-case object Score extends Order
+case object ScoreAll extends Order
 
 sealed trait Product
 case object Pizza extends Product
