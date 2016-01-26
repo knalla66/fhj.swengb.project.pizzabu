@@ -166,8 +166,9 @@ case class PizzaBuAppHighscoreController() extends Initializable {
 
 
 
-    if (new java.io.File("C:\\workspace\\score.db").exists == true) {
+    if (new java.io.File("score.db").exists == true) {
 
+      println("ich komme in die if schleife")
       for {
         con <- Db.maybeConnection
         s <- Score.fromDb(Score.queryAll(con))
