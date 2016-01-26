@@ -16,6 +16,13 @@ case object Customer2 extends Move
 case object Customer3 extends Move
 case object Customer4 extends Move
 
+sealed trait Order
+case object Order1 extends Order
+case object Order2 extends Order
+case object Order3 extends Order
+case object Order4 extends Order
+case object Score extends Order
+
 sealed trait Product
 case object Pizza extends Product
 case object Cola extends Product
@@ -130,6 +137,7 @@ sealed trait Table {
     case _ => orderSeq
   }
 
+
   val tableDelay:Seq[Long] = Seq(5000000000L,10000000000L,15000000000L)
 
 
@@ -167,12 +175,17 @@ sealed trait Machine{
   def getProperty:Boolean = btnProperty.get()
   def setProperty(b:Boolean) = btnProperty.set(b)
 
+  val waiting:SimpleBooleanProperty = new SimpleBooleanProperty()
+  def getWaiting:Boolean = waiting.get()
+  def setWaiting(b:Boolean) = waiting.set(b)
+
   def checkMachine(n:Long,t:Long,product:Product) = {
     if(getProperty){
       if(getReady) {
         PizzaBude.setDeliverProperty(product)
         setProperty(false)
         setReady(false)
+        setWaiting(false)
         println("DELIVER: "+PizzaBude.getDeliverProperty)
 
       } else {
@@ -185,6 +198,7 @@ sealed trait Machine{
     if(getTime < n && getState) {
       println()
       println(product+" FERTIG")
+      setWaiting(true)
       setState(false)
       setReady(true)
     }
