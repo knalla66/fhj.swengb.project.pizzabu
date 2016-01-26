@@ -5,8 +5,8 @@ import java.util.ResourceBundle
 import javafx.animation.AnimationTimer
 import javafx.application.Application
 import javafx.fxml.{FXML, FXMLLoader, Initializable}
-import javafx.scene.control.{TextField, Button, TableColumn, TableView}
-import javafx.scene.layout.{BorderPane, AnchorPane}
+import javafx.scene.control.{Button, TableColumn, TableView}
+import javafx.scene.layout.AnchorPane
 import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
 import javafx.scene.{Parent, Scene}
@@ -29,7 +29,7 @@ object PizzaBuApp {
   }
 }
 
-case class PizzaBuAppFX() extends Application {
+class PizzaBuAppFX extends Application {
 
   val loader = new FXMLLoader(getClass.getResource("GUI-Startscreen.fxml"))
 
@@ -60,9 +60,8 @@ case class CircleAnimation(circles: Seq[ Circle ]) extends AnimationTimer {
 }
 
 
-case class PizzaBuAppStartController() {
+class PizzaBuAppStartController {
 
-  @FXML var borderTop: BorderPane = _
   @FXML var start: Button = _
   @FXML var highscore: Button = _
   @FXML var help: Button = _
@@ -77,8 +76,6 @@ case class PizzaBuAppStartController() {
     gameStage.setScene(new Scene(loaderGame.getRoot[ Parent ]))
 
     gameStage.show()
-    borderTop.getScene.getWindow.hide()
-
   }
 
   def goToHighScore(): Unit = {
@@ -111,19 +108,18 @@ case class PizzaBuAppStartController() {
   }
 
   def onExit(): Unit = {
-    borderTop.getScene.getWindow.hide()
+    println("hello Exit")
   }
 
 }
 
 
-case class PizzaBuAppHighscoreController() extends Initializable {
+class PizzaBuAppHighscoreController extends Initializable {
 
   import JfxUtils._
 
   type ScoreTC[ T ] = TableColumn[ MutableScore, T ]
 
-  @FXML var rootHighScore: BorderPane =_
   @FXML var tableView: TableView[ MutableScore ] = _
 
   @FXML var columnRang: ScoreTC[ Int ] = _
@@ -135,15 +131,8 @@ case class PizzaBuAppHighscoreController() extends Initializable {
   // Wenn der Button Zurück gedrückt wird, soll das aktuelle Fenster geschlossen werden und
   // der Startbildschirm wieder angezeigt werden.
   def onZurueck(): Unit = {
-    rootHighScore.getScene.getWindow.hide()
+    println("Ich will zurück zum Startbildschirm")
 
-    val loader = new FXMLLoader(getClass.getResource("GUI-Startscreen.fxml"))
-    val startStage = new Stage()
-    startStage.setTitle("PizzaBu - Die Pizza kommt in nu!")
-    loader.load[Parent]()
-    startStage.setScene(new Scene(loader.getRoot[ Parent ]))
-
-    startStage.show()
   }
 
   /**
@@ -166,9 +155,8 @@ case class PizzaBuAppHighscoreController() extends Initializable {
 
 
 
-    if (new java.io.File("score.db").exists == true) {
+    if (new java.io.File("C:\\workspace\\score.db").exists == true) {
 
-      println("ich komme in die if schleife")
       for {
         con <- Db.maybeConnection
         s <- Score.fromDb(Score.queryAll(con))
@@ -198,21 +186,21 @@ case class PizzaBuAppHighscoreController() extends Initializable {
   }
 }
 
-case class PizzaBuAppHelpController() {
+class PizzaBuAppHelpController {
 
-  @FXML var borderTop: BorderPane = _
   @FXML var zurueck: Button = _
 
   // Wenn der Button Zurück gedrückt wird, soll das aktuelle Fenster geschlossen werden und
   // der Startbildschirm wieder angezeigt werden.
   def onZurueck(): Unit = {
-    borderTop.getScene.getWindow.hide()
+    println("Ich will zurück zum Startbildschirm")
+
   }
 }
 
 
 
-case class PizzaBuAppFXController() extends Initializable {
+class PizzaBuAppFXController extends Initializable {
 
   @FXML var canvasAnchorPane: AnchorPane = _
   @FXML var pommes: Button = _
