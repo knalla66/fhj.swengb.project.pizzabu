@@ -4,10 +4,11 @@ import java.net.URL
 import java.util.ResourceBundle
 import javafx.animation.AnimationTimer
 import javafx.application.Application
-import javafx.beans.property.{SimpleIntegerProperty, SimpleObjectProperty}
+import javafx.beans.property.{SimpleBooleanProperty, SimpleIntegerProperty, SimpleObjectProperty}
 import javafx.fxml._
 import javafx.scene.image.{ImageView, Image}
 import javafx.scene.layout.{BorderPane, AnchorPane}
+import javafx.scene.media.{MediaPlayerBuilder, AudioClip, Media, MediaPlayer}
 import javafx.scene.{Scene, Parent}
 import javafx.scene.control.{TextField, Button, Label}
 import javafx.stage.Stage
@@ -40,10 +41,11 @@ class PizzaBudeApp extends Application {
   }
 }
 
-case class GameLoop(game: PizzaBude,buttons: Map[Move, Button],labels: Map[Order,Label],images: Map[Images, ImageView]) extends AnimationTimer{
+case class GameLoop(game: PizzaBude,buttons: Map[Move, Button],labels: Map[Order,Label],images: Map[Images, ImageView],m:MediaPlayer,s: Map[Sounds,AudioClip]) extends AnimationTimer{
 
   override def handle(now:Long):Unit = {
-
+    m.setCycleCount(999)
+    m.play()
     PizzaBude.saveStartTime(now)
 
     PizzaOven.checkMachine(now, PizzaOven.t, PizzaOven.product)
@@ -133,6 +135,8 @@ case class GameLoop(game: PizzaBude,buttons: Map[Move, Button],labels: Map[Order
     }
     PizzaBude.checkGameOver()
     if(PizzaBude.getGameOver) {
+      s(GameO).play()
+      m.stop()
       stop()
       val loaderGameOver = new FXMLLoader(getClass.getResource("GUI-GameOver.fxml"))
       val gameOverStage = new Stage()
@@ -143,11 +147,7 @@ case class GameLoop(game: PizzaBude,buttons: Map[Move, Button],labels: Map[Order
 
       gameOverStage.show()
       //borderTop.getScene.getWindow.hide()
-
-
     }
-
-
   }
 }
 
@@ -204,6 +204,8 @@ case class PizzaBudeController() extends Initializable {
   @FXML var lblScore: Label = _
 
   @FXML var canvasAnchorPane: AnchorPane = _
+  @FXML var mediaPlayer: MediaPlayer = _
+  @FXML var sound: Media = _
 
   var game:GameLoop = _
 
@@ -225,47 +227,30 @@ case class PizzaBudeController() extends Initializable {
     ScoreAll -> lblScore
   )
 
-  lazy val btnDrink_1: ImageView = new ImageView(new Image(getClass.getResourceAsStream("btnDrink_DrinkWait.png")))
-  lazy val btnDrink_2: ImageView = new ImageView(new Image(getClass.getResourceAsStream("btnDrink_DrinkWorking.png")))
-  lazy val btnDrink_3: ImageView = new ImageView(new Image(getClass.getResourceAsStream("btnDrink_DrinkRdy.png")))
-  lazy val btnPizza_1: ImageView = new ImageView(new Image(getClass.getResourceAsStream("btnPizza_OvenWait.png")))
-  lazy val btnPizza_2: ImageView = new ImageView(new Image(getClass.getResourceAsStream("btnPizza_OvenWorking.png")))
-  lazy val btnPizza_3: ImageView = new ImageView(new Image(getClass.getResourceAsStream("btnPizza_OvenRdy.png")))
-  lazy val btnFries_1: ImageView = new ImageView(new Image(getClass.getResourceAsStream("btnFries_FriesWait.png")))
-  lazy val btnFries_2: ImageView = new ImageView(new Image(getClass.getResourceAsStream("btnFries_FriesWorking.png")))
-  lazy val btnFries_3: ImageView = new ImageView(new Image(getClass.getResourceAsStream("btnFries_FriesRdy.png")))
-  lazy val btnTable_0: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_0.png")))
-  lazy val btnTable_1: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_1.png")))
-  lazy val btnTable_2: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_2.png")))
-  lazy val btnTable_3: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_3.png")))
-  lazy val btnTable_4: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_4.png")))
-  lazy val btnTable2_0: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_0.png")))
-  lazy val btnTable2_1: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_1.png")))
-  lazy val btnTable2_2: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_2.png")))
-  lazy val btnTable2_3: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_3.png")))
-  lazy val btnTable2_4: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_4.png")))
-  lazy val btnTable3_0: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_0.png")))
-  lazy val btnTable3_1: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_1.png")))
-  lazy val btnTable3_2: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_2.png")))
-  lazy val btnTable3_3: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_3.png")))
-  lazy val btnTable3_4: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_4.png")))
-  lazy val btnTable4_0: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_0.png")))
-  lazy val btnTable4_1: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_1.png")))
-  lazy val btnTable4_2: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_2.png")))
-  lazy val btnTable4_3: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_3.png")))
-  lazy val btnTable4_4: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_4.png")))
+  val cash = new AudioClip(getClass.getResource("cash.wav").toString)
+  val gameO = new AudioClip(getClass.getResource("gameover.wav").toString)
+  val bad = new AudioClip(getClass.getResource("bad.mp3").toString)
+  val good = new AudioClip(getClass.getResource("bad.mp3").toString)
+
+  lazy val sounds: Map[Sounds,AudioClip] = Map(
+    Cash -> cash,
+    GameO -> gameO,
+    Bad -> bad,
+    Good -> good
+  )
 
 
   override def initialize(location: URL, resources: ResourceBundle): Unit = {
+    println("NEUES GAME!!!!!!!!!!!!!!!!!!!!!!")
+    resetGame
 
-    val g = PizzaBude.apply()
+    val res:URL = getClass.getResource("loop1.wav")
+    sound = new Media(res.toString)
+    mediaPlayer = new MediaPlayer(sound)
+
+    var g = PizzaBude()
     val pane = canvasAnchorPane
-
-    g.setGameState(g)
-    game = GameLoop(g,buttons,labels,images)
-    btnPommes.setGraphic(btnFries_1)
-    btnPizza.setGraphic(btnPizza_1)
-    btnDrink.setGraphic(btnDrink_1)
+    game = GameLoop(g,buttons,labels,images,mediaPlayer,sounds)
     game.start()
 
   }
@@ -314,7 +299,69 @@ case class PizzaBudeController() extends Initializable {
     BtnTable4_4 -> btnTable4_4
   )
 
+  /**
+    * Images 4 buttons
+    */
+  lazy val btnDrink_1: ImageView = new ImageView(new Image(getClass.getResourceAsStream("btnDrink_DrinkWait.png")))
+  lazy val btnDrink_2: ImageView = new ImageView(new Image(getClass.getResourceAsStream("btnDrink_DrinkWorking.png")))
+  lazy val btnDrink_3: ImageView = new ImageView(new Image(getClass.getResourceAsStream("btnDrink_DrinkRdy.png")))
+  lazy val btnPizza_1: ImageView = new ImageView(new Image(getClass.getResourceAsStream("btnPizza_OvenWait.png")))
+  lazy val btnPizza_2: ImageView = new ImageView(new Image(getClass.getResourceAsStream("btnPizza_OvenWorking.png")))
+  lazy val btnPizza_3: ImageView = new ImageView(new Image(getClass.getResourceAsStream("btnPizza_OvenRdy.png")))
+  lazy val btnFries_1: ImageView = new ImageView(new Image(getClass.getResourceAsStream("btnFries_FriesWait.png")))
+  lazy val btnFries_2: ImageView = new ImageView(new Image(getClass.getResourceAsStream("btnFries_FriesWorking.png")))
+  lazy val btnFries_3: ImageView = new ImageView(new Image(getClass.getResourceAsStream("btnFries_FriesRdy.png")))
+  lazy val btnTable_0: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_0.png")))
+  lazy val btnTable_1: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_1.png")))
+  lazy val btnTable_2: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_2.png")))
+  lazy val btnTable_3: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_3.png")))
+  lazy val btnTable_4: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_4.png")))
+  lazy val btnTable2_0: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_0.png")))
+  lazy val btnTable2_1: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_1.png")))
+  lazy val btnTable2_2: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_2.png")))
+  lazy val btnTable2_3: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_3.png")))
+  lazy val btnTable2_4: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_4.png")))
+  lazy val btnTable3_0: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_0.png")))
+  lazy val btnTable3_1: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_1.png")))
+  lazy val btnTable3_2: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_2.png")))
+  lazy val btnTable3_3: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_3.png")))
+  lazy val btnTable3_4: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_4.png")))
+  lazy val btnTable4_0: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_0.png")))
+  lazy val btnTable4_1: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_1.png")))
+  lazy val btnTable4_2: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_2.png")))
+  lazy val btnTable4_3: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_3.png")))
+  lazy val btnTable4_4: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_4.png")))
+
+  def resetGame = {
+    PizzaBude.setGameOver(false)
+    Table1.setAngryLevel(0)
+    Table2.setAngryLevel(0)
+    Table3.setAngryLevel(0)
+    Table4.setAngryLevel(0)
+    Table1.setScore(0)
+    Table2.setScore(0)
+    Table3.setScore(0)
+    Table4.setScore(0)
+    Table1.setOrder(Nil)
+    Table2.setOrder(Nil)
+    Table3.setOrder(Nil)
+    Table4.setOrder(Nil)
+    Table1.setDeliverd(Nil)
+    Table2.setDeliverd(Nil)
+    Table3.setDeliverd(Nil)
+    Table4.setDeliverd(Nil)
+    Table1.setTableStatus(true)
+    Table2.setTableStatus(true)
+    Table3.setTableStatus(true)
+    Table4.setTableStatus(true)
+  }
 }
+
+sealed trait Sounds
+case object Cash extends Sounds
+case object GameO extends Sounds
+case object Bad extends Sounds
+case object Good extends Sounds
 
 sealed trait Images
 case object BtnDrink_1 extends Images
