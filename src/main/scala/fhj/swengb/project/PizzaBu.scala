@@ -19,6 +19,8 @@ package fhj.swengb.project
   * | f40   f41   f42 |
   * |-----|-----|-----|
   * */
+/**
+
 sealed trait Field
 
 case object f00 extends Field
@@ -44,7 +46,7 @@ case object Down extends Move
 case object Left extends Move
 case object Right extends Move
 case object Action extends Move
-/**
+
 object PizzaBu {
 
   val playField:Array[Array[Field]] = Array(Array(f00,f01,f02),Array(f10,f11,f12),Array(f20,f21,f22),Array(f30,f31,f32),Array(f40,f41,f42))
