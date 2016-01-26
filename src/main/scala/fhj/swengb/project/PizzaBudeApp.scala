@@ -81,7 +81,6 @@ case class GameLoop(game: PizzaBude) extends AnimationTimer{
       gameOverStage.setScene(new Scene(loaderGameOver.getRoot[Parent]))
 
       gameOverStage.show()
-
     }
 
   }
