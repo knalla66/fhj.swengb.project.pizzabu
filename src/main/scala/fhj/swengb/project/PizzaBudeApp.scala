@@ -62,8 +62,7 @@ case class GameLoop(game: PizzaBude) extends AnimationTimer{
       Table1.checkTables(now)
       Table1.deliver()
     }
-    if(PizzaBude.getStartTime()+180000000000L < now) {
-      Table4.checkTables(now)
+    if(PizzaBude.getStartTime()+180000000000L < now) {      Table4.checkTables(now)
       Table4.deliver()
     }
 
@@ -119,7 +118,6 @@ class PizzaBudeController extends Initializable {
   @FXML def table2():Unit = Table2.setProperty(true)
   @FXML def table3():Unit = Table3.setProperty(true)
   @FXML def table4():Unit = Table4.setProperty(true)
-  @FXML def close():Unit = bordertop.getScene.getWindow.hide()
 
 }
 
@@ -144,7 +142,7 @@ class GameOverController extends Initializable {
 
     println("Name: " + name + " Highscore:" + highscore)
 
-    val loaderScore = new FXMLLoader(getClass.getResource("GUI.fxml"))
+    val loaderScore = new FXMLLoader(getClass.getResource("GUI-Highscore.fxml"))
     val highScoreStage = new Stage()
 
     highScoreStage.setTitle("PizzaBu - HighScore!")
@@ -157,7 +155,7 @@ class GameOverController extends Initializable {
 
   def toHighscore() = {
 
-    val loaderScore = new FXMLLoader(getClass.getResource("GUI.fxml"))
+    val loaderScore = new FXMLLoader(getClass.getResource("GUI-Highscore.fxml"))
     val highScoreStage = new Stage()
 
     highScoreStage.setTitle("PizzaBu - HighScore!")
