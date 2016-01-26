@@ -19,8 +19,8 @@ import scala.util.Random
 import scala.util.control.NonFatal
 
 /**
- * Created by KnallerMJ on 14.01.16.
- */
+  * Created by KnallerMJ on 14.01.16.
+  */
 
 // companion object
 object PizzaBuApp {
@@ -147,12 +147,12 @@ case class PizzaBuAppHighscoreController() extends Initializable {
   }
 
   /**
-   * provide a table column and a generator function for the value to put into
-   * the column.
-   *
-   * @tparam T the type which is contained in the property
-   * @return
-   */
+    * provide a table column and a generator function for the value to put into
+    * the column.
+    *
+    * @tparam T the type which is contained in the property
+    * @return
+    */
 
   def initTableViewColumn[ T ]: (ScoreTC[ T ], (MutableScore) => Any) => Unit =
     initTableViewColumnCellValueFactory[ MutableScore, T ]
@@ -264,5 +264,3 @@ case class PizzaBuAppFXController() extends Initializable {
 
 
 }
-
-
