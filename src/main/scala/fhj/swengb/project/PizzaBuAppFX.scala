@@ -1,12 +1,14 @@
 package fhj.swengb.project
 
+import java.io.File
 import java.net.URL
+import java.nio.file.{Paths, Path, Files}
 import java.util.ResourceBundle
 import javafx.animation.AnimationTimer
 import javafx.application.Application
 import javafx.fxml.{FXML, FXMLLoader, Initializable}
-import javafx.scene.control.{TextField, Button, TableColumn, TableView}
-import javafx.scene.layout.{BorderPane, AnchorPane}
+import javafx.scene.control.{Button, TableColumn, TableView}
+import javafx.scene.layout.{AnchorPane, BorderPane}
 import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
 import javafx.scene.{Parent, Scene}
@@ -60,7 +62,7 @@ case class CircleAnimation(circles: Seq[ Circle ]) extends AnimationTimer {
 }
 
 
-case class PizzaBuAppStartController() {
+case class PizzaBuAppStartController() extends Initializable {
 
   @FXML var borderTop: BorderPane = _
   @FXML var start: Button = _
@@ -114,6 +116,35 @@ case class PizzaBuAppStartController() {
     borderTop.getScene.getWindow.hide()
   }
 
+  override def initialize(location: URL, resources: ResourceBundle): Unit = {
+
+    var path: Path = Paths.get("C:\\PizzaBu")
+    if (Files.exists(path) == true) {
+
+
+      println("Der Ordner PizzaBu existiert bereits")
+
+    }
+
+    else {
+
+      val dir: File = new File("C:\\PizzaBu")
+
+      // attempt to create the directory here
+      var successful: Boolean = dir.mkdir()
+      if (successful) {
+        // creating the directory succeeded
+        println("directory was created successfully")
+      }
+      else {
+        // creating the directory failed
+        println("failed trying to create the directory");
+
+      }
+
+    }
+
+  }
 }
 
 
@@ -123,7 +154,7 @@ case class PizzaBuAppHighscoreController() extends Initializable {
 
   type ScoreTC[ T ] = TableColumn[ MutableScore, T ]
 
-  @FXML var rootHighScore: BorderPane =_
+  @FXML var rootHighScore: BorderPane = _
   @FXML var tableView: TableView[ MutableScore ] = _
 
   @FXML var columnRang: ScoreTC[ Int ] = _
@@ -166,7 +197,7 @@ case class PizzaBuAppHighscoreController() extends Initializable {
 
 
 
-    if (new java.io.File("C:\\workspace\\score.db").exists == true) {
+    if (new java.io.File("C:\\PizzaBu\\score.db").exists == true) {
 
       for {
         con <- Db.maybeConnection
@@ -208,7 +239,6 @@ case class PizzaBuAppHelpController() {
     borderTop.getScene.getWindow.hide()
   }
 }
-
 
 
 case class PizzaBuAppFXController() extends Initializable {

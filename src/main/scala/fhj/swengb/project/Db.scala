@@ -18,7 +18,7 @@ object Db {
     * */
 
     lazy val maybeConnection: Try[Connection] =
-      Try(DriverManager.getConnection("jdbc:sqlite:score.db"))
+      Try(DriverManager.getConnection("jdbc:sqlite://C:\\PizzaBu\\score.db"))
 
 
     /**
