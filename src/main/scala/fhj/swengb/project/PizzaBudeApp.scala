@@ -52,13 +52,13 @@ case class GameLoop(game: PizzaBude,buttons: Map[Move, Button],labels: Map[Order
     Drink.checkMachine(now, Drink.t, Drink.product)
     Pommes.checkMachine(now, Pommes.t, Pommes.product)
 
-    if(PizzaOven.getWaiting) buttons(Product2).setGraphic(images(BtnDrink_3))
-    if(PizzaOven.getState) buttons(Product2).setGraphic(images(BtnDrink_2))
-    if(!PizzaOven.getState && !PizzaOven.getWaiting) buttons(Product2).setGraphic(images(BtnDrink_1))
+    if(PizzaOven.getWaiting) buttons(Product2).setGraphic(images(BtnPizza_3))
+    if(PizzaOven.getState) buttons(Product2).setGraphic(images(BtnPizza_2))
+    if(!PizzaOven.getState && !PizzaOven.getWaiting) buttons(Product2).setGraphic(images(BtnPizza_1))
 
-    if(Drink.getWaiting) buttons(Product1).setGraphic(images(BtnPizza_3))
-    if(Drink.getState) buttons(Product1).setGraphic(images(BtnPizza_2))
-    if(!Drink.getState && !Drink.getWaiting) buttons(Product1).setGraphic(images(BtnPizza_1))
+    if(Drink.getWaiting) buttons(Product1).setGraphic(images(BtnDrink_3))
+    if(Drink.getState) buttons(Product1).setGraphic(images(BtnDrink_2))
+    if(!Drink.getState && !Drink.getWaiting) buttons(Product1).setGraphic(images(BtnDrink_1))
 
     if(Pommes.getWaiting) buttons(Product3).setGraphic(images(BtnFries_3))
     if(Pommes.getState) buttons(Product3).setGraphic(images(BtnFries_2))
