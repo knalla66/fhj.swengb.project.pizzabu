@@ -2,7 +2,7 @@ package fhj.swengb.project
 
 import java.net.URL
 import java.util.ResourceBundle
-import javafx.animation.AnimationTimer
+import javafx.animation.{TranslateTransition, Transition, AnimationTimer}
 import javafx.application.Application
 import javafx.beans.property._
 import javafx.fxml._
@@ -206,6 +206,8 @@ case class PizzaBudeController() extends Initializable {
   @FXML var mediaPlayer: MediaPlayer = _
   @FXML var sound: Media = _
 
+  @FXML var trans: TranslateTransition = _
+
   var game:GameLoop = _
 
   lazy val buttons: Map[Move, Button] = Map(
@@ -246,7 +248,7 @@ case class PizzaBudeController() extends Initializable {
     val res:URL = getClass.getResource("loop1.wav")
     sound = new Media(res.toString)
     mediaPlayer = new MediaPlayer(sound)
-
+    trans.
     var g = PizzaBude()
     val pane = canvasAnchorPane
     game = GameLoop(g,buttons,labels,images,mediaPlayer,sounds)
