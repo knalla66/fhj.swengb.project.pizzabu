@@ -7,10 +7,11 @@ import java.util.ResourceBundle
 import javafx.animation.AnimationTimer
 import javafx.application.Application
 import javafx.fxml.{FXML, FXMLLoader, Initializable}
-import javafx.scene.control.{ListView, Button, TableColumn, TableView}
+import javafx.scene.control.{Button, ListView, TableColumn, TableView}
 import javafx.scene.layout.{AnchorPane, BorderPane}
 import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
+import javafx.scene.text.{Font, Text, TextFlow}
 import javafx.scene.{Parent, Scene}
 import javafx.stage.Stage
 
@@ -91,6 +92,7 @@ case class PizzaBuAppStartController() extends Initializable {
     gameStage.setTitle("PizzaBu - Die Pizza kommt in nu!")
     loaderGame.load[Parent]()
     gameStage.setScene(new Scene(loaderGame.getRoot[ Parent ]))
+    gameStage.getScene.getStylesheets.add("/fhj/swengb/project/PizzaBude.css")
 
     gameStage.show()
     borderTop.getScene.getWindow.hide()
@@ -402,10 +404,11 @@ case class PizzaBuAppHighscoreGameOverController() extends Initializable {
   }
 }
 
-case class PizzaBuAppHelpController() {
+case class PizzaBuAppHelpController() extends Initializable{
 
   @FXML var borderTop: BorderPane = _
   @FXML var zurueck: Button = _
+  @FXML var textFlow: TextFlow = _
 
   // Wenn der Button Zurück gedrückt wird, soll das aktuelle Fenster geschlossen werden und
   // der Startbildschirm wieder angezeigt werden.
@@ -420,6 +423,92 @@ case class PizzaBuAppHelpController() {
     startStage.setScene(new Scene(loader.getRoot[ Parent ]))
 
     startStage.show()
+
+
+  }
+
+  override def initialize(location: URL, resources: ResourceBundle): Unit = {
+
+    val fontUe = new Font("Segoe UI Light",20)
+    val fontText = new Font("Times New Roman",20)
+
+    val text1 = new Text("\nSpiel starten")
+    text1.setFill(Color.DARKRED)
+    text1.setFont(fontUe)
+
+
+    val text2 = new Text("\n\nUm das Spiel zu starten, drücke im Menü auf den Button Start. Du wirst dann automatisch zum Spiel weitergeleitet")
+    text2.setFill(Color.BLACK)
+    text2.setFont(fontText)
+
+
+
+    val text3 = new Text("\n\n\nIm Spiel")
+    text3.setFill(Color.DARKRED)
+    text3.setFont(fontUe)
+
+
+
+    /**
+     * 10 Sekunden Pizza
+        3 Sekunden Cola
+        5 Sekunden Pommes
+
+     */
+    val text4 = new Text("\n\nAm Rechten Rand siehst du die Kunden, die an ihren Tischen sitzen und ihre Bestellungen aufgeben \n" +
+      "Die Tische füllen sich entweder in 4,8 oder 12 Sekunden mit Kunden\n" +
+      "Deine Aufgabe ist es nun, die Bestellungen der Kunden zu erfüllen. \n" +
+      "Dazu klickst du auf die gewünschten Produkte (Cola, Pizza oder Pommes) um die Geräte zu starten. \n" +
+      "Jedes Produkt braucht eine gewisse Zeit, bis es fertig ist. \n" +
+      "\t ein Cola dauert 3 Sekunden \n" +
+      "\t Pommes dauern 5 Sekunden und \n" +
+      "\t eine Pizza dauert 10 Sekunden\n"+
+      "Sobald ein Produkt fertig ist, kannst du es dem Kunden bringen. Dazu klickst du zuerst auf das fertige Produkt und dann auf den Kunden, der das Produkt erhält")
+    text4.setFill(Color.BLACK)
+    text4.setFont(fontText)
+
+
+    val text5 = new Text("\nAngry-Levels")
+    text5.setFill(Color.DARKRED)
+    text5.setFont(fontUe)
+
+
+    val text6 = new Text("\n\nJe länger ein Kunde auf seine Bestellung warten muss, oder je öfter er etwas falsches Geliefert bekommt" +
+      "desto zorniger wird der Kunde.\n" +
+      "Zuerst ist der Kunde noch fröhlich und lächelt.\n" +
+      "")
+
+    /**
+     *  Pizza Score 100
+     *  Fries Score 60
+     *  COla Score 30
+     *  falsche Lieferung -50
+     */
+
+
+
+    text6.setFill(Color.BLACK)
+    text6.setFont(fontText)
+
+
+
+    val text7 = new Text("\nSpiel Ende")
+    text7.setFill(Color.DARKRED)
+    text7.setFont(fontUe)
+
+
+    val text8 = new Text("\n\nDas Spiel ist zu Ende, wenn eines der ")
+    text8.setFill(Color.BLACK)
+    text8.setFont(fontText)
+
+
+
+    textFlow.getChildren().addAll(text1,text2,text3,text4)
+
+
+
+
+
 
   }
 }
