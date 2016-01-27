@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+
+<BorderPane fx:id="rootHighScore" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhj.swengb.project.PizzaBuAppHighscoreGameOverController">
+    <center>
+        <TableView fx:id="tableView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="546.0" prefWidth="666.0" BorderPane.alignment="CENTER">
+            <columns>
+                <TableColumn fx:id="columnName" prefWidth="239.0" text="Name" />
+                <TableColumn fx:id="columnScore" prefWidth="362.0" text="Highscore" />
+            </columns>
+        </TableView>
+    </center>
+    <right>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b10000" height="660.0" stroke="#b10000" strokeType="INSIDE" width="39.0" BorderPane.alignment="CENTER" />
+    </right>
+    <top>
+        <AnchorPane prefHeight="53.0" prefWidth="737.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="newgame" layoutX="47.0" layoutY="6.0" mnemonicParsing="false" onAction="#onNewGame" prefHeight="41.0" prefWidth="120.0" text="New Game" />
+                <Label layoutX="263.0" layoutY="12.0" prefHeight="21.0" prefWidth="274.0" text="PizzaBu - Highscore">
+               <font>
+                  <Font size="23.0" />
+               </font></Label>
+            <Button fx:id="exit" layoutX="632.0" layoutY="6.0" mnemonicParsing="false" onAction="#onExit" prefHeight="41.0" prefWidth="120.0" text="Exit" />
+            </children>
+        </AnchorPane>
+    </top>
+   <left>
+      <AnchorPane prefHeight="412.0" prefWidth="98.0" BorderPane.alignment="CENTER">
+         <children>
+            <ListView fx:id="listView" layoutX="39.0" layoutY="66.0" prefHeight="517.0" prefWidth="59.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b10000" height="636.0" layoutY="-19.0" stroke="#b10000" strokeType="INSIDE" width="39.0" />
+            <Label fx:id="labelText" alignment="CENTER" layoutX="39.0" layoutY="34.0" prefHeight="36.0" prefWidth="59.0" text="Rang" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </left>
+</BorderPane>

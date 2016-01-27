@@ -278,6 +278,130 @@ case class PizzaBuAppHighscoreController() extends Initializable {
   }
 }
 
+case class PizzaBuAppHighscoreGameOverController() extends Initializable {
+
+  import JfxUtils._
+
+  type ScoreTC[ T ] = TableColumn[ MutableScore, T ]
+
+  @FXML var rootHighScore: BorderPane = _
+  @FXML var tableView: TableView[ MutableScore ] = _
+  @FXML var listView: ListView[Int]=_
+
+  @FXML var columnRang: ScoreTC[ Int ] = _
+  @FXML var columnName: ScoreTC[ String ] = _
+  @FXML var columnScore: ScoreTC[ Int ] = _
+
+  @FXML var newgame: Button = _
+  @FXML var exit: Button = _
+
+  // Wenn der Button Zurück gedrückt wird, soll das aktuelle Fenster geschlossen werden und
+  // der Startbildschirm wieder angezeigt werden.
+  def onNewGame(): Unit = {
+    rootHighScore.getScene.getWindow.hide()
+
+    val loaderGame = new FXMLLoader(getClass.getResource("PizzaBude.fxml"))
+    val gameStage = new Stage()
+
+    gameStage.setTitle("PizzaBu - Die Pizza kommt in nu!")
+    loaderGame.load[Parent]()
+    gameStage.setScene(new Scene(loaderGame.getRoot[ Parent ]))
+
+    gameStage.show()
+  }
+
+  def onExit(): Unit = {
+    sys.exit(1)
+  }
+
+  /**
+    * provide a table column and a generator function for the value to put into
+    * the column.
+    *
+    * @tparam T the type which is contained in the property
+    * @return
+    */
+
+  def initTableViewColumn[ T ]: (ScoreTC[ T ], (MutableScore) => Any) => Unit =
+    initTableViewColumnCellValueFactory[ MutableScore, T ]
+
+  //läd die Daten von der Datenbank
+
+  override def initialize(location: URL, resources: ResourceBundle): Unit = {
+    //teilt den einzelnen Spalten einen Wert zu
+    initTableViewColumn[String](columnName, _.nameProperty)
+    initTableViewColumn[Int](columnScore, _.scoreProperty)
+
+    for(i <- 1 to 10) listView.getItems().add(i)
+
+
+    if (PizzaBuApp.checkos == 1) {
+      if (new java.io.File("C:\\PizzaBu\\score.db").exists == true) {
+
+        println("ich komme in die if schleife")
+        for {
+          con <- Db.maybeConnectionWindows
+          s <- Score.fromDb(Score.queryAll(con))
+        } {
+          tableView.getItems().add(MutableScore(s))
+        }
+
+        println("Es musste keine Datenbank erstellt werden!")
+
+
+      }
+      else {
+
+        for {
+          con <- Db.maybeConnectionWindows
+          _ = Score.reTable(con.createStatement())
+          _ = Score.highscorelist.map(Score.toDb(con)(_))
+          s <- Score.fromDb(Score.queryAll(con))
+        } {
+          tableView.getItems().add(MutableScore(s))
+        }
+
+        println("Es wurde eine neue Datenbank erstellt!")
+
+      }
+
+    }
+
+
+    if (PizzaBuApp.checkos == 2) {
+      if (new java.io.File("Macintosh HD\\PizzaBu\\score.db").exists == true) {
+
+        println("ich komme in die if schleife")
+        for {
+          con <- Db.maybeConnectionMac
+          s <- Score.fromDb(Score.queryAll(con))
+        } {
+          tableView.getItems().add(MutableScore(s))
+        }
+
+        println("Es musste keine Datenbank erstellt werden!")
+
+
+      }
+      else {
+
+        for {
+          con <- Db.maybeConnectionMac
+          _ = Score.reTable(con.createStatement())
+          _ = Score.highscorelist.map(Score.toDb(con)(_))
+          s <- Score.fromDb(Score.queryAll(con))
+        } {
+          tableView.getItems().add(MutableScore(s))
+        }
+
+        println("Es wurde eine neue Datenbank erstellt!")
+
+      }
+
+    }
+  }
+}
+
 case class PizzaBuAppHelpController() {
 
   @FXML var borderTop: BorderPane = _
