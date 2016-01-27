@@ -34,8 +34,6 @@ case class Score(name: String, highscore: Int) extends Db.DbEntity[ Score ] {
 
   def insertSql: String = "insert into score (name, highscore) VALUES (?, ?)"
 
-  def tableexistsSql: String = "SELECT count(*) FROM sqlite_master WHERE type='table' AND name='score'"
-
   def printlist(l: List[ Score ]): Unit = {}
 
   def printscore(s: Score): Unit = {}
@@ -144,9 +142,7 @@ object Score extends Db.DbEntity[ Score ] {
 
 
 
-  def queryAll(c: Connection): ResultSet = query(c)("select * from score order by highscore DESC")
-
-  def queryMaster (c:Connection): ResultSet = query(c)("SELECT count(*) FROM sqlite_master WHERE type = 'table' AND tbl_name = 'score'")
+  def queryAll(c: Connection): ResultSet = query(c)("select * from score order by highscore DESC LIMIT 10")
 
   def printlist(l: List[ Score ]): Unit = println(l)
 

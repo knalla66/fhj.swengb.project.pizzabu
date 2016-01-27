@@ -7,7 +7,7 @@ import java.util.ResourceBundle
 import javafx.animation.AnimationTimer
 import javafx.application.Application
 import javafx.fxml.{FXML, FXMLLoader, Initializable}
-import javafx.scene.control.{Button, TableColumn, TableView}
+import javafx.scene.control.{ListView, Button, TableColumn, TableView}
 import javafx.scene.layout.{AnchorPane, BorderPane}
 import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
@@ -98,7 +98,6 @@ case class PizzaBuAppStartController() extends Initializable {
   def goToHighScore(): Unit = {
     val loaderScore = new FXMLLoader(getClass.getResource("GUI-Highscore.fxml"))
     val highScoreStage = new Stage()
-
     highScoreStage.setTitle("PizzaBu - HighScore!")
     loaderScore.load[Parent]()
     highScoreStage.setScene(new Scene(loaderScore.getRoot[ Parent ]))
@@ -166,6 +165,7 @@ case class PizzaBuAppHighscoreController() extends Initializable {
 
   @FXML var rootHighScore: BorderPane = _
   @FXML var tableView: TableView[ MutableScore ] = _
+  @FXML var listView: ListView[Int]=_
 
   @FXML var columnRang: ScoreTC[ Int ] = _
   @FXML var columnName: ScoreTC[ String ] = _
@@ -204,6 +204,8 @@ case class PizzaBuAppHighscoreController() extends Initializable {
     //teilt den einzelnen Spalten einen Wert zu
     initTableViewColumn[String](columnName, _.nameProperty)
     initTableViewColumn[Int](columnScore, _.scoreProperty)
+
+    for(i <- 1 to 10) listView.getItems().add(i)
 
 
     if (PizzaBuApp.checkos == 1) {
