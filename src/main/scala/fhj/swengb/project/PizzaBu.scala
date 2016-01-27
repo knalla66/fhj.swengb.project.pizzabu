@@ -106,3 +106,15 @@ case class PizzaBu(player: Player) {
   }
 }
 */
+
+object test {
+  def main(args: Array[String]) {
+    val y = List((2,"a"),(1,"b"),(5,"c"),(43,"d")).sorted.reverse
+    val x = y.size
+    val index = for (i <- Seq.range(1, x+1)) yield i
+
+    val rang:Seq[(Int,(Int,String))]= index zip y.sorted.reverse
+    for (i <- rang) println(i._1,i._2._1,i._2._2)
+
+  }
+}

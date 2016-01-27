@@ -1,0 +1,29 @@
+
+
+.label {
+    -fx-font-size: 20pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: black;
+    -fx-alignment: center;
+    -fx-opacity: 1;
+
+}
+
+.table-view .column-header{
+    -fx-font-size: 20pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: black;
+    -fx-alignment: center;
+    -fx-opacity: 1;
+}
+
+.table-cell {
+    -fx-font-size: 25px;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+}
+
+.list-view {
+    -fx-font-size: 24px;
+    -fx-alignment:center-right ;
+}

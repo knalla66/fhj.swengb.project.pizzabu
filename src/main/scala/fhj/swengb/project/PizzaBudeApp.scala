@@ -2,7 +2,7 @@ package fhj.swengb.project
 
 import java.net.URL
 import java.util.ResourceBundle
-import javafx.animation.{TranslateTransition, Transition, AnimationTimer}
+import javafx.animation.AnimationTimer
 import javafx.application.Application
 import javafx.beans.property._
 import javafx.fxml._
@@ -11,10 +11,17 @@ import javafx.scene.layout.{BorderPane, AnchorPane}
 import javafx.scene.media.{AudioClip, Media, MediaPlayer}
 import javafx.scene.{Scene, Parent}
 import javafx.scene.control.{TextField, Button, Label}
+import javafx.fxml._
+import javafx.scene.control.{Button, Label, TextField}
+import javafx.scene.image.{Image, ImageView}
+import javafx.scene.layout.{AnchorPane, BorderPane}
+import javafx.scene.media.{AudioClip, Media, MediaPlayer}
+import javafx.scene.{Parent, Scene}
 import javafx.stage.Stage
 
 import fhj.swengb.project.Highscore.Score
 
+import scala.collection.mutable
 import scala.util.control.NonFatal
 
 /**
@@ -51,13 +58,13 @@ case class GameLoop(game: PizzaBude,buttons: Map[Move, Button],labels: Map[Order
     Drink.checkMachine(now, Drink.t, Drink.product)
     Pommes.checkMachine(now, Pommes.t, Pommes.product)
 
-    if(PizzaOven.getWaiting) buttons(Product2).setGraphic(images(BtnDrink_3))
-    if(PizzaOven.getState) buttons(Product2).setGraphic(images(BtnDrink_2))
-    if(!PizzaOven.getState && !PizzaOven.getWaiting) buttons(Product2).setGraphic(images(BtnDrink_1))
+    if(PizzaOven.getWaiting) buttons(Product2).setGraphic(images(BtnPizza_3))
+    if(PizzaOven.getState) buttons(Product2).setGraphic(images(BtnPizza_2))
+    if(!PizzaOven.getState && !PizzaOven.getWaiting) buttons(Product2).setGraphic(images(BtnPizza_1))
 
-    if(Drink.getWaiting) buttons(Product1).setGraphic(images(BtnPizza_3))
-    if(Drink.getState) buttons(Product1).setGraphic(images(BtnPizza_2))
-    if(!Drink.getState && !Drink.getWaiting) buttons(Product1).setGraphic(images(BtnPizza_1))
+    if(Drink.getWaiting) buttons(Product1).setGraphic(images(BtnDrink_3))
+    if(Drink.getState) buttons(Product1).setGraphic(images(BtnDrink_2))
+    if(!Drink.getState && !Drink.getWaiting) buttons(Product1).setGraphic(images(BtnDrink_1))
 
     if(Pommes.getWaiting) buttons(Product3).setGraphic(images(BtnFries_3))
     if(Pommes.getState) buttons(Product3).setGraphic(images(BtnFries_2))
@@ -137,15 +144,7 @@ case class GameLoop(game: PizzaBude,buttons: Map[Move, Button],labels: Map[Order
       s(GameO).play()
       m.stop()
       stop()
-      val loaderGameOver = new FXMLLoader(getClass.getResource("GUI-GameOver.fxml"))
-      val gameOverStage = new Stage()
-
-      gameOverStage.setTitle("GAMEOVER!")
-      loaderGameOver.load[Parent]()
-      gameOverStage.setScene(new Scene(loaderGameOver.getRoot[ Parent ]))
-
-      gameOverStage.show()
-      //borderTop.getScene.getWindow.hide()
+      PizzaBudeController().goToHighscore()
     }
   }
 }
@@ -171,9 +170,10 @@ case class GameOverController() extends Initializable {
 
   def save() = {
     val name = nameField.getCharacters.toString
-    Score.toDb(Db.maybeConnection.get)(Score(name, highscore))
+    if (PizzaBuApp.checkos == 1)  Score.toDb(Db.maybeConnectionWindows.get)(Score(name, highscore))
+    if (PizzaBuApp.checkos == 2)  Score.toDb(Db.maybeConnectionMac.get)(Score(name, highscore))
     println("Name: " + name + " Highscore:" + highscore)
-    val loaderScore = new FXMLLoader(getClass.getResource("GUI-Highscore.fxml"))
+    val loaderScore = new FXMLLoader(getClass.getResource("GUI-Highscore_gameover.fxml"))
     val highScoreStage = new Stage()
     highScoreStage.setTitle("PizzaBu - HighScore!")
     loaderScore.load[Parent]()
@@ -205,6 +205,20 @@ case class PizzaBudeController() extends Initializable {
   @FXML var canvasAnchorPane: AnchorPane = _
   @FXML var mediaPlayer: MediaPlayer = _
   @FXML var sound: Media = _
+
+  def goToHighscore():Unit = {
+//    borderPaneTop.getScene().getWindow().setOpacity(0.0)
+
+    val loaderGameOver = new FXMLLoader(getClass.getResource("GUI-GameOver.fxml"))
+    val gameOverStage = new Stage()
+
+    gameOverStage.setTitle("GAMEOVER!")
+    loaderGameOver.load[Parent]()
+    gameOverStage.setScene(new Scene(loaderGameOver.getRoot[ Parent ]))
+
+    gameOverStage.show()
+
+  }
 
   @FXML var trans: TranslateTransition = _
 

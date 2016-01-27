@@ -44,19 +44,19 @@
             <Button fx:id="btnTable1" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#table1" prefHeight="100.0" prefWidth="100.0" />
             <Button fx:id="btnTable3" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#table3" prefHeight="100.0" prefWidth="100.0" GridPane.rowIndex="2" />
             <Button fx:id="btnTable4" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#table4" prefHeight="100.0" prefWidth="100.0" GridPane.rowIndex="3" />
-            <Label id="order" fx:id="lblTable1" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0" prefHeight="120.0" prefWidth="120.0" text="" GridPane.columnIndex="1">
+            <Label fx:id="lblTable1" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0" prefHeight="120.0" prefWidth="120.0" text="" GridPane.columnIndex="1">
                <font>
                   <Font size="18.0" />
                </font></Label>
-            <Label id="order" fx:id="lblTable2" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0" prefHeight="120.0" prefWidth="120.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label fx:id="lblTable2" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0" prefHeight="120.0" prefWidth="120.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="18.0" />
                </font></Label>
-            <Label id="order" fx:id="lblTable3" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0" prefHeight="120.0" prefWidth="120.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label fx:id="lblTable3" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0" prefHeight="120.0" prefWidth="120.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
                   <Font size="18.0" />
                </font></Label>
-            <Label id="order" fx:id="lblTable4" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0" prefHeight="120.0" prefWidth="120.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Label fx:id="lblTable4" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0" prefHeight="120.0" prefWidth="120.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font size="18.0" />
                </font></Label>
@@ -64,7 +64,7 @@
       </GridPane>
    </right>
    <top>
-      <Label id="score" fx:id="lblScore" text="" BorderPane.alignment="CENTER">
+      <Label fx:id="lblScore" text="" BorderPane.alignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>

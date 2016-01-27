@@ -17,9 +17,15 @@ object Db {
     *
     * */
 
-    lazy val maybeConnection: Try[Connection] =
-      Try(DriverManager.getConnection("jdbc:sqlite://C:\\PizzaBu\\score.db"))
+    lazy val maybeConnectionWindows: Try[Connection] = {
 
+      Try(DriverManager.getConnection("jdbc:sqlite://C:\\PizzaBu\\score.db"))
+    }
+
+  lazy val maybeConnectionMac: Try[Connection] = {
+
+    Try(DriverManager.getConnection("jdbc:sqlite:Macintosh HD\\PizzaBu\\score.db"))
+  }
 
     /**
      * A marker interface for datastructures which should be persisted to a jdbc database.
