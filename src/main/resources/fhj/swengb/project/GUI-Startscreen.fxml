@@ -20,10 +20,10 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="start" mnemonicParsing="false" onAction="#onStart" prefHeight="64.0" prefWidth="272.0" text="Start" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Button fx:id="highscore" mnemonicParsing="false" onAction="#goToHighScore" prefHeight="64.0" prefWidth="272.0" text="Highscore" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button fx:id="help" mnemonicParsing="false" onAction="#onHelp" prefHeight="64.0" prefWidth="272.0" text="Help" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Button fx:id="exit" mnemonicParsing="false" onAction="#onExit" prefHeight="64.0" prefWidth="272.0" text="Exit" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Button fx:id="start" mnemonicParsing="false" styleClass="button" onAction="#onStart" prefHeight="64.0" prefWidth="272.0" text="Start" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button fx:id="highscore" mnemonicParsing="false" styleClass="button" onAction="#goToHighScore" prefHeight="64.0" prefWidth="272.0" text="Highscore" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button fx:id="help" mnemonicParsing="false" styleClass="button" onAction="#onHelp" prefHeight="64.0" prefWidth="272.0" text="Help" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Button fx:id="exit" mnemonicParsing="false" styleClass="button" onAction="#onExit" prefHeight="64.0" prefWidth="272.0" text="Exit" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
    </center>
