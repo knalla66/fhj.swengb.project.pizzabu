@@ -9,11 +9,10 @@ import javafx.fxml._
 import javafx.scene.image.{ImageView, Image}
 import javafx.scene.layout.{BorderPane, AnchorPane}
 import javafx.scene.{Scene, Parent}
-import javafx.scene.control.{Button,Label}
+import javafx.scene.control.{TextField, Button, Label}
 import javafx.stage.Stage
 
 import fhj.swengb.project.Highscore.Score
-import fhj.swengb.project.PizzaBude._
 
 import scala.collection.mutable
 import scala.util.control.NonFatal
@@ -136,10 +135,58 @@ case class GameLoop(game: PizzaBude,buttons: Map[Move, Button],labels: Map[Order
       Table4.checkAngryLevel(now)
     }
     PizzaBude.checkGameOver()
-    if(PizzaBude.getGameOver) stop()
+    if(PizzaBude.getGameOver) {
+      stop()
+      val loaderGameOver = new FXMLLoader(getClass.getResource("GUI-GameOver.fxml"))
+      val gameOverStage = new Stage()
+
+      gameOverStage.setTitle("GAMEOVER!")
+      loaderGameOver.load[Parent]()
+      gameOverStage.setScene(new Scene(loaderGameOver.getRoot[ Parent ]))
+
+      gameOverStage.show()
+      //borderTop.getScene.getWindow.hide()
+
+
+    }
+
 
   }
 }
+
+
+/**
+ * GAMEOVER
+ */
+
+case class GameOverController() extends Initializable {
+
+  @FXML var borderPaneTop: BorderPane = _
+  @FXML var nameField: TextField = _
+  @FXML var scoreField: TextField = _
+  @FXML var btn_save: Button = _
+  @FXML var btn_toHighscore: Button = _
+
+  val highscore = Table1.getScore + Table2.getScore + Table3.getScore + Table4.getScore
+
+  override def initialize(location: URL, resources: ResourceBundle): Unit = {
+    scoreField.setText(highscore.toString())
+  }
+
+  def save() = {
+    val name = nameField.getCharacters.toString
+    Score.toDb(Db.maybeConnection.get)(Score(name, highscore))
+    println("Name: " + name + " Highscore:" + highscore)
+    val loaderScore = new FXMLLoader(getClass.getResource("GUI-Highscore.fxml"))
+    val highScoreStage = new Stage()
+    highScoreStage.setTitle("PizzaBu - HighScore!")
+    loaderScore.load[Parent]()
+    highScoreStage.setScene(new Scene(loaderScore.getRoot[Parent]))
+    highScoreStage.show()
+    borderPaneTop.getScene.getWindow.hide()
+  }
+}
+
 
 case class PizzaBudeController() extends Initializable {
 
@@ -225,6 +272,7 @@ case class PizzaBudeController() extends Initializable {
     btnPommes.setGraphic(btnFries_1)
     btnPizza.setGraphic(btnPizza_1)
     btnDrink.setGraphic(btnDrink_1)
+    game.start()
 
   }
 
