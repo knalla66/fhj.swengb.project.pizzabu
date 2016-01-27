@@ -94,7 +94,6 @@ case class PizzaBuAppStartController() extends Initializable {
     gameStage.setTitle("PizzaBu - Die Pizza kommt in nu!")
     loaderGame.load[Parent]()
     gameStage.setScene(new Scene(loaderGame.getRoot[ Parent ]))
-    gameStage.getScene.getStylesheets.add("/fhj/swengb/project/PizzaBude.css")
 
     gameStage.show()
     anchorTop.getScene.getWindow.hide()
@@ -308,7 +307,6 @@ case class PizzaBuAppHighscoreGameOverController() extends Initializable {
     gameStage.setTitle("PizzaBu - Die Pizza kommt in nu!")
     loaderGame.load[Parent]()
     gameStage.setScene(new Scene(loaderGame.getRoot[ Parent ]))
-    gameStage.getScene.getStylesheets.add("/fhj/swengb/project/PizzaBude.css")
 
     gameStage.show()
   }
