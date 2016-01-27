@@ -216,7 +216,8 @@ case class PizzaBudeController() extends Initializable {
 
     gameOverStage.show()
   }
-  
+
+
   var game:GameLoop = _
 
   lazy val buttons: Map[Move, Button] = Map(
@@ -363,6 +364,26 @@ case class PizzaBudeController() extends Initializable {
     Table2.setTableStatus(true)
     Table3.setTableStatus(true)
     Table4.setTableStatus(true)
+    Table1.setTime(0L)
+    Table2.setTime(0L)
+    Table3.setTime(0L)
+    Table4.setTime(0L)
+    Table1.setAngryTime(0L)
+    Table2.setAngryTime(0L)
+    Table3.setAngryTime(0L)
+    Table4.setAngryTime(0L)
+    PizzaOven.setReady(false)
+    PizzaOven.setProperty(false)
+    PizzaOven.setWaiting(false)
+    PizzaOven.setState(false)
+    Drink.setReady(false)
+    Drink.setProperty(false)
+    Drink.setWaiting(false)
+    Drink.setState(false)
+    Pommes.setReady(false)
+    Pommes.setProperty(false)
+    Pommes.setWaiting(false)
+    Pommes.setState(false)
   }
 }
 
