@@ -81,7 +81,7 @@ case class CircleAnimation(circles: Seq[ Circle ]) extends AnimationTimer {
 
 case class PizzaBuAppStartController() extends Initializable {
 
-  @FXML var borderTop: BorderPane = _
+  @FXML var anchorTop: AnchorPane = _
   @FXML var start: Button = _
   @FXML var highscore: Button = _
   @FXML var help: Button = _
@@ -97,7 +97,7 @@ case class PizzaBuAppStartController() extends Initializable {
     gameStage.getScene.getStylesheets.add("/fhj/swengb/project/PizzaBude.css")
 
     gameStage.show()
-    borderTop.getScene.getWindow.hide()
+    anchorTop.getScene.getWindow.hide()
   }
 
   def goToHighScore(): Unit = {
@@ -108,7 +108,7 @@ case class PizzaBuAppStartController() extends Initializable {
     highScoreStage.setScene(new Scene(loaderScore.getRoot[ Parent ]))
 
     highScoreStage.show()
-    borderTop.getScene.getWindow.hide()
+    anchorTop.getScene.getWindow.hide()
 
   }
 
@@ -121,11 +121,11 @@ case class PizzaBuAppStartController() extends Initializable {
     helpStage.setScene(new Scene(loaderHelp.getRoot[ Parent ]))
 
     helpStage.show()
-    borderTop.getScene.getWindow.hide()
+    anchorTop.getScene.getWindow.hide()
   }
 
   def onExit(): Unit = {
-    borderTop.getScene.getWindow.hide()
+    anchorTop.getScene.getWindow.hide()
   }
 
 

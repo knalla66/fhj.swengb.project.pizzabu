@@ -5,12 +5,11 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="anchorTop"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhj.swengb.project.PizzaBuAppStartController">
+<AnchorPane fx:id="anchorTop" id="anchorTop" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhj.swengb.project.PizzaBuAppStartController">
    <children>
-      <Button fx:id="start" layoutX="116.0" layoutY="372.0" mnemonicParsing="false" onAction="#onStart" prefHeight="64.0" prefWidth="272.0" text="START" />
-      <Button fx:id="exit" layoutX="412.0" layoutY="450.0" mnemonicParsing="false" onAction="#onExit" prefHeight="64.0" prefWidth="272.0" text="EXIT" />
-      <Button fx:id="help" layoutX="116.0" layoutY="450.0" mnemonicParsing="false" onAction="#onHelp" prefHeight="64.0" prefWidth="272.0" text="HELP" />
-      <Button fx:id="highscore" layoutX="412.0" layoutY="372.0" mnemonicParsing="false" onAction="#goToHighScore" prefHeight="64.0" prefWidth="272.0" text="HIGHSCORE" />
+      <Button fx:id="start" layoutX="116.0" layoutY="436.0" mnemonicParsing="false" onAction="#onStart" prefHeight="64.0" prefWidth="272.0" text="START" />
+      <Button fx:id="exit" layoutX="412.0" layoutY="514.0" mnemonicParsing="false" onAction="#onExit" prefHeight="64.0" prefWidth="272.0" text="EXIT" />
+      <Button fx:id="help" layoutX="116.0" layoutY="514.0" mnemonicParsing="false" onAction="#onHelp" prefHeight="64.0" prefWidth="272.0" text="HELP" />
+      <Button fx:id="highscore" layoutX="412.0" layoutY="436.0" mnemonicParsing="false" onAction="#goToHighScore" prefHeight="64.0" prefWidth="272.0" text="HIGHSCORE" />
    </children>
 </AnchorPane>

@@ -28,6 +28,7 @@
     -fx-alignment:center-right ;
 }
 
+/*
 .button {
     -fx-font-size: 24px;
     -fx-text-fill: white;
@@ -38,7 +39,8 @@
 }
 .button:hover {
      -fx-font-size: 36px;
-     /*-fx-background-color: #B10000;*/
+     /*-fx-background-color: #B10000;
      -fx-background-color: linear-gradient(#2A5058, #61a2b1);
      -fx-text-fill: white;
  }
+*/
