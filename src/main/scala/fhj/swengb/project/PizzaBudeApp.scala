@@ -4,10 +4,11 @@ import java.net.URL
 import java.util.ResourceBundle
 import javafx.animation.AnimationTimer
 import javafx.application.Application
-import javafx.beans.property.{SimpleIntegerProperty, SimpleObjectProperty}
+import javafx.beans.property.{SimpleBooleanProperty, SimpleIntegerProperty, SimpleObjectProperty}
 import javafx.fxml._
 import javafx.scene.image.{ImageView, Image}
 import javafx.scene.layout.{BorderPane, AnchorPane}
+import javafx.scene.media.{MediaPlayerBuilder, AudioClip, Media, MediaPlayer}
 import javafx.scene.{Scene, Parent}
 import javafx.scene.control.{TextField, Button, Label}
 import javafx.stage.Stage
@@ -40,10 +41,11 @@ class PizzaBudeApp extends Application {
   }
 }
 
-case class GameLoop(game: PizzaBude,buttons: Map[Move, Button],labels: Map[Order,Label],images: Map[Images, ImageView]) extends AnimationTimer{
+case class GameLoop(game: PizzaBude,buttons: Map[Move, Button],labels: Map[Order,Label],images: Map[Images, ImageView],m:MediaPlayer,s: Map[Sounds,AudioClip]) extends AnimationTimer{
 
   override def handle(now:Long):Unit = {
-
+    m.setCycleCount(999)
+    m.play()
     PizzaBude.saveStartTime(now)
 
     PizzaOven.checkMachine(now, PizzaOven.t, PizzaOven.product)
@@ -64,42 +66,42 @@ case class GameLoop(game: PizzaBude,buttons: Map[Move, Button],labels: Map[Order
 
     labels(ScoreAll).setText("Score: "+(Table1.getScore+Table2.getScore+Table3.getScore+Table4.getScore).toString)
 
-    if(Table1.getOrder==Nil) buttons(Customer1).setGraphic(images(BtnTable_0()))
-    if(Table2.getOrder==Nil) buttons(Customer2).setGraphic(images(BtnTable2_0()))
-    if(Table3.getOrder==Nil) buttons(Customer3).setGraphic(images(BtnTable3_0()))
-    if(Table4.getOrder==Nil) buttons(Customer4).setGraphic(images(BtnTable4_0()))
+    if(Table1.getOrder==Nil) buttons(Customer1).setGraphic(images(BtnTable_0))
+    if(Table2.getOrder==Nil) buttons(Customer2).setGraphic(images(BtnTable2_0))
+    if(Table3.getOrder==Nil) buttons(Customer3).setGraphic(images(BtnTable3_0))
+    if(Table4.getOrder==Nil) buttons(Customer4).setGraphic(images(BtnTable4_0))
 
 
     if(Table1.getOrder!=Nil) Table1.getAngryLevel match {
-      case 0 => buttons(Customer1).setGraphic(images(BtnTable_1()))
-      case 1 => buttons(Customer1).setGraphic(images(BtnTable_2()))
-      case 2 => buttons(Customer1).setGraphic(images(BtnTable_3()))
-      case 3 => buttons(Customer1).setGraphic(images(BtnTable_4()))
-      case _ => buttons(Customer1).setGraphic(images(BtnTable_0()))
+      case 0 => buttons(Customer1).setGraphic(images(BtnTable_1))
+      case 1 => buttons(Customer1).setGraphic(images(BtnTable_2))
+      case 2 => buttons(Customer1).setGraphic(images(BtnTable_3))
+      case 3 => buttons(Customer1).setGraphic(images(BtnTable_4))
+      case _ => buttons(Customer1).setGraphic(images(BtnTable_0))
     }
 
     if(Table2.getOrder!=Nil) Table2.getAngryLevel match {
-      case 0 => buttons(Customer2).setGraphic(images(BtnTable2_1()))
-      case 1 => buttons(Customer2).setGraphic(images(BtnTable2_2()))
-      case 2 => buttons(Customer2).setGraphic(images(BtnTable2_3()))
-      case 3 => buttons(Customer2).setGraphic(images(BtnTable2_4()))
-      case _ => buttons(Customer2).setGraphic(images(BtnTable2_0()))
+      case 0 => buttons(Customer2).setGraphic(images(BtnTable2_1))
+      case 1 => buttons(Customer2).setGraphic(images(BtnTable2_2))
+      case 2 => buttons(Customer2).setGraphic(images(BtnTable2_3))
+      case 3 => buttons(Customer2).setGraphic(images(BtnTable2_4))
+      case _ => buttons(Customer2).setGraphic(images(BtnTable2_0))
     }
 
     if(Table3.getOrder!=Nil) Table3.getAngryLevel match {
-      case 0 => buttons(Customer3).setGraphic(images(BtnTable3_1()))
-      case 1 => buttons(Customer3).setGraphic(images(BtnTable3_2()))
-      case 2 => buttons(Customer3).setGraphic(images(BtnTable3_3()))
-      case 3 => buttons(Customer3).setGraphic(images(BtnTable3_4()))
-      case _ => buttons(Customer3).setGraphic(images(BtnTable3_0()))
+      case 0 => buttons(Customer3).setGraphic(images(BtnTable3_1))
+      case 1 => buttons(Customer3).setGraphic(images(BtnTable3_2))
+      case 2 => buttons(Customer3).setGraphic(images(BtnTable3_3))
+      case 3 => buttons(Customer3).setGraphic(images(BtnTable3_4))
+      case _ => buttons(Customer3).setGraphic(images(BtnTable3_0))
     }
 
     if(Table4.getOrder!=Nil) Table4.getAngryLevel match {
-      case 0 => buttons(Customer4).setGraphic(images(BtnTable4_1()))
-      case 1 => buttons(Customer4).setGraphic(images(BtnTable4_2()))
-      case 2 => buttons(Customer4).setGraphic(images(BtnTable4_3()))
-      case 3 => buttons(Customer4).setGraphic(images(BtnTable4_4()))
-      case _ => buttons(Customer4).setGraphic(images(BtnTable4_0()))
+      case 0 => buttons(Customer4).setGraphic(images(BtnTable4_1))
+      case 1 => buttons(Customer4).setGraphic(images(BtnTable4_2))
+      case 2 => buttons(Customer4).setGraphic(images(BtnTable4_3))
+      case 3 => buttons(Customer4).setGraphic(images(BtnTable4_4))
+      case _ => buttons(Customer4).setGraphic(images(BtnTable4_0))
     }
 
     if(Table1.getOrder!=Nil) labels(Order1).setText((Table1.getOrder diff Table1.getDeliverd).mkString("\n"))
@@ -111,9 +113,6 @@ case class GameLoop(game: PizzaBude,buttons: Map[Move, Button],labels: Map[Order
     if(Table2.getTableStatus) labels(Order2).setText("")
     if(Table3.getTableStatus) labels(Order3).setText("")
     if(Table4.getTableStatus) labels(Order4).setText("")
-
-
-
 
     Table2.checkTables(now)
     Table2.deliver()
@@ -135,15 +134,13 @@ case class GameLoop(game: PizzaBude,buttons: Map[Move, Button],labels: Map[Order
       Table4.checkAngryLevel(now)
     }
     PizzaBude.checkGameOver()
-
-
     if(PizzaBude.getGameOver) {
+      s(GameO).play()
+      m.stop()
       stop()
       PizzaBudeController().goToHighscore()
       PizzaBuAppStartController
     }
-
-
   }
 }
 
@@ -200,6 +197,8 @@ case class PizzaBudeController() extends Initializable {
   @FXML var lblScore: Label = _
 
   @FXML var canvasAnchorPane: AnchorPane = _
+  @FXML var mediaPlayer: MediaPlayer = _
+  @FXML var sound: Media = _
 
   def goToHighscore():Unit = {
 //    borderPaneTop.getScene().getWindow().setOpacity(0.0)
@@ -235,6 +234,81 @@ case class PizzaBudeController() extends Initializable {
     ScoreAll -> lblScore
   )
 
+  val cash = new AudioClip(getClass.getResource("cash.wav").toString)
+  val gameO = new AudioClip(getClass.getResource("gameover.wav").toString)
+  val bad = new AudioClip(getClass.getResource("bad.mp3").toString)
+  val good = new AudioClip(getClass.getResource("bad.mp3").toString)
+
+  lazy val sounds: Map[Sounds,AudioClip] = Map(
+    Cash -> cash,
+    GameO -> gameO,
+    Bad -> bad,
+    Good -> good
+  )
+
+
+  override def initialize(location: URL, resources: ResourceBundle): Unit = {
+    println("NEUES GAME!!!!!!!!!!!!!!!!!!!!!!")
+    resetGame
+
+    val res:URL = getClass.getResource("loop1.wav")
+    sound = new Media(res.toString)
+    mediaPlayer = new MediaPlayer(sound)
+
+    var g = PizzaBude()
+    val pane = canvasAnchorPane
+    game = GameLoop(g,buttons,labels,images,mediaPlayer,sounds)
+    game.start()
+
+  }
+
+  @FXML def pizza():Unit = if(!PizzaOven.getState) PizzaOven.setProperty(true)
+  @FXML def drink():Unit = if(!Drink.getState) Drink.setProperty(true)
+  @FXML def pommes():Unit = if(!Pommes.getState) Pommes.setProperty(true)
+  @FXML def start():Unit = game.start()
+  @FXML def stop():Unit = game.stop()
+
+  @FXML def table1():Unit = Table1.setProperty(true)
+  @FXML def table2():Unit = Table2.setProperty(true)
+  @FXML def table3():Unit = Table3.setProperty(true)
+  @FXML def table4():Unit = Table4.setProperty(true)
+  @FXML def close():Unit = borderPaneTop.getScene.getWindow.hide()
+
+  lazy val images: Map[Images, ImageView] = Map(
+    BtnDrink_1 -> btnDrink_1,
+    BtnDrink_2 -> btnDrink_2,
+    BtnDrink_3 -> btnDrink_3,
+    BtnPizza_1 -> btnPizza_1,
+    BtnPizza_2 -> btnPizza_2,
+    BtnPizza_3 -> btnPizza_3,
+    BtnFries_1 -> btnFries_1,
+    BtnFries_2 -> btnFries_2,
+    BtnFries_3 -> btnFries_3,
+    BtnTable_0 -> btnTable_0,
+    BtnTable_1 -> btnTable_1,
+    BtnTable_2 -> btnTable_2,
+    BtnTable_3 -> btnTable_3,
+    BtnTable_4 -> btnTable_4,
+    BtnTable2_0 -> btnTable2_0,
+    BtnTable2_1 -> btnTable2_1,
+    BtnTable2_2 -> btnTable2_2,
+    BtnTable2_3 -> btnTable2_3,
+    BtnTable2_4 -> btnTable2_4,
+    BtnTable3_0 -> btnTable3_0,
+    BtnTable3_1 -> btnTable3_1,
+    BtnTable3_2 -> btnTable3_2,
+    BtnTable3_3 -> btnTable3_3,
+    BtnTable3_4 -> btnTable3_4,
+    BtnTable4_0 -> btnTable4_0,
+    BtnTable4_1 -> btnTable4_1,
+    BtnTable4_2 -> btnTable4_2,
+    BtnTable4_3 -> btnTable4_3,
+    BtnTable4_4 -> btnTable4_4
+  )
+
+  /**
+    * Images 4 buttons
+    */
   lazy val btnDrink_1: ImageView = new ImageView(new Image(getClass.getResourceAsStream("btnDrink_DrinkWait.png")))
   lazy val btnDrink_2: ImageView = new ImageView(new Image(getClass.getResourceAsStream("btnDrink_DrinkWorking.png")))
   lazy val btnDrink_3: ImageView = new ImageView(new Image(getClass.getResourceAsStream("btnDrink_DrinkRdy.png")))
@@ -265,70 +339,36 @@ case class PizzaBudeController() extends Initializable {
   lazy val btnTable4_3: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_3.png")))
   lazy val btnTable4_4: ImageView = new ImageView(new Image(getClass.getResourceAsStream("Table_4.png")))
 
-
-  override def initialize(location: URL, resources: ResourceBundle): Unit = {
-
-    val machines = Seq(PizzaOven,Drink)
-    val guests: mutable.Map[Guest, Seq[Product]] = mutable.Map()
-    val g = PizzaBude.apply(guests,machines)
-
-    val pane = canvasAnchorPane
-
-    g.setGameState(g)
-    game = GameLoop(g,buttons,labels,images)
-    btnPommes.setGraphic(btnFries_1)
-    btnPizza.setGraphic(btnPizza_1)
-    btnDrink.setGraphic(btnDrink_1)
-    game.start()
-
+  def resetGame = {
+    PizzaBude.setGameOver(false)
+    Table1.setAngryLevel(0)
+    Table2.setAngryLevel(0)
+    Table3.setAngryLevel(0)
+    Table4.setAngryLevel(0)
+    Table1.setScore(0)
+    Table2.setScore(0)
+    Table3.setScore(0)
+    Table4.setScore(0)
+    Table1.setOrder(Nil)
+    Table2.setOrder(Nil)
+    Table3.setOrder(Nil)
+    Table4.setOrder(Nil)
+    Table1.setDeliverd(Nil)
+    Table2.setDeliverd(Nil)
+    Table3.setDeliverd(Nil)
+    Table4.setDeliverd(Nil)
+    Table1.setTableStatus(true)
+    Table2.setTableStatus(true)
+    Table3.setTableStatus(true)
+    Table4.setTableStatus(true)
   }
-
-
-  @FXML def pizza():Unit = if(!PizzaOven.getState) PizzaOven.setProperty(true)
-  @FXML def drink():Unit = if(!Drink.getState) Drink.setProperty(true)
-  @FXML def pommes():Unit = if(!Pommes.getState) Pommes.setProperty(true)
-  @FXML def start():Unit = game.start()
-  @FXML def stop():Unit = game.stop()
-
-  @FXML def table1():Unit = Table1.setProperty(true)
-  @FXML def table2():Unit = Table2.setProperty(true)
-  @FXML def table3():Unit = Table3.setProperty(true)
-  @FXML def table4():Unit = Table4.setProperty(true)
-  @FXML def close():Unit = borderPaneTop.getScene.getWindow.hide()
-
-  lazy val images: Map[Images, ImageView] = Map(
-    BtnDrink_1 -> btnDrink_1,
-    BtnDrink_2 -> btnDrink_2,
-    BtnDrink_3 -> btnDrink_3,
-    BtnPizza_1 -> btnPizza_1,
-    BtnPizza_2 -> btnPizza_2,
-    BtnPizza_3 -> btnPizza_3,
-    BtnFries_1 -> btnFries_1,
-    BtnFries_2 -> btnFries_2,
-    BtnFries_3 -> btnFries_3,
-    BtnTable_0() -> btnTable_0,
-    BtnTable_1() -> btnTable_1,
-    BtnTable_2() -> btnTable_2,
-    BtnTable_3() -> btnTable_3,
-    BtnTable_4() -> btnTable_4,
-    BtnTable2_0() -> btnTable2_0,
-    BtnTable2_1() -> btnTable2_1,
-    BtnTable2_2() -> btnTable2_2,
-    BtnTable2_3() -> btnTable2_3,
-    BtnTable2_4() -> btnTable2_4,
-    BtnTable3_0() -> btnTable3_0,
-    BtnTable3_1() -> btnTable3_1,
-    BtnTable3_2() -> btnTable3_2,
-    BtnTable3_3() -> btnTable3_3,
-    BtnTable3_4() -> btnTable3_4,
-    BtnTable4_0() -> btnTable4_0,
-    BtnTable4_1() -> btnTable4_1,
-    BtnTable4_2() -> btnTable4_2,
-    BtnTable4_3() -> btnTable4_3,
-    BtnTable4_4() -> btnTable4_4
-  )
-
 }
+
+sealed trait Sounds
+case object Cash extends Sounds
+case object GameO extends Sounds
+case object Bad extends Sounds
+case object Good extends Sounds
 
 sealed trait Images
 case object BtnDrink_1 extends Images
@@ -340,23 +380,23 @@ case object BtnPizza_3 extends Images
 case object BtnFries_1 extends Images
 case object BtnFries_2 extends Images
 case object BtnFries_3 extends Images
-case class BtnTable_0() extends Images
-case class BtnTable_1() extends Images
-case class BtnTable_2() extends Images
-case class BtnTable_3() extends Images
-case class BtnTable_4() extends Images
-case class BtnTable2_0() extends Images
-case class BtnTable2_1() extends Images
-case class BtnTable2_2() extends Images
-case class BtnTable2_3() extends Images
-case class BtnTable2_4() extends Images
-case class BtnTable3_0() extends Images
-case class BtnTable3_1() extends Images
-case class BtnTable3_2() extends Images
-case class BtnTable3_3() extends Images
-case class BtnTable3_4() extends Images
-case class BtnTable4_0() extends Images
-case class BtnTable4_1() extends Images
-case class BtnTable4_2() extends Images
-case class BtnTable4_3() extends Images
-case class BtnTable4_4() extends Images
+case object BtnTable_0 extends Images
+case object BtnTable_1 extends Images
+case object BtnTable_2 extends Images
+case object BtnTable_3 extends Images
+case object BtnTable_4 extends Images
+case object BtnTable2_0 extends Images
+case object BtnTable2_1 extends Images
+case object BtnTable2_2 extends Images
+case object BtnTable2_3 extends Images
+case object BtnTable2_4 extends Images
+case object BtnTable3_0 extends Images
+case object BtnTable3_1 extends Images
+case object BtnTable3_2 extends Images
+case object BtnTable3_3 extends Images
+case object BtnTable3_4 extends Images
+case object BtnTable4_0 extends Images
+case object BtnTable4_1 extends Images
+case object BtnTable4_2 extends Images
+case object BtnTable4_3 extends Images
+case object BtnTable4_4 extends Images
