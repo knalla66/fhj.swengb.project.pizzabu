@@ -4,18 +4,16 @@ import java.net.URL
 import java.util.ResourceBundle
 import javafx.animation.AnimationTimer
 import javafx.application.Application
-import javafx.beans.property.{SimpleBooleanProperty, SimpleIntegerProperty, SimpleObjectProperty}
 import javafx.fxml._
-import javafx.scene.image.{ImageView, Image}
-import javafx.scene.layout.{BorderPane, AnchorPane}
-import javafx.scene.media.{MediaPlayerBuilder, AudioClip, Media, MediaPlayer}
-import javafx.scene.{Scene, Parent}
-import javafx.scene.control.{TextField, Button, Label}
+import javafx.scene.control.{Button, Label, TextField}
+import javafx.scene.image.{Image, ImageView}
+import javafx.scene.layout.{AnchorPane, BorderPane}
+import javafx.scene.media.{AudioClip, Media, MediaPlayer}
+import javafx.scene.{Parent, Scene}
 import javafx.stage.Stage
 
 import fhj.swengb.project.Highscore.Score
 
-import scala.collection.mutable
 import scala.util.control.NonFatal
 
 /**
@@ -172,7 +170,8 @@ case class GameOverController() extends Initializable {
 
   def save() = {
     val name = nameField.getCharacters.toString
-    Score.toDb(Db.maybeConnection.get)(Score(name, highscore))
+    if (PizzaBuApp.checkos == 1)  Score.toDb(Db.maybeConnectionWindows.get)(Score(name, highscore))
+    if (PizzaBuApp.checkos == 2)  Score.toDb(Db.maybeConnectionMac.get)(Score(name, highscore))
     println("Name: " + name + " Highscore:" + highscore)
     val loaderScore = new FXMLLoader(getClass.getResource("GUI-Highscore.fxml"))
     val highScoreStage = new Stage()
