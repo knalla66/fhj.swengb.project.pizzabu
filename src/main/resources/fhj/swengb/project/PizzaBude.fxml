@@ -28,7 +28,6 @@
       </ButtonBar>
    </left>
    <bottom>
-      <Button fx:id="btnStart" mnemonicParsing="false" onAction="#start" text="Start" BorderPane.alignment="CENTER" />
    </bottom>
    <right>
       <GridPane BorderPane.alignment="CENTER">
