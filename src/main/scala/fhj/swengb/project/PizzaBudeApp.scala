@@ -217,6 +217,8 @@ case class PizzaBudeController() extends Initializable {
     gameOverStage.show()
   }
 
+  @FXML var trans: TranslateTransition = _
+
   var game:GameLoop = _
 
   lazy val buttons: Map[Move, Button] = Map(
@@ -257,7 +259,7 @@ case class PizzaBudeController() extends Initializable {
     val res:URL = getClass.getResource("loop1.wav")
     sound = new Media(res.toString)
     mediaPlayer = new MediaPlayer(sound)
-
+    trans.
     var g = PizzaBude()
     val pane = canvasAnchorPane
     game = GameLoop(g,buttons,labels,images,mediaPlayer,sounds)
