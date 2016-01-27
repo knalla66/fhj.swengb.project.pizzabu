@@ -25,4 +25,11 @@ On the Start-Screen there are four buttons.
 - Help
 - Exit
 
+###Game-Screen
+A click on the Start-Button and you will assume the role of a stressed pizza baker.
+
 ###The Highscore-Screen
+You are the best? Then you would probably find your name here! 
+
+###The Help-Screen
+You don’t know how to play the game? No problem, just read the Instructions provided on the Help-Screen.
