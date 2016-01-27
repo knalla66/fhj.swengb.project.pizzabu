@@ -42,29 +42,53 @@ sealed trait Table {
   def getProperty:Boolean = btnProperty.get()
   def setProperty(b:Boolean) = btnProperty.set(b)
 
+  /**
+    * Indicates is a Table is free or not
+    */
   val tableStatus:SimpleBooleanProperty = new SimpleBooleanProperty(true)
   def getTableStatus:Boolean = tableStatus.get()
   def setTableStatus(b:Boolean) = tableStatus.set(b)
 
+  /**
+    * Saves the order from the customer to an SimpleObjectProperty[Seq[Product]]
+    */
   val order:SimpleObjectProperty[Seq[Product]] = new SimpleObjectProperty[Seq[Product]](Nil)
   def getOrder: Seq[Product] = order.get()
   def setOrder(o: Seq[Product]) = order.set(o)
 
+  /**
+    * Saves the delieverd Products to an SimpleObjectProperty[Seq[Product]]
+    */
   val delivered:SimpleObjectProperty[Seq[Product]] = new SimpleObjectProperty[Seq[Product]](Nil)
   def getDeliverd:Seq[Product] = delivered.get()
   def setDeliverd(d: Seq[Product]) = delivered.set(d)
 
+  /**
+    * IntegerProperty to save the Score
+    */
   val score:SimpleIntegerProperty = new SimpleIntegerProperty(0)
   def getScore:Int = score.get()
   def setScore(s:Int) = score.set(s)
 
+  /**
+    * Indicates the angryLevel of a customer
+    */
   val angryLevel:SimpleIntegerProperty = new SimpleIntegerProperty(0)
   def getAngryLevel:Int = angryLevel.get()
   def setAngryLevel(s:Int) = angryLevel.set(s)
 
+  /**
+    * deliver function for delivering products to a table
+    */
   def deliver() = {
     if(getProperty){
+      /**
+        * Checks if chef has a product with him
+        */
       if(PizzaBude.getDeliverProperty!=null) {
+        /**
+          * Checks if delivered product was ordered by the customer
+          */
         if((getOrder diff getDeliverd).contains(PizzaBude.getDeliverProperty)){
           setDeliverd(getDeliverd:+PizzaBude.getDeliverProperty)
           PizzaBude.getDeliverProperty match {
@@ -104,6 +128,10 @@ sealed trait Table {
     }
   }
 
+  /**
+    * Creates an order for a customer
+    * @param n time from GameLoop, to save startTime of the Order
+    */
   def makeOrder(n:Long) = {
     if(getOrder==Nil){
       setOrder(createOrder(Random.shuffle(1 to maxLength).head))
@@ -122,7 +150,6 @@ sealed trait Table {
     * oderLength => create Randomlength for an order
     */
   val maxLength = products.length + 1
-  //val orderLength = Random.shuffle(1 to maxLength).head
 
   /**
     * Create an RandomOrder - recursive
@@ -137,10 +164,13 @@ sealed trait Table {
     case _ => orderSeq
   }
 
+  val tableDelay:Seq[Long] = Seq(4000000000L,8000000000L,12000000000L)
 
-  val tableDelay:Seq[Long] = Seq(5000000000L,10000000000L,15000000000L)
-
-
+  /**
+    * Checks if a table is free for a customer. If a table is free an order will be created after 4,8 or 12 seconds
+    * @param n current time from GameLoop
+    * @param t random time
+    */
   def checkTables(n:Long,t:Long =Random.shuffle(Table1.tableDelay).head) = {
     if(getTableStatus) setTime(n+t);setTableStatus(false)
     if(getTime < n && getOrder == Nil) {
@@ -218,27 +248,8 @@ case object Pommes extends Machine {
   override val product:Product = Fries
 }
 
-case class Guest(id: Int)
-/**
-case class Order(id: Int) {
 
-  val products:Seq[Product] = Seq(Pizza,Cola,Fries)
-
-  val maxLength = products.length + 1
-  val orderLength = Random.shuffle(1 to maxLength).head
-
-
-  def createOrder(orderSeq:Seq[Product] = Nil,orderLength:Int = orderLength,products: Seq[Product] = products):Seq[Product] = orderLength match {
-    case orderLength if orderLength > 0 => createOrder(orderSeq:+Random.shuffle(products).head,orderLength-1,products)
-    case _ => orderSeq
-  }
-
-  val order = createOrder()
-}
-*/
-
-
-case class PizzaBude(guests: mutable.Map[Guest, Seq[Product]], machines: Seq[Machine]) {
+case class PizzaBude() {
 
   val gameState: SimpleObjectProperty[PizzaBude] = new SimpleObjectProperty[PizzaBude]()
   def getGameState:PizzaBude = gameState.get()
@@ -256,9 +267,6 @@ case class PizzaBude(guests: mutable.Map[Guest, Seq[Product]], machines: Seq[Mac
   def getDeliverProperty: Product = deliverProperty.get()
   def setDeliverProperty(p:Product) = deliverProperty.set(p)
 
-  def createNextGameState(guests:mutable.Map[Guest,Seq[Product]]): PizzaBude = {
-    PizzaBude(guests,machines)
-  }
 }
 
 object PizzaBude {
