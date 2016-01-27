@@ -170,9 +170,11 @@ case class GameOverController() extends Initializable {
     scoreField.setText(highscore.toString())
   }
 
+
   def save() = {
     val name = nameField.getCharacters.toString
-    Score.toDb(Db.maybeConnection.get)(Score(name, highscore))
+    if (PizzaBuApp.checkos == 1)  Score.toDb(Db.maybeConnectionWindows.get)(Score(name, highscore))
+    if (PizzaBuApp.checkos == 2)  Score.toDb(Db.maybeConnectionMac.get)(Score(name, highscore))
     println("Name: " + name + " Highscore:" + highscore)
     val loaderScore = new FXMLLoader(getClass.getResource("GUI-Highscore.fxml"))
     val highScoreStage = new Stage()
