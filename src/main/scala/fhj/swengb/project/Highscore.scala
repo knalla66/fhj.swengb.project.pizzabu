@@ -101,16 +101,16 @@ object JfxUtils {
 //Datenbank
 
 object Score extends Db.DbEntity[ Score ] {
-  val one = Score("Verena", 15666858)
-  val two = Score( "Dani", 58968)
-  val three = Score("Tati", 321548)
-  val four = Score("Edith",25865)
-  val five = Score("Marie", 2568768)
-  val six = Score("Sophie", 2727272)
-  val seven = Score("Michi", 52577)
-  val eight = Score("Benji", 25245)
+  val one = Score("Verena", 1566)
+  val two = Score( "Dani", 589)
+  val three = Score("Tati", 321)
+  val four = Score("Edith",258)
+  val five = Score("Marie", 2568)
+  val six = Score("Sophie", 27)
+  val seven = Score("Michi", 77)
+  val eight = Score("Benji", 245)
   val nine = Score("Benni", 7000)
-  val ten = Score("Alex", 78688)
+  val ten = Score("Alex", 688)
 
   val highscore: Set[ Score ] = Set(one,two,three,four,five,six,seven,eight,nine,ten)
 

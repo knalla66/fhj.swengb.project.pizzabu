@@ -2,13 +2,13 @@ package fhj.swengb.project
 
 import java.io.File
 import java.net.URL
-import java.nio.file.{Paths, Path, Files}
+import java.nio.file.{Files, Paths, Path}
 import java.util.ResourceBundle
 import javafx.animation.AnimationTimer
 import javafx.application.Application
 import javafx.fxml.{FXML, FXMLLoader, Initializable}
-import javafx.scene.control.{Button, TableColumn, TableView}
-import javafx.scene.layout.{AnchorPane, BorderPane}
+import javafx.scene.control.{TextField, Button, TableColumn, TableView}
+import javafx.scene.layout.{BorderPane, AnchorPane}
 import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
 import javafx.scene.{Parent, Scene}
@@ -62,7 +62,7 @@ case class CircleAnimation(circles: Seq[ Circle ]) extends AnimationTimer {
 }
 
 
-case class PizzaBuAppStartController() extends Initializable {
+case class PizzaBuAppStartController() extends Initializable{
 
   @FXML var borderTop: BorderPane = _
   @FXML var start: Button = _
@@ -71,10 +71,10 @@ case class PizzaBuAppStartController() extends Initializable {
   @FXML var exit: Button = _
 
   def onStart(): Unit = {
-    val loaderGame = new FXMLLoader(getClass.getResource("GUI-Game.fxml"))
+    val loaderGame = new FXMLLoader(getClass.getResource("PizzaBude.fxml"))
     val gameStage = new Stage()
 
-    gameStage.setTitle("PizzaBu - HighScore!")
+    gameStage.setTitle("PizzaBu - Die Pizza kommt in nu!")
     loaderGame.load[Parent]()
     gameStage.setScene(new Scene(loaderGame.getRoot[ Parent ]))
 
@@ -92,12 +92,7 @@ case class PizzaBuAppStartController() extends Initializable {
     highScoreStage.setScene(new Scene(loaderScore.getRoot[ Parent ]))
 
     highScoreStage.show()
-
-    // Zurück zu Startbilschirm Button einbauen! (muss im Highscore Controller eingebaut sein)
-
-    // Beenden des anderen Fensters wenn auf Button geklickt wird
-
-    //highScoreStage.close()
+    borderTop.getScene.getWindow.hide()
 
   }
 
@@ -117,33 +112,15 @@ case class PizzaBuAppStartController() extends Initializable {
   }
 
   override def initialize(location: URL, resources: ResourceBundle): Unit = {
-
     var path: Path = Paths.get("C:\\PizzaBu")
-    if (Files.exists(path) == true) {
 
-
-      println("Der Ordner PizzaBu existiert bereits")
-
-    }
-
-    else {
+    if (Files.exists(path) == false){
 
       val dir: File = new File("C:\\PizzaBu")
-
-      // attempt to create the directory here
-      var successful: Boolean = dir.mkdir()
-      if (successful) {
-        // creating the directory succeeded
-        println("directory was created successfully")
-      }
-      else {
-        // creating the directory failed
-        println("failed trying to create the directory");
-
-      }
+      // attempt to create the directory
+      dir.mkdir()
 
     }
-
   }
 }
 
@@ -154,7 +131,7 @@ case class PizzaBuAppHighscoreController() extends Initializable {
 
   type ScoreTC[ T ] = TableColumn[ MutableScore, T ]
 
-  @FXML var rootHighScore: BorderPane = _
+  @FXML var rootHighScore: BorderPane =_
   @FXML var tableView: TableView[ MutableScore ] = _
 
   @FXML var columnRang: ScoreTC[ Int ] = _
@@ -199,6 +176,7 @@ case class PizzaBuAppHighscoreController() extends Initializable {
 
     if (new java.io.File("C:\\PizzaBu\\score.db").exists == true) {
 
+      println("ich komme in die if schleife")
       for {
         con <- Db.maybeConnection
         s <- Score.fromDb(Score.queryAll(con))
@@ -239,6 +217,11 @@ case class PizzaBuAppHelpController() {
     borderTop.getScene.getWindow.hide()
   }
 }
+
+
+/**
+ * GAME OVER CONTROLLER
+ */
 
 
 case class PizzaBuAppFXController() extends Initializable {
