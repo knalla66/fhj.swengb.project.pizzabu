@@ -2,13 +2,13 @@ package fhj.swengb.project
 
 import java.io.File
 import java.net.URL
-import java.nio.file.{Files, Paths, Path}
+import java.nio.file.{Files, Path, Paths}
 import java.util.ResourceBundle
 import javafx.animation.AnimationTimer
 import javafx.application.Application
 import javafx.fxml.{FXML, FXMLLoader, Initializable}
-import javafx.scene.control.{TextField, Button, TableColumn, TableView}
-import javafx.scene.layout.{BorderPane, AnchorPane}
+import javafx.scene.control.{Button, TableColumn, TableView}
+import javafx.scene.layout.{AnchorPane, BorderPane}
 import javafx.scene.paint.Color
 import javafx.scene.shape.Circle
 import javafx.scene.{Parent, Scene}
@@ -28,6 +28,19 @@ import scala.util.control.NonFatal
 object PizzaBuApp {
   def main(args: Array[ String ]) {
     Application.launch(classOf[ PizzaBuAppFX ], args: _*)
+  }
+
+  def checkos: Int = {
+    var os = 0
+
+    if (System.getProperty("os.name").startsWith("Windows")) os = 1
+    if (System.getProperty("os.name").startsWith("Mac")) os = 2
+
+
+
+
+    return os
+
   }
 }
 
@@ -61,8 +74,7 @@ case class CircleAnimation(circles: Seq[ Circle ]) extends AnimationTimer {
   }
 }
 
-
-case class PizzaBuAppStartController() extends Initializable{
+case class PizzaBuAppStartController() extends Initializable {
 
   @FXML var borderTop: BorderPane = _
   @FXML var start: Button = _
@@ -111,14 +123,35 @@ case class PizzaBuAppStartController() extends Initializable{
     borderTop.getScene.getWindow.hide()
   }
 
+
   override def initialize(location: URL, resources: ResourceBundle): Unit = {
-    var path: Path = Paths.get("C:\\PizzaBu")
 
-    if (Files.exists(path) == false){
 
-      val dir: File = new File("C:\\PizzaBu")
-      // attempt to create the directory
-      dir.mkdir()
+    if (PizzaBuApp.checkos == 1) {
+
+
+      println("Oh, it's a Windows PC!")
+      var path: Path = Paths.get("C:\\PizzaBu")
+
+      if (Files.exists(path) == false) {
+
+        val dir: File = new File("C:\\PizzaBu")
+        // attempt to create the directory
+        dir.mkdir()
+      }
+    }
+
+    if (PizzaBuApp.checkos == 2) {
+      println("Oh, it's a Mac!")
+      var path: Path = Paths.get("Macintosh HD\\PizzaBu")
+
+      if (Files.exists(path) == false) {
+
+        val dir: File = new File("Macintosh HD:\\PizzaBu")
+        // attempt to create the directory
+        dir.mkdir()
+      }
+
 
     }
   }
@@ -131,7 +164,7 @@ case class PizzaBuAppHighscoreController() extends Initializable {
 
   type ScoreTC[ T ] = TableColumn[ MutableScore, T ]
 
-  @FXML var rootHighScore: BorderPane =_
+  @FXML var rootHighScore: BorderPane = _
   @FXML var tableView: TableView[ MutableScore ] = _
 
   @FXML var columnRang: ScoreTC[ Int ] = _
@@ -173,36 +206,70 @@ case class PizzaBuAppHighscoreController() extends Initializable {
     initTableViewColumn[Int](columnScore, _.scoreProperty)
 
 
+    if (PizzaBuApp.checkos == 1) {
+      if (new java.io.File("C:\\PizzaBu\\score.db").exists == true) {
 
-    if (new java.io.File("C:\\PizzaBu\\score.db").exists == true) {
+        println("ich komme in die if schleife")
+        for {
+          con <- Db.maybeConnectionWindows
+          s <- Score.fromDb(Score.queryAll(con))
+        } {
+          tableView.getItems().add(MutableScore(s))
+        }
 
-      println("ich komme in die if schleife")
-      for {
-        con <- Db.maybeConnection
-        s <- Score.fromDb(Score.queryAll(con))
-      } {
-        tableView.getItems().add(MutableScore(s))
+        println("Es musste keine Datenbank erstellt werden!")
+
+
+      }
+      else {
+
+        for {
+          con <- Db.maybeConnectionWindows
+          _ = Score.reTable(con.createStatement())
+          _ = Score.highscorelist.map(Score.toDb(con)(_))
+          s <- Score.fromDb(Score.queryAll(con))
+        } {
+          tableView.getItems().add(MutableScore(s))
+        }
+
+        println("Es wurde eine neue Datenbank erstellt!")
+
       }
 
-      println("Es musste keine Datenbank erstellt werden!")
-
-
     }
-    else {
 
-      for {
-        con <- Db.maybeConnection
-        _ = Score.reTable(con.createStatement())
-        _ = Score.highscorelist.map(Score.toDb(con)(_))
-        s <- Score.fromDb(Score.queryAll(con))
-      } {
-        tableView.getItems().add(MutableScore(s))
+
+    if (PizzaBuApp.checkos == 2) {
+      if (new java.io.File("Macintosh HD\\PizzaBu\\score.db").exists == true) {
+
+        println("ich komme in die if schleife")
+        for {
+          con <- Db.maybeConnectionMac
+          s <- Score.fromDb(Score.queryAll(con))
+        } {
+          tableView.getItems().add(MutableScore(s))
+        }
+
+        println("Es musste keine Datenbank erstellt werden!")
+
+
+      }
+      else {
+
+        for {
+          con <- Db.maybeConnectionMac
+          _ = Score.reTable(con.createStatement())
+          _ = Score.highscorelist.map(Score.toDb(con)(_))
+          s <- Score.fromDb(Score.queryAll(con))
+        } {
+          tableView.getItems().add(MutableScore(s))
+        }
+
+        println("Es wurde eine neue Datenbank erstellt!")
+
       }
 
-      println("Es wurde eine neue Datenbank erstellt!")
-
     }
-
   }
 }
 
