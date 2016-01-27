@@ -2,18 +2,15 @@
      -fx-background-image: url("floor.png");
 }
 
+.button {
+    -fx-background-color: transparent;
+}
+
 #score {
-    -fx-font-size:32px;
-    -fx-fontweight: bold;
     -fx-effect: dropshadow(gaussian, rgba(255,255,255,0.5) , 0,0,0,1);
 }
 
 #order {
-    -fx-fontweight: bold;
     -fx-effect: dropshadow(gaussian, rgba(255,255,255,0.5) , 0,0,0,1);
-    -fx-background-image:
 }
 
-.button {
-    -fx-background-color: transparent;
-}
