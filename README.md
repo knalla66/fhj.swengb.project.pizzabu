@@ -18,7 +18,11 @@ But your guests are very impatient, and you have to handle four tables in a litt
 So, you don't believe me? Try it out! Play the game and you will see, how stressful this situation can be.
 
 ### The Start-Screen
-![Screenshot_Start](Screenshot_Start.png)
+
+<p align="center">
+ ![Screenshot_Start](Screenshot_Start.png)
+</p>
+
 
 On the Start-Screen there are four buttons. 
 - Start
