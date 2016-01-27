@@ -135,19 +135,12 @@ case class GameLoop(game: PizzaBude,buttons: Map[Move, Button],labels: Map[Order
       Table4.checkAngryLevel(now)
     }
     PizzaBude.checkGameOver()
+
+
     if(PizzaBude.getGameOver) {
       stop()
-      val loaderGameOver = new FXMLLoader(getClass.getResource("GUI-GameOver.fxml"))
-      val gameOverStage = new Stage()
-
-      gameOverStage.setTitle("GAMEOVER!")
-      loaderGameOver.load[Parent]()
-      gameOverStage.setScene(new Scene(loaderGameOver.getRoot[ Parent ]))
-
-      gameOverStage.show()
-      //borderTop.getScene.getWindow.hide()
-
-
+      PizzaBudeController().goToHighscore()
+      PizzaBuAppStartController
     }
 
 
@@ -207,6 +200,20 @@ case class PizzaBudeController() extends Initializable {
   @FXML var lblScore: Label = _
 
   @FXML var canvasAnchorPane: AnchorPane = _
+
+  def goToHighscore():Unit = {
+//    borderPaneTop.getScene().getWindow().setOpacity(0.0)
+
+    val loaderGameOver = new FXMLLoader(getClass.getResource("GUI-GameOver.fxml"))
+    val gameOverStage = new Stage()
+
+    gameOverStage.setTitle("GAMEOVER!")
+    loaderGameOver.load[Parent]()
+    gameOverStage.setScene(new Scene(loaderGameOver.getRoot[ Parent ]))
+
+    gameOverStage.show()
+
+  }
 
   var game:GameLoop = _
 
@@ -288,8 +295,6 @@ case class PizzaBudeController() extends Initializable {
   @FXML def table3():Unit = Table3.setProperty(true)
   @FXML def table4():Unit = Table4.setProperty(true)
   @FXML def close():Unit = borderPaneTop.getScene.getWindow.hide()
-
-
 
   lazy val images: Map[Images, ImageView] = Map(
     BtnDrink_1 -> btnDrink_1,
