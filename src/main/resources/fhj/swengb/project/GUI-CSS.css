@@ -17,12 +17,11 @@
 
 
 .label {
-
-    -font-size: 20pt;
-    -font-family: "Segoe UI Light";
-    -text-fill: white;
-    -alignment: center-left;
-    -opacity: 1;
+    -fx-font-size: 20pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;
 
 }
 
