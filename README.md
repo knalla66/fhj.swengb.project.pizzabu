@@ -1,5 +1,7 @@
-#Final project of group 2 - 
-##PizzaBu - die pizza kommt in nu!
+
+#PizzaBu - die pizza kommt in nu!
+Final project of group 2
+
 ### fhj.swengb.project.pizzabu
 
 ##Team Members:
