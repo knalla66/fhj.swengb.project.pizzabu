@@ -4,11 +4,11 @@ import java.net.URL
 import java.util.ResourceBundle
 import javafx.animation.AnimationTimer
 import javafx.application.Application
-import javafx.beans.property.{SimpleBooleanProperty, SimpleIntegerProperty, SimpleObjectProperty}
+import javafx.beans.property._
 import javafx.fxml._
 import javafx.scene.image.{ImageView, Image}
 import javafx.scene.layout.{BorderPane, AnchorPane}
-import javafx.scene.media.{MediaPlayerBuilder, AudioClip, Media, MediaPlayer}
+import javafx.scene.media.{AudioClip, Media, MediaPlayer}
 import javafx.scene.{Scene, Parent}
 import javafx.scene.control.{TextField, Button, Label}
 import javafx.fxml._
@@ -20,6 +20,7 @@ import javafx.scene.{Parent, Scene}
 import javafx.stage.Stage
 
 import fhj.swengb.project.Highscore.Score
+
 import scala.collection.mutable
 import scala.util.control.NonFatal
 
