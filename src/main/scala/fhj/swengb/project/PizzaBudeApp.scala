@@ -143,7 +143,6 @@ case class GameLoop(game: PizzaBude,buttons: Map[Move, Button],labels: Map[Order
       m.stop()
       stop()
       PizzaBudeController().goToHighscore()
-      PizzaBuAppStartController
     }
   }
 }
@@ -172,7 +171,7 @@ case class GameOverController() extends Initializable {
     if (PizzaBuApp.checkos == 1)  Score.toDb(Db.maybeConnectionWindows.get)(Score(name, highscore))
     if (PizzaBuApp.checkos == 2)  Score.toDb(Db.maybeConnectionMac.get)(Score(name, highscore))
     println("Name: " + name + " Highscore:" + highscore)
-    val loaderScore = new FXMLLoader(getClass.getResource("GUI-Highscore.fxml"))
+    val loaderScore = new FXMLLoader(getClass.getResource("GUI-Highscore_gameover.fxml"))
     val highScoreStage = new Stage()
     highScoreStage.setTitle("PizzaBu - HighScore!")
     loaderScore.load[Parent]()
