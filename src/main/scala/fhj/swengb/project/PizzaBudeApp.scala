@@ -4,6 +4,7 @@ import java.net.URL
 import java.util.ResourceBundle
 import javafx.animation.AnimationTimer
 import javafx.application.Application
+import javafx.beans.property.SimpleObjectProperty
 import javafx.fxml._
 import javafx.scene.control.{Button, Label, TextField}
 import javafx.scene.image.{Image, ImageView}
@@ -199,8 +200,6 @@ case class PizzaBudeController() extends Initializable {
   @FXML var sound: Media = _
 
   def goToHighscore():Unit = {
-//    borderPaneTop.getScene().getWindow().setOpacity(0.0)
-
     val loaderGameOver = new FXMLLoader(getClass.getResource("GUI-GameOver.fxml"))
     val gameOverStage = new Stage()
 
@@ -209,7 +208,6 @@ case class PizzaBudeController() extends Initializable {
     gameOverStage.setScene(new Scene(loaderGameOver.getRoot[ Parent ]))
 
     gameOverStage.show()
-
   }
 
   var game:GameLoop = _

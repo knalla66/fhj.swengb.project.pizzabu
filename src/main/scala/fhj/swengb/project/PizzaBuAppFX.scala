@@ -6,6 +6,7 @@ import java.nio.file.{Files, Path, Paths}
 import java.util.ResourceBundle
 import javafx.animation.AnimationTimer
 import javafx.application.Application
+import javafx.beans.property.SimpleObjectProperty
 import javafx.fxml.{FXML, FXMLLoader, Initializable}
 import javafx.scene.control.{ListView, Button, TableColumn, TableView}
 import javafx.scene.layout.{AnchorPane, BorderPane}
@@ -55,6 +56,8 @@ case class PizzaBuAppFX() extends Application {
       stage.setScene(new Scene(loader.getRoot[ Parent ]))
 
       stage.show()
+
+
     } catch {
       case NonFatal(e) => e.printStackTrace()
     }
@@ -83,7 +86,6 @@ case class PizzaBuAppStartController() extends Initializable {
   @FXML var help: Button = _
   @FXML var exit: Button = _
 
-
   def onStart(): Unit = {
     val loaderGame = new FXMLLoader(getClass.getResource("PizzaBude.fxml"))
     val gameStage = new Stage()
@@ -94,7 +96,6 @@ case class PizzaBuAppStartController() extends Initializable {
 
     gameStage.show()
     borderTop.getScene.getWindow.hide()
-
   }
 
   def goToHighScore(): Unit = {
@@ -299,7 +300,6 @@ case class PizzaBuAppHighscoreGameOverController() extends Initializable {
   // der Startbildschirm wieder angezeigt werden.
   def onNewGame(): Unit = {
     rootHighScore.getScene.getWindow.hide()
-
     val loaderGame = new FXMLLoader(getClass.getResource("PizzaBude.fxml"))
     val gameStage = new Stage()
 
