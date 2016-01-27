@@ -27,9 +27,6 @@
          </buttons>
       </ButtonBar>
    </left>
-   <bottom>
-      <Button fx:id="btnStart" mnemonicParsing="false" onAction="#start" text="Start" BorderPane.alignment="CENTER" />
-   </bottom>
    <right>
       <GridPane BorderPane.alignment="CENTER">
          <columnConstraints>
@@ -43,10 +40,10 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="btnTable2" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#table2" prefHeight="100.0" prefWidth="100.0" text="Table2" GridPane.rowIndex="1" />
-            <Button fx:id="btnTable1" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#table1" prefHeight="100.0" prefWidth="100.0" text="Table1" />
-            <Button fx:id="btnTable3" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#table3" prefHeight="100.0" prefWidth="100.0" text="Table3" GridPane.rowIndex="2" />
-            <Button fx:id="btnTable4" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#table4" prefHeight="100.0" prefWidth="100.0" text="Table4" GridPane.rowIndex="3" />
+            <Button fx:id="btnTable2" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#table2" prefHeight="100.0" prefWidth="100.0" GridPane.rowIndex="1" />
+            <Button fx:id="btnTable1" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#table1" prefHeight="100.0" prefWidth="100.0" />
+            <Button fx:id="btnTable3" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#table3" prefHeight="100.0" prefWidth="100.0" GridPane.rowIndex="2" />
+            <Button fx:id="btnTable4" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#table4" prefHeight="100.0" prefWidth="100.0" GridPane.rowIndex="3" />
             <Label fx:id="lblTable1" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0" prefHeight="120.0" prefWidth="120.0" text="" GridPane.columnIndex="1">
                <font>
                   <Font size="18.0" />
