@@ -11,10 +11,15 @@ import javafx.scene.layout.{BorderPane, AnchorPane}
 import javafx.scene.media.{MediaPlayerBuilder, AudioClip, Media, MediaPlayer}
 import javafx.scene.{Scene, Parent}
 import javafx.scene.control.{TextField, Button, Label}
+import javafx.fxml._
+import javafx.scene.control.{Button, Label, TextField}
+import javafx.scene.image.{Image, ImageView}
+import javafx.scene.layout.{AnchorPane, BorderPane}
+import javafx.scene.media.{AudioClip, Media, MediaPlayer}
+import javafx.scene.{Parent, Scene}
 import javafx.stage.Stage
 
 import fhj.swengb.project.Highscore.Score
-
 import scala.collection.mutable
 import scala.util.control.NonFatal
 
@@ -169,7 +174,6 @@ case class GameOverController() extends Initializable {
   override def initialize(location: URL, resources: ResourceBundle): Unit = {
     scoreField.setText(highscore.toString())
   }
-
 
   def save() = {
     val name = nameField.getCharacters.toString
