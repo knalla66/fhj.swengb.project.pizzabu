@@ -7,7 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="borderTop" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhj.swengb.project.PizzaBuAppStartController">
+<BorderPane fx:id="borderTop" stylesheets="@main.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhj.swengb.project.PizzaBuAppStartController">
    <center>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -21,7 +21,7 @@
         </rowConstraints>
          <children>
             <Button fx:id="start" mnemonicParsing="false" onAction="#onStart" prefHeight="64.0" prefWidth="272.0" text="Start" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Button fx:id="highscore" mnemonicParsing="false" onAction="#goToHighScore" prefHeight="64.0" prefWidth="272.0" text="High Score" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button fx:id="highscore" mnemonicParsing="false" onAction="#goToHighScore" prefHeight="64.0" prefWidth="272.0" text="Highscore" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <Button fx:id="help" mnemonicParsing="false" onAction="#onHelp" prefHeight="64.0" prefWidth="272.0" text="Help" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
             <Button fx:id="exit" mnemonicParsing="false" onAction="#onExit" prefHeight="64.0" prefWidth="272.0" text="Exit" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
          </children>
