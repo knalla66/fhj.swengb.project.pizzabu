@@ -19,6 +19,8 @@ So, you don't believe me? Try it out! Play the game and you will see, how stress
 
 ### The Start-Screen
 
+
+![Screenshot_Start](Screenshot_Start.png)
 On the Start-Screen there are four buttons. 
 - Start
 - Highscore
@@ -26,9 +28,11 @@ On the Start-Screen there are four buttons.
 - Exit
 
 ###Game-Screen
+![Screenshot_Game](Screenshot_Game.png)
 A click on the Start-Button and you will assume the role of a stressed pizza baker.
 
 ###The Highscore-Screen
+![Screenshot_Highscore](Screenshot_Highscore.png)
 You are the best? Then you would probably find your name here! 
 
 ###The Help-Screen
