@@ -28,7 +28,7 @@
     -fx-alignment:center-right ;
 }
 
-
+/*
 .button {
     -fx-font-size: 20px;
     -fx-text-fill: black;
@@ -40,3 +40,34 @@
      -fx-font-size: 20px;
           -fx-text-fill: black;
  }
+ */
+
+ .button {
+     -fx-font-size: 20px;
+     -fx-text-fill: white;
+     -fx-font-family: "MV Boli";
+     -fx-font-weight: bold;
+     -fx-background-color: linear-gradient(#fd4404, #211f21);
+     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+ }
+ .button:hover {
+      -fx-font-size: 20px;
+      -fx-background-color: linear-gradient(#211f21, #fd4404);
+      -fx-text-fill: white;
+      -fx-cursor: hand;
+      -fx-underline: false;
+      -fx-font-weight: bold;
+  }
+
+#titel {
+        -fx-font-size: 28pt;
+        -fx-font-family: "Segoe UI Light";
+        -fx-text-fill: black;
+        -fx-alignment: center;
+        -fx-opacity: 1;
+        -fx-font-weight: bold;
+}
+
+#rec {
+     -fx-fill: linear-gradient(#fd4404, #211f21);
+}

@@ -8,9 +8,9 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="borderPaneTop" stylesheets="@GUI-CSS.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="737.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhj.swengb.project.GameOverController">
+<BorderPane fx:id="borderPaneTop" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="737.0" stylesheets="@GUI-CSS.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhj.swengb.project.GameOverController">
    <top>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Game Over!" BorderPane.alignment="CENTER">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="You are fired!" BorderPane.alignment="CENTER">
          <font>
             <Font size="61.0" />
          </font>
@@ -19,7 +19,7 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="70.0" layoutY="63.0" prefHeight="51.0" prefWidth="146.0" text="Name des Spielers" textFill="#0051ff">
+            <Label layoutX="70.0" layoutY="63.0" prefHeight="51.0" prefWidth="146.0" text="Name" textFill="#0051ff">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
@@ -40,9 +40,9 @@
       </AnchorPane>
    </center>
    <left>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b10000" height="550.0" stroke="#b10000" strokeType="INSIDE" width="39.0" BorderPane.alignment="CENTER" />
+      <Rectangle id="rec" arcHeight="5.0" arcWidth="5.0" height="550.0" stroke="#b10000" strokeType="INSIDE" width="39.0" BorderPane.alignment="CENTER" />
    </left>
    <right>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b10000" height="617.0" stroke="#b10000" strokeType="INSIDE" width="39.0" BorderPane.alignment="CENTER" />
+      <Rectangle id="rec" arcHeight="5.0" arcWidth="5.0" height="617.0" stroke="#b10000" strokeType="INSIDE" width="39.0" BorderPane.alignment="CENTER" />
    </right>
 </BorderPane>

@@ -9,15 +9,15 @@
 
 <BorderPane fx:id="borderTop" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@GUI-CSS.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhj.swengb.project.PizzaBuAppHelpController">
    <left>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b10000" height="730.0" stroke="#b10000" strokeType="INSIDE" width="39.0" BorderPane.alignment="CENTER" />
+      <Rectangle id="rec" arcHeight="5.0" arcWidth="5.0"  height="730.0" stroke="#b10000" strokeType="INSIDE" width="39.0" BorderPane.alignment="CENTER" />
    </left>
    <right>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b10000" height="732.0" stroke="#b10000" strokeType="INSIDE" width="39.0" BorderPane.alignment="CENTER" />
+      <Rectangle id="rec" arcHeight="5.0" arcWidth="5.0"  height="732.0" stroke="#b10000" strokeType="INSIDE" width="39.0" BorderPane.alignment="CENTER" />
    </right>
    <top>
       <AnchorPane prefHeight="63.0" prefWidth="737.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="321.0" layoutY="23.0" text="PizzaBu - HELP" />
+            <Label id="titel" layoutX="257.0" layoutY="18.0" text="PizzaBu - HELP" />
             <Button fx:id="zurueck" layoutX="46.0" layoutY="18.0" mnemonicParsing="false" onAction="#onZurueck" text="Zurück" />
          </children>
       </AnchorPane>

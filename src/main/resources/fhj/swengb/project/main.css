@@ -15,7 +15,6 @@
 }
 .button:hover {
      -fx-font-size: 36px;
-     /*-fx-background-color: #B10000;*/
      -fx-background-color: linear-gradient(#211f21, #fd4404);
      -fx-text-fill: white;
      -fx-cursor: hand;

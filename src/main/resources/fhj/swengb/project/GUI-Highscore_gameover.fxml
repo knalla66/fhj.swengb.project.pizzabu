@@ -10,7 +10,7 @@
 
 <BorderPane fx:id="rootHighScore" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@GUI-CSS.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhj.swengb.project.PizzaBuAppHighscoreGameOverController">
     <center>
-        <TableView fx:id="tableView" fixedCellSize="47.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="546.0" prefWidth="652.0" styleClass="table-view" stylesheets="@GUI-CSS.css" BorderPane.alignment="CENTER">
+        <TableView fx:id="tableView" fixedCellSize="47.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="546.0" prefWidth="727.0" styleClass="table-view" stylesheets="@GUI-CSS.css" BorderPane.alignment="CENTER">
             <columns>
                 <TableColumn fx:id="columnName" editable="false" prefWidth="325.0" sortable="false" text="Name" />
                 <TableColumn fx:id="columnScore" editable="false" prefWidth="325.0" sortable="false" text="Highscore" />
@@ -21,13 +21,13 @@
         </TableView>
     </center>
     <right>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b10000" height="660.0" stroke="#b10000" strokeType="INSIDE" width="39.0" BorderPane.alignment="CENTER" />
+        <Rectangle id="rec" arcHeight="5.0" arcWidth="5.0" height="660.0" stroke="#b10000" strokeType="INSIDE" width="39.0" BorderPane.alignment="CENTER" />
     </right>
     <top>
         <AnchorPane prefHeight="53.0" prefWidth="737.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="newgame" layoutX="47.0" layoutY="6.0" mnemonicParsing="false" onAction="#onNewGame" prefHeight="41.0" prefWidth="120.0" text="New Game" />
-                <Label layoutX="263.0" layoutY="12.0" prefHeight="21.0" prefWidth="274.0" text="PizzaBu - Highscore">
+                <Button fx:id="newgame" layoutX="47.0" layoutY="6.0" mnemonicParsing="false" onAction="#onNewGame" prefHeight="41.0" prefWidth="141.0" text="New Game" />
+                <Label id="titel" layoutX="158.0" layoutY="4.0" prefHeight="45.0" prefWidth="484.0" text="PizzaBu - Highscore">
                <font>
                   <Font size="23.0" />
                </font></Label>
@@ -36,11 +36,11 @@
         </AnchorPane>
     </top>
     <left>
-        <AnchorPane prefHeight="412.0" prefWidth="98.0" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="617.0" prefWidth="12.0" BorderPane.alignment="CENTER">
             <children>
-                <ListView fx:id="listView" layoutX="39.0" layoutY="90.0" prefHeight="493.0" prefWidth="72.0" />
-                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b10000" height="636.0" layoutY="-19.0" stroke="#b10000" strokeType="INSIDE" width="39.0" />
-                <Label fx:id="labelText" alignment="CENTER" contentDisplay="CENTER" layoutX="39.0" layoutY="37.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="53.0" prefWidth="73.0" styleClass="label" stylesheets="@GUI-CSS.css" text="Rang" textAlignment="CENTER">
+                <ListView fx:id="listView" layoutX="39.0" layoutY="90.0" prefHeight="493.0" prefWidth="0.0" />
+                <Rectangle id="rec" arcHeight="5.0" arcWidth="5.0" height="636.0" layoutY="-19.0" stroke="#b10000" strokeType="INSIDE" width="39.0" />
+                <Label fx:id="labelText" alignment="CENTER" contentDisplay="CENTER" layoutX="39.0" layoutY="37.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="53.0" prefWidth="0.0" styleClass="label" stylesheets="@GUI-CSS.css" text="" textAlignment="CENTER">
                     <font>
                         <Font name="Segoe UI Light" size="25.0" />
                     </font>
