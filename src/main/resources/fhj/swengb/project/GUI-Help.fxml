@@ -25,7 +25,11 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TextFlow fx:id="textFlow" layoutX="14.0" prefHeight="538.0" prefWidth="708.0" />
+            <ScrollPane fx:id="scrollPane" prefHeight="537.0" prefWidth="723.0">
+               <content>
+                  <TextFlow fx:id="textFlow" prefHeight="538.0" prefWidth="708.0" />
+               </content>
+            </ScrollPane>
          </children>
       </AnchorPane>
    </center>
