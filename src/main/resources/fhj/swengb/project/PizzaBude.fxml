@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" stylesheets="PizzaBude.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhj.swengb.project.PizzaBudeController">
+<BorderPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" stylesheets="@PizzaBude.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhj.swengb.project.PizzaBudeController">
    <left>
       <ButtonBar buttonMinWidth="150.0" prefHeight="400.0" prefWidth="79.0" BorderPane.alignment="CENTER">
          <buttons>
@@ -44,29 +44,29 @@
             <Button fx:id="btnTable1" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#table1" prefHeight="100.0" prefWidth="100.0" />
             <Button fx:id="btnTable3" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#table3" prefHeight="100.0" prefWidth="100.0" GridPane.rowIndex="2" />
             <Button fx:id="btnTable4" maxHeight="100.0" maxWidth="100.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#table4" prefHeight="100.0" prefWidth="100.0" GridPane.rowIndex="3" />
-            <Label fx:id="lblTable1" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0" prefHeight="120.0" prefWidth="120.0" text="" GridPane.columnIndex="1">
+            <Label id="order" fx:id="lblTable1" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0" prefHeight="120.0" prefWidth="120.0" GridPane.columnIndex="1">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Gill Sans Ultra Bold" size="18.0" />
                </font></Label>
-            <Label fx:id="lblTable2" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0" prefHeight="120.0" prefWidth="120.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label id="order" fx:id="lblTable2" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0" prefHeight="120.0" prefWidth="120.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Gill Sans Ultra Bold" size="18.0" />
                </font></Label>
-            <Label fx:id="lblTable3" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0" prefHeight="120.0" prefWidth="120.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label id="order" fx:id="lblTable3" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0" prefHeight="120.0" prefWidth="120.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Gill Sans Ultra Bold" size="18.0" />
                </font></Label>
-            <Label fx:id="lblTable4" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0" prefHeight="120.0" prefWidth="120.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <Label id="order" fx:id="lblTable4" maxHeight="120.0" maxWidth="120.0" minHeight="120.0" minWidth="120.0" prefHeight="120.0" prefWidth="120.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Gill Sans Ultra Bold" size="18.0" />
                </font></Label>
          </children>
       </GridPane>
    </right>
    <top>
-      <Label fx:id="lblScore" text="" BorderPane.alignment="CENTER">
+      <Label id="score" fx:id="lblScore" text="" BorderPane.alignment="CENTER">
          <font>
-            <Font size="20.0" />
+            <Font name="Gill Sans Ultra Bold" size="32.0" />
          </font>
       </Label>
    </top>

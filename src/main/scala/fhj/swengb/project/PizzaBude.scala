@@ -197,6 +197,9 @@ sealed trait Machine{
   def getState:Boolean = state.get()
   def setState(b:Boolean) = state.set(b)
 
+  /**
+    * Indicates if product is ready to deliver
+    */
   val ready:SimpleBooleanProperty = new SimpleBooleanProperty()
   def getReady:Boolean = ready.get()
   def setReady(b:Boolean) = ready.set(b)

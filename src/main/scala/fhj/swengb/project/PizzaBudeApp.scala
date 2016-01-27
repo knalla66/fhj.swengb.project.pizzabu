@@ -220,7 +220,6 @@ case class PizzaBudeController() extends Initializable {
 
   }
 
-  @FXML var trans: TranslateTransition = _
 
   var game:GameLoop = _
 
@@ -262,7 +261,6 @@ case class PizzaBudeController() extends Initializable {
     val res:URL = getClass.getResource("loop1.wav")
     sound = new Media(res.toString)
     mediaPlayer = new MediaPlayer(sound)
-    trans.
     var g = PizzaBude()
     val pane = canvasAnchorPane
     game = GameLoop(g,buttons,labels,images,mediaPlayer,sounds)
@@ -369,6 +367,26 @@ case class PizzaBudeController() extends Initializable {
     Table2.setTableStatus(true)
     Table3.setTableStatus(true)
     Table4.setTableStatus(true)
+    Table1.setTime(0L)
+    Table2.setTime(0L)
+    Table3.setTime(0L)
+    Table4.setTime(0L)
+    Table1.setAngryTime(0L)
+    Table2.setAngryTime(0L)
+    Table3.setAngryTime(0L)
+    Table4.setAngryTime(0L)
+    PizzaOven.setReady(false)
+    PizzaOven.setProperty(false)
+    PizzaOven.setWaiting(false)
+    PizzaOven.setState(false)
+    Drink.setReady(false)
+    Drink.setProperty(false)
+    Drink.setWaiting(false)
+    Drink.setState(false)
+    Pommes.setReady(false)
+    Pommes.setProperty(false)
+    Pommes.setWaiting(false)
+    Pommes.setState(false)
   }
 }
 
