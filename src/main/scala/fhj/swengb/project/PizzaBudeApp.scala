@@ -143,15 +143,7 @@ case class GameLoop(game: PizzaBude,buttons: Map[Move, Button],labels: Map[Order
       s(GameO).play()
       m.stop()
       stop()
-      val loaderGameOver = new FXMLLoader(getClass.getResource("GUI-GameOver.fxml"))
-      val gameOverStage = new Stage()
-
-      gameOverStage.setTitle("GAMEOVER!")
-      loaderGameOver.load[Parent]()
-      gameOverStage.setScene(new Scene(loaderGameOver.getRoot[ Parent ]))
-
-      gameOverStage.show()
-      //borderTop.getScene.getWindow.hide()
+      PizzaBudeController().goToHighscore()
     }
   }
 }
@@ -180,7 +172,7 @@ case class GameOverController() extends Initializable {
     if (PizzaBuApp.checkos == 1)  Score.toDb(Db.maybeConnectionWindows.get)(Score(name, highscore))
     if (PizzaBuApp.checkos == 2)  Score.toDb(Db.maybeConnectionMac.get)(Score(name, highscore))
     println("Name: " + name + " Highscore:" + highscore)
-    val loaderScore = new FXMLLoader(getClass.getResource("GUI-Highscore.fxml"))
+    val loaderScore = new FXMLLoader(getClass.getResource("GUI-Highscore_gameover.fxml"))
     val highScoreStage = new Stage()
     highScoreStage.setTitle("PizzaBu - HighScore!")
     loaderScore.load[Parent]()
@@ -212,6 +204,20 @@ case class PizzaBudeController() extends Initializable {
   @FXML var canvasAnchorPane: AnchorPane = _
   @FXML var mediaPlayer: MediaPlayer = _
   @FXML var sound: Media = _
+
+  def goToHighscore():Unit = {
+//    borderPaneTop.getScene().getWindow().setOpacity(0.0)
+
+    val loaderGameOver = new FXMLLoader(getClass.getResource("GUI-GameOver.fxml"))
+    val gameOverStage = new Stage()
+
+    gameOverStage.setTitle("GAMEOVER!")
+    loaderGameOver.load[Parent]()
+    gameOverStage.setScene(new Scene(loaderGameOver.getRoot[ Parent ]))
+
+    gameOverStage.show()
+
+  }
 
   var game:GameLoop = _
 
