@@ -6,18 +6,18 @@
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-
 <?import java.net.URL?>
 
-
-
-<BorderPane fx:id="rootHighScore" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.40"  xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhj.swengb.project.PizzaBuAppHighscoreController">
+<BorderPane fx:id="rootHighScore" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@GUI-CSS.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhj.swengb.project.PizzaBuAppHighscoreController">
     <center>
-        <TableView fx:id="tableView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="546.0" prefWidth="666.0" BorderPane.alignment="CENTER">
+        <TableView fx:id="tableView" fixedCellSize="47.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="546.0" prefWidth="652.0" styleClass="table-view" stylesheets="@GUI-CSS.css" BorderPane.alignment="CENTER">
             <columns>
-                <TableColumn fx:id="columnName" prefWidth="239.0" text="Name" />
-                <TableColumn fx:id="columnScore" prefWidth="362.0" text="Highscore" />
+                <TableColumn fx:id="columnName" editable="false" prefWidth="325.0" sortable="false" text="Name" />
+                <TableColumn fx:id="columnScore" editable="false" prefWidth="325.0" sortable="false" text="Highscore" />
             </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
         </TableView>
     </center>
     <right>
@@ -37,11 +37,11 @@
    <left>
       <AnchorPane prefHeight="412.0" prefWidth="98.0" BorderPane.alignment="CENTER">
          <children>
-            <ListView fx:id="listView" layoutX="39.0" layoutY="66.0" prefHeight="517.0" prefWidth="59.0" />
+            <ListView fx:id="listView" layoutX="39.0" layoutY="90.0" prefHeight="493.0" prefWidth="72.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b10000" height="636.0" layoutY="-19.0" stroke="#b10000" strokeType="INSIDE" width="39.0" />
-            <Label fx:id="labelText" alignment="CENTER" layoutX="39.0" layoutY="34.0" prefHeight="36.0" prefWidth="59.0" text="Rang" textAlignment="CENTER">
+            <Label fx:id="labelText" alignment="CENTER" contentDisplay="CENTER" layoutX="39.0" layoutY="37.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="53.0" prefWidth="73.0" styleClass="label" stylesheets="@GUI-CSS.css" text="Rang" textAlignment="CENTER">
                <font>
-                  <Font name="System Bold" size="15.0" />
+                  <Font name="Segoe UI Light" size="25.0" />
                </font>
             </Label>
          </children>
